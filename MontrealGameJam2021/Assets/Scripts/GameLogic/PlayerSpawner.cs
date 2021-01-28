@@ -12,7 +12,7 @@ public class PlayerSpawner : MonoBehaviourPun
     {
         Object player;
         
-        if (PhotonNetwork.IsConnected)
+        if (PhotonNetwork.IsConnected && photonView.IsMine)
             player = PhotonNetwork.Instantiate("Prefabs/Player", new Vector3(0, 0, 0), Quaternion.identity);
         else
             player = Instantiate(Resources.Load("Prefabs/Player"));
