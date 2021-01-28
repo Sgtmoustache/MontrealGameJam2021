@@ -79,11 +79,8 @@ namespace Menus
             {
                 waitingStatusText.text = "Opponent Found";
                 Debug.Log("Match is ready to begin");
-
-                if (PhotonNetwork.CurrentRoom.PlayerCount == MaxPlayersPerRoom)
-                {
-                    LoadGame();
-                }
+                
+                LoadGame();
             }
         }
 
@@ -93,7 +90,7 @@ namespace Menus
 
             waitingStatusText.text = "Opponent Found";
             Debug.Log("Match is ready to begin");
-                
+            
             PhotonNetwork.LoadLevel(sceneToLoad);
         }
 
