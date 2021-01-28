@@ -79,19 +79,26 @@ namespace Menus
             {
                 waitingStatusText.text = "Opponent Found";
                 Debug.Log("Match is ready to begin");
+                
+                LoadGame();
             }
+        }
+
+        public void LoadGame()
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+
+            waitingStatusText.text = "Opponent Found";
+            Debug.Log("Match is ready to begin");
+            
+            PhotonNetwork.LoadLevel(sceneToLoad);
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount == MaxPlayersPerRoom)
             {
-                PhotonNetwork.CurrentRoom.IsOpen = false;
-
-                waitingStatusText.text = "Opponent Found";
-                Debug.Log("Match is ready to begin");
-                
-                PhotonNetwork.LoadLevel(sceneToLoad);
+                LoadGame();
             }
         }
     }
