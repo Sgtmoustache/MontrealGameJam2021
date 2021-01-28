@@ -1880,6 +1880,7 @@ GameObject:
   - component: {fileID: 1449559839360445783}
   - component: {fileID: 1449559839360445786}
   - component: {fileID: 1449559839360445785}
+  - component: {fileID: 250069332279600724}
   m_Layer: 6
   m_Name: Bot
   m_TagString: Untagged
@@ -1964,6 +1965,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 1449559839360445782}
+  - {fileID: 250069332279600724}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1979,7 +1981,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57efa8c40d85c364cb8a5f9dc2ef3eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  _debugtarget: {fileID: 0}
+  _bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!195 &1449559839360445785
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2002,6 +2007,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &250069332279600724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449559839360445776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: isRunning
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &1449559839373480929
 GameObject:
   m_ObjectHideFlags: 0
