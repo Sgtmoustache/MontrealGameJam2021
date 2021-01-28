@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviourPun
 {
@@ -10,18 +11,15 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField] private float WalkingSpeed = 6f;
     [SerializeField] private float TurnSmoothTime = 0.1f;
     
-    
+    private Animator _anim;
+
     private CharacterController _controller;
     private float _turnSmoothVelocity;
-
-    public PlayerMovement(Transform camera)
-    {
-        Camera = camera;
-    }
 
     void Start()
     {
         _controller = GetComponent<CharacterController>();
+        _anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -48,6 +46,11 @@ public class PlayerMovement : MonoBehaviourPun
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             _controller.Move(moveDirection.normalized * WalkingSpeed * Time.deltaTime);
+             _anim.SetBool("isRunning", true);
+        }
+        else 
+        {
+            _anim.SetBool("isRunning", false);
         }
     }
 }
