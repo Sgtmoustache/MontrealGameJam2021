@@ -9,6 +9,7 @@ public class PlayerSpawner : MonoBehaviourPun
     //Todo : Change to personnal camera
     [SerializeField] private Transform MainCamera;
     [SerializeField] private Bounds MapBounds;
+    [SerializeField] private int numberOfBots = 50;
     public void Start()
     {
         SpawnPlayers();
@@ -33,7 +34,7 @@ public class PlayerSpawner : MonoBehaviourPun
         
         if (PhotonNetwork.IsMasterClient)
         {
-            for (int i = 0; i <= 50; i++)
+            for (int i = 0; i <= numberOfBots; i++)
             {
                 bot = PhotonNetwork.Instantiate("Prefabs/Bot", new Vector3(0, 0, 0), Quaternion.identity);
                 ((GameObject) bot).GetComponent<BotMovement>()._bounds = MapBounds;
@@ -41,7 +42,7 @@ public class PlayerSpawner : MonoBehaviourPun
         }
         else if (!PhotonNetwork.IsConnected)
         {
-            for (int i = 0; i <= 50; i++)
+            for (int i = 0; i <= numberOfBots; i++)
             {
                 bot = Instantiate(Resources.Load("Prefabs/Bot"));
                 ((GameObject) bot).GetComponent<BotMovement>()._bounds = MapBounds;            
