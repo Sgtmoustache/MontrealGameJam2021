@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class LocalPlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPun
 {
-    [SerializeField] private Transform _camera;
+    public Transform Camera;
     [SerializeField] private float WalkingSpeed = 6f;
     [SerializeField] private float TurnSmoothTime = 0.1f;
     
     
     private CharacterController _controller;
     private float _turnSmoothVelocity;
-    
+
+    public PlayerMovement(Transform camera)
+    {
+        Camera = camera;
+    }
+
     void Start()
     {
         _controller = GetComponent<CharacterController>();
@@ -20,6 +26,11 @@ public class LocalPlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (PhotonNetwork.IsConnected && photonView.IsMine == false)
+        {
+            return;
+        }
+        
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
@@ -27,7 +38,7 @@ public class LocalPlayerMovement : MonoBehaviour
         //If were getting some input to move
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _camera.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
                 TurnSmoothTime);
             
