@@ -10,7 +10,8 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField] private float WalkingSpeed = 6f;
     [SerializeField] private float TurnSmoothTime = 0.1f;
     
-    
+    public Animator anim;
+
     private CharacterController _controller;
     private float _turnSmoothVelocity;
 
@@ -48,6 +49,11 @@ public class PlayerMovement : MonoBehaviourPun
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             _controller.Move(moveDirection.normalized * WalkingSpeed * Time.deltaTime);
+             anim.SetBool("isRunning", true);
+        }
+        else 
+        {
+            anim.SetBool("isRunning", false);
         }
     }
 }
