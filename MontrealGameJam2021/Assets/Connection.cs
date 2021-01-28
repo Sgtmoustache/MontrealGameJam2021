@@ -11,7 +11,8 @@ namespace Menus
         [SerializeField] private GameObject findOpponentPanel = null;
         [SerializeField] private GameObject waitingStatusPanel = null;
         [SerializeField] private TextMeshProUGUI waitingStatusText = null;
-
+        [SerializeField] private string sceneToLoad = "";
+        
         private bool isConnecting = false;
 
         private const string GameVersion = "0.1";
@@ -90,7 +91,7 @@ namespace Menus
                 waitingStatusText.text = "Opponent Found";
                 Debug.Log("Match is ready to begin");
                 
-                PhotonNetwork.LoadLevel("SampleScene");
+                PhotonNetwork.LoadLevel(sceneToLoad);
             }
         }
     }

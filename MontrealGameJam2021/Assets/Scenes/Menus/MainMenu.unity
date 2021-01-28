@@ -1044,6 +1044,7 @@ MonoBehaviour:
   findOpponentPanel: {fileID: 1935954525}
   waitingStatusPanel: {fileID: 247614344}
   waitingStatusText: {fileID: 216640901}
+  sceneToLoad: MainScene
 --- !u!114 &1655487147
 MonoBehaviour:
   m_ObjectHideFlags: 0
