@@ -27,12 +27,10 @@ public class PlayerSpawner : MonoBehaviourPun
     
     private void SpawnPlayers()
     {
-        int randomIndex = Random.Range(0, playerSpawns.Count);
-
         if (PhotonNetwork.IsConnected)
-            LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", playerSpawns[randomIndex].position, botsSpawns[randomIndex].rotation);
+            LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", playerSpawns[photonView.ViewID-1].position, botsSpawns[photonView.ViewID-1].rotation);
         else
-            LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"), playerSpawns[randomIndex].position, botsSpawns[randomIndex].rotation);
+            LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"), playerSpawns[photonView.ViewID-1].position, botsSpawns[photonView.ViewID-1].rotation);
 
         Debug.LogWarning("Spawning player!");
         
@@ -49,7 +47,7 @@ public class PlayerSpawner : MonoBehaviourPun
         
         if (PhotonNetwork.IsMasterClient)
         {
-            for (int i = 0; i <= numberOfBots; i++)
+            for (int i = 0; i < numberOfBots; i++)
             {
                 int randomIndex = Random.Range(0, botsSpawns.Count);
 
@@ -58,7 +56,7 @@ public class PlayerSpawner : MonoBehaviourPun
         }
         else if (!PhotonNetwork.IsConnected)
         {
-            for (int i = 0; i <= numberOfBots; i++)
+            for (int i = 0; i < numberOfBots; i++)
             {
                 int randomIndex = Random.Range(0, botsSpawns.Count);
 

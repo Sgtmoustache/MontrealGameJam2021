@@ -2017,9 +2017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355da503997fc1d4da93f3cffe4b8456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  rayHeight: 0.5
-  range: 6
 --- !u!1 &4129072953622629878
 GameObject:
   m_ObjectHideFlags: 0

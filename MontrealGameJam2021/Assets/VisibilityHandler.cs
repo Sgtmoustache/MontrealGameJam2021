@@ -27,8 +27,11 @@ public class VisibilityHandler : MonoBehaviour
         Vector3 origin = transform.position + new Vector3(0, RayHeight, 0);
         Vector3 direction = _player.transform.position - transform.position + new Vector3(0, RayHeight, 0);
 
+        int layerMask = 1 << 8;
+        layerMask = ~layerMask;
+        
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(origin, direction, out hit, Range))
+        if (Physics.Raycast(origin, direction, out hit, Range, layerMask))
         {
             if (hit.transform.CompareTag("Player"))
             {
