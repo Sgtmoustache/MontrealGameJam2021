@@ -4,7 +4,7 @@ namespace DefaultNamespace
 {
     public static class PlacerHelper
     {
-        public static void Ground(Transform gameObject, float thickness)
+        public static void GroundObject(Transform gameObject, float thickness)
         {
             RaycastHit hit;
 
@@ -17,9 +17,6 @@ namespace DefaultNamespace
             if (Physics.Raycast(origin, Vector3.down, out hit, Mathf.Infinity, layerMask))
             {
                 
-            }
-            else
-            {
             }
         }
     }
