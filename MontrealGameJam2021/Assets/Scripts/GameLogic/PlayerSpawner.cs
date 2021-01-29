@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviourPun
 {
-    //Todo : Change to personnal camera
     [SerializeField] private Transform MainCamera;
     [SerializeField] private Bounds MapBounds;
     [SerializeField] private int numberOfBots = 50;
@@ -26,7 +25,7 @@ public class PlayerSpawner : MonoBehaviourPun
     
     private void SpawnPlayers()
     {
-        if (PhotonNetwork.IsConnected && photonView.IsMine)
+        if (PhotonNetwork.IsConnected)
             LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", new Vector3(0, 0, 0), Quaternion.identity);
         else
             LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"));
