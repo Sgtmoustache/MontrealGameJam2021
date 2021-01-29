@@ -13,8 +13,10 @@ public class Collecting : Interactable {
     public override void Interact(GameObject player){
         if(canBePick && !(Inventory.HasObject())){
             Debug.Log("PLAYER GRAB");
-            Inventory.setObject(objectID, this.gameObject);
+            photonView.TransferOwnership(photonView.ViewID);
             
+            Inventory.setObject(objectID, this.gameObject);
+
             this.gameObject.transform.SetParent(player.transform);
             this.gameObject.transform.localPosition = new Vector3(0.0f, 8.0f, 0.0f);
 
