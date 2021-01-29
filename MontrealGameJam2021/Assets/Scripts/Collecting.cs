@@ -15,11 +15,14 @@ public class Collecting : Interactable {
             photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
             Inventory.setObject(objectID, this.gameObject);
 
-            this.gameObject.transform.SetParent(player.transform);
+            this.gameObject.transform.SetParent(PlayerSpawner.LocalPlayer.transform);
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             this.gameObject.transform.localPosition = new Vector3(0.0f, 8.0f, 0.0f);
+            
         }
     }
     public override void beInteractable(){
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         photonView.RPC("SetLock", RpcTarget.All, false);
     }
 }

@@ -10,9 +10,9 @@ public class PlayerMovement : MonoBehaviourPun
     public Transform Camera;
     [SerializeField] private float WalkingSpeed = 6f;
     [SerializeField] private float TurnSmoothTime = 0.1f;
-    
+    [SerializeField] private float GravityForce = -0.4f;
     private Animator _anim;
-
+    
     private CharacterController _controller;
     private float _turnSmoothVelocity;
 
@@ -45,11 +45,12 @@ public class PlayerMovement : MonoBehaviourPun
 
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _controller.Move(moveDirection.normalized * WalkingSpeed * Time.deltaTime);
+            _controller.Move(Time.deltaTime * WalkingSpeed * moveDirection.normalized + new Vector3(0, GravityForce, 0));
              _anim.SetBool("isRunning", true);
         }
         else 
         {
+            _controller.Move(new Vector3(0, GravityForce, 0));
             _anim.SetBool("isRunning", false);
         }
     }
