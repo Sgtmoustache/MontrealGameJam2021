@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class VisibilityHandler : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject player;
+    public GameObject player;
 
     [SerializeField] private float rayHeight = 0;
     [SerializeField] private float range = 10;
@@ -16,6 +15,7 @@ public class VisibilityHandler : MonoBehaviour
      void Start()
     {
         GFX = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
+        player = PlayerSpawner.LocalPlayer;
         Debug.LogError($"Found {GFX.Count} child");
     }
 
