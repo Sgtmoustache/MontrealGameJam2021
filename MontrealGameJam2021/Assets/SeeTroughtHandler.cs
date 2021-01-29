@@ -10,6 +10,9 @@ public class SeeTroughtHandler : MonoBehaviour
     [SerializeField] private float originHeight = 0.4f;
     public void Start()
     {
+        if (PlayerSpawner.LocalPlayer == null)
+            Destroy(gameObject);
+            
         Camera = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>().Camera;
     }
 
