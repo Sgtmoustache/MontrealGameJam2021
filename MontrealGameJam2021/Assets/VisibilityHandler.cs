@@ -17,7 +17,7 @@ public class VisibilityHandler : MonoBehaviour
 
      void Start()
     {
-        GFX = GetComponentsInChildren<Renderer>().ToList();
+        GFX = GetComponentsInChildren<Renderer>().Where(b => !b.gameObject.CompareTag("VisibilityIndependant")).ToList();
     }
 
     void Update()

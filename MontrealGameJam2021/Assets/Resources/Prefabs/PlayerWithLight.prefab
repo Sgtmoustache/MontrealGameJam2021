@@ -2310,6 +2310,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SeeThoughtSpere
       objectReference: {fileID: 0}
+    - target: {fileID: 274843610019303788, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4701066319637834386, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
       propertyPath: m_RootOrder
       value: 9

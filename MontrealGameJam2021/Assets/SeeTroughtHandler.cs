@@ -24,9 +24,9 @@ public class SeeTroughtHandler : MonoBehaviour
     IEnumerator Initializer()
     {
         yield return new WaitForSeconds(1);
-        if(PlayerSpawner.LocalPlayer == null)
+        if (PlayerSpawner.LocalPlayer == null || PlayerSpawner.LocalPlayer != transform.root.gameObject)
             Destroy(gameObject);
-        
+
         Camera = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>().Camera;
         _isInitialized = true;
     }
