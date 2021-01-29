@@ -21,9 +21,9 @@ public class PlayerSpawner : MonoBehaviourPun
         Object player;
         
         if (PhotonNetwork.IsConnected && photonView.IsMine)
-            player = PhotonNetwork.Instantiate("Prefabs/Player", new Vector3(0, 0, 0), Quaternion.identity);
+            player = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", new Vector3(0, 0, 0), Quaternion.identity);
         else
-            player = Instantiate(Resources.Load("Prefabs/Player"));
+            player = Instantiate(Resources.Load("Prefabs/PlayerWithLight"));
 
         ((GameObject) player).GetComponent<PlayerMovement>().Camera = MainCamera;
     }
@@ -36,7 +36,7 @@ public class PlayerSpawner : MonoBehaviourPun
         {
             for (int i = 0; i <= numberOfBots; i++)
             {
-                bot = PhotonNetwork.Instantiate("Prefabs/Bot", new Vector3(0, 0, 0), Quaternion.identity);
+                bot = PhotonNetwork.Instantiate("Prefabs/BotWithLight", new Vector3(0, 0, 0), Quaternion.identity);
                 ((GameObject) bot).GetComponent<BotMovement>()._bounds = MapBounds;
             }
         }
@@ -44,7 +44,7 @@ public class PlayerSpawner : MonoBehaviourPun
         {
             for (int i = 0; i <= numberOfBots; i++)
             {
-                bot = Instantiate(Resources.Load("Prefabs/Bot"));
+                bot = Instantiate(Resources.Load("Prefabs/BotWithVisibility"));
                 ((GameObject) bot).GetComponent<BotMovement>()._bounds = MapBounds;            
             }
         }
