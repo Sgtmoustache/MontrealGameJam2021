@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Collecting : Interactable {
 
@@ -12,6 +13,7 @@ public class Collecting : Interactable {
     public override void Interact(GameObject player){
         if(canBePick && !(Inventory.HasObject())){
             Debug.Log("PLAYER GRAB");
+            GetComponent<PhotonView>().RequestOwnership();
             Inventory.setObject(objectID, this.gameObject);
             
             this.gameObject.transform.SetParent(player.transform);
