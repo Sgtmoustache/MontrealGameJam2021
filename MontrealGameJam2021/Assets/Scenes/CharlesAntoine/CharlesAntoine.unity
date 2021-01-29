@@ -538,7 +538,11 @@ Transform:
   - {fileID: 1796632403}
   - {fileID: 1559784319}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 2
+=======
+  m_RootOrder: 3
+>>>>>>> Interaction
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &970051793
 GameObject:
@@ -715,6 +719,7 @@ MeshFilter:
 --- !u!1001 &1044504139
 PrefabInstance:
   m_ObjectHideFlags: 0
+<<<<<<< HEAD
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
@@ -1045,6 +1050,8 @@ Transform:
 --- !u!64 &1051645699
 MeshCollider:
   m_ObjectHideFlags: 0
+=======
+>>>>>>> Interaction
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1075,7 +1082,11 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+<<<<<<< HEAD
   - {fileID: 2100000, guid: 025fee57f575f0248ad89a5aaf9b6127, type: 2}
+=======
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+>>>>>>> Interaction
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1242,7 +1253,11 @@ GameObject:
   - component: {fileID: 1665484803}
   - component: {fileID: 1665484802}
   - component: {fileID: 1665484801}
+<<<<<<< HEAD
   m_Layer: 7
+=======
+  m_Layer: 0
+>>>>>>> Interaction
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
