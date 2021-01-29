@@ -7,23 +7,19 @@ using Photon.Pun;
 public class Collecting : Interactable {
 
     [SerializeField] int objectID;
-
-    public bool canBePick = true;
     
     public override void Interact(GameObject player){
-        if(canBePick && !(Inventory.HasObject())){
+        if(!(Inventory.HasObject())){
             Debug.Log("PLAYER GRAB");
+            photonView.RPC("SetLock", RpcTarget.All, true);
             photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
-            
             Inventory.setObject(objectID, this.gameObject);
 
             this.gameObject.transform.SetParent(player.transform);
             this.gameObject.transform.localPosition = new Vector3(0.0f, 8.0f, 0.0f);
-
-            canBePick = false;
         }
     }
     public override void beInteractable(){
-        canBePick = true;
+        photonView.RPC("SetLock", RpcTarget.All, false);
     }
 }

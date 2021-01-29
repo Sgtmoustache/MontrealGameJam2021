@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5675a92b99197c943bd7ece0936b9d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneToLoad: InteractionTest
 --- !u!1 &104619090
 GameObject:
   m_ObjectHideFlags: 0
