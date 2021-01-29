@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 public abstract class Interactable: MonoBehaviour{
 
-    public KeyCode key =  KeyCode.E;
-    public void Start()
-    {
-        SetKey();
-    }
-    public abstract void SetKey();
+    public abstract void beInteractable();
     public abstract void Interact(GameObject player);
+
 
     public void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyDown(key)){
+        if (Input.GetKey(KeyCode.E)){
             Interact(other.gameObject);
         }
     }
+
 }
 
 
