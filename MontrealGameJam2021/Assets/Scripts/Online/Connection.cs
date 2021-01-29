@@ -16,7 +16,7 @@ namespace Menus
         private bool isConnecting = false;
 
         private const string GameVersion = "0.1";
-        private const int MaxPlayersPerRoom = 2;
+        private const int MaxPlayersPerRoom = 3;
 
         private void Awake() => PhotonNetwork.AutomaticallySyncScene = true;
 
@@ -86,11 +86,12 @@ namespace Menus
 
         public void LoadGame()
         {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-
             waitingStatusText.text = "Opponent Found";
             Debug.Log("Match is ready to begin");
+
+            if (!PhotonNetwork.IsMasterClient) return;
             
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel(sceneToLoad);
         }
 
