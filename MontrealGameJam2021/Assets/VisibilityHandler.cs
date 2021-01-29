@@ -6,27 +6,29 @@ using UnityEngine;
 
 public class VisibilityHandler : MonoBehaviour
 {
-    public GameObject player;
 
-    [SerializeField] private float rayHeight = 0;
-    [SerializeField] private float range = 10;
+    private GameObject Player;
+    private GameObject _player => Player ? Player : PlayerSpawner.LocalPlayer;
+
+    private const float RayHeight = 0.5f;
+    private const float Range = 15;
+    
     private List<SkinnedMeshRenderer> GFX = new List<SkinnedMeshRenderer>();
 
      void Start()
     {
         GFX = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
-        player = PlayerSpawner.LocalPlayer;
     }
 
     void Update()
     {
         RaycastHit hit;
 
-        Vector3 origin = transform.position + new Vector3(0, rayHeight, 0);
-        Vector3 direction = player.transform.position - transform.position + new Vector3(0, rayHeight, 0);
+        Vector3 origin = transform.position + new Vector3(0, RayHeight, 0);
+        Vector3 direction = _player.transform.position - transform.position + new Vector3(0, RayHeight, 0);
 
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(origin, direction, out hit, range))
+        if (Physics.Raycast(origin, direction, out hit, Range))
         {
             if (hit.transform.CompareTag("Player"))
             {

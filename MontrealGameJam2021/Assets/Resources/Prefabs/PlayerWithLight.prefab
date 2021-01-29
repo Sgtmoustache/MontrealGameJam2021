@@ -1122,9 +1122,10 @@ GameObject:
   - component: {fileID: 3980898375877514293}
   - component: {fileID: 1633921942980143606}
   - component: {fileID: 8102625135913602486}
+  - component: {fileID: -3092710947702350554}
   m_Layer: 8
   m_Name: PlayerWithLight
-  m_TagString: Player
+  m_TagString: OtherPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1278,6 +1279,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.63
   m_Center: {x: 0, y: 3.8, z: 0}
+--- !u!114 &-3092710947702350554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3152530231971215768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 355da503997fc1d4da93f3cffe4b8456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3311834799941785929
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class PlayerSpawner : MonoBehaviourPun
     [SerializeField] private CinemachineVirtualCamera camera;
     
     [SerializeField] private List<Transform> botsSpawns = new List<Transform>();
+    [SerializeField] private List<Transform> playerSpawns = new List<Transform>();
+
     public static GameObject LocalPlayer;
     
     public void Start()
@@ -25,16 +27,20 @@ public class PlayerSpawner : MonoBehaviourPun
     
     private void SpawnPlayers()
     {
+        int randomIndex = Random.Range(0, playerSpawns.Count);
+
         if (PhotonNetwork.IsConnected)
-            LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", new Vector3(0, 0, 0), Quaternion.identity);
+            LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", playerSpawns[randomIndex].position, botsSpawns[randomIndex].rotation);
         else
-            LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"));
+            LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"), playerSpawns[randomIndex].position, botsSpawns[randomIndex].rotation);
 
         Debug.LogWarning("Spawning player!");
         
         LocalPlayer.GetComponent<PlayerMovement>().Camera = MainCamera;
         LocalPlayer.gameObject.layer = 6;
-        LocalPlayer.GetComponentInChildren<Light>().enabled = true; 
+        LocalPlayer.GetComponentInChildren<Light>().enabled = true;
+        LocalPlayer.GetComponent<VisibilityHandler>().enabled = false;
+        LocalPlayer.gameObject.tag = "Player";
     }
 
     private void SpawnBots()
