@@ -30,6 +30,8 @@ public class PlayerSpawner : MonoBehaviourPun
         else
             LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"));
 
+        Debug.LogWarning("Spawning player!");
+        
         LocalPlayer.GetComponent<PlayerMovement>().Camera = MainCamera;
         LocalPlayer.gameObject.layer = 6;
         LocalPlayer.GetComponentInChildren<Light>().enabled = true; 
@@ -45,7 +47,7 @@ public class PlayerSpawner : MonoBehaviourPun
             {
                 int randomIndex = Random.Range(0, botsSpawns.Count);
 
-                bots.Add(PhotonNetwork.Instantiate("Prefabs/BotWithLight",  botsSpawns[randomIndex].position, botsSpawns[randomIndex].rotation));
+                bots.Add(PhotonNetwork.Instantiate("Prefabs/BotWithVisibility",  botsSpawns[randomIndex].position, botsSpawns[randomIndex].rotation));
             }
         }
         else if (!PhotonNetwork.IsConnected)
