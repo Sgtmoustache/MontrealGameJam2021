@@ -13,11 +13,11 @@ public class VisibilityHandler : MonoBehaviour
     private const float RayHeight = 0.5f;
     private const float Range = 15;
     
-    private List<SkinnedMeshRenderer> GFX = new List<SkinnedMeshRenderer>();
+    private List<Renderer> GFX = new List<Renderer>();
 
      void Start()
     {
-        GFX = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
+        GFX = GetComponentsInChildren<Renderer>().ToList();
     }
 
     void Update()
