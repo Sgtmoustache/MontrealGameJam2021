@@ -13,7 +13,7 @@ public class Collecting : Interactable {
     public override void Interact(GameObject player){
         if(canBePick && !(Inventory.HasObject())){
             Debug.Log("PLAYER GRAB");
-            photonView.TransferOwnership(photonView.ViewID);
+            photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
             
             Inventory.setObject(objectID, this.gameObject);
 
