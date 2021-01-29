@@ -86,11 +86,12 @@ namespace Menus
 
         public void LoadGame()
         {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-
             waitingStatusText.text = "Opponent Found";
             Debug.Log("Match is ready to begin");
+
+            if (!PhotonNetwork.IsMasterClient) return;
             
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.LoadLevel(sceneToLoad);
         }
 

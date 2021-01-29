@@ -16,7 +16,6 @@ public class VisibilityHandler : MonoBehaviour
     {
         GFX = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
         player = PlayerSpawner.LocalPlayer;
-        Debug.LogError($"Found {GFX.Count} child");
     }
 
     void Update()
