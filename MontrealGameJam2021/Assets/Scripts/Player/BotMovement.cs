@@ -38,6 +38,9 @@ namespace Assets.Scripts.Player
 
         public void Update()
         {
+            if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient)
+                return;
+            
             if (!hasDestination)
             {
                 _agent.SetDestination (new Vector3(
@@ -56,7 +59,6 @@ namespace Assets.Scripts.Player
             }
             
             _animator.SetBool("isRunning", _agent.velocity.magnitude >= 1);
-            
         }
     }
 }

@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     void Update()
     {
-        if (PhotonNetwork.IsConnected && photonView.IsMine == false)
+        if (PhotonNetwork.IsConnected && !photonView.IsMine)
         {
             return;
         }
