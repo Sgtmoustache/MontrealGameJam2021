@@ -12,10 +12,29 @@ public class VisibilityHandler : MonoBehaviour
 
     private const float RayHeight = 0.5f;
     private const float Range = 15;
+    private const float VFX_TTL = 1;
     
     private List<SkinnedMeshRenderer> GFX = new List<SkinnedMeshRenderer>();
 
-     void Start()
+    private GameObject vfx_disapeer;
+    
+
+    private bool _CurrentVisibility;
+
+    private bool currentVisibility
+    {
+        set
+        {
+            if (value != _CurrentVisibility || !value)
+            {
+                //ADD EFFECT
+            }
+
+            _CurrentVisibility = value;
+        }
+    }
+
+    void Start()
     {
         GFX = GetComponentsInChildren<SkinnedMeshRenderer>().ToList();
     }
@@ -36,17 +55,20 @@ public class VisibilityHandler : MonoBehaviour
             if (hit.transform.CompareTag("Player"))
             {
                 Debug.DrawRay(origin, direction, Color.red);
+                currentVisibility = true;
                 GFX.ForEach(b => b.enabled = true);
             }
             else
             {
                 Debug.DrawRay(origin, direction, Color.yellow);
+                currentVisibility = false;
                 GFX.ForEach(b => b.enabled = false);
             }
         }
         else
         {
             Debug.DrawRay(origin, direction, Color.green);
+            currentVisibility = false;
             GFX.ForEach(b => b.enabled = false);
         }
     }
