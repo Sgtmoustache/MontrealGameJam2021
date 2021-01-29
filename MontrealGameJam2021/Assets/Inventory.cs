@@ -7,19 +7,16 @@ public class Inventory
     public static int objectID;
     public static GameObject objet;
 
-    public static void setObjectId(int value)
+    public static void setObject(int value, GameObject ob)
     {
         objectID = value;
-    }
-    public static void setItem(GameObject value)
-    {
-        objet = value;
+        objet = ob;
     }
     public static GameObject getItem()
     {
         return objet;
     }
-    public static int getObjectValue(){ 
+    public static int getObjectID(){ 
         return objectID;
     }
 
