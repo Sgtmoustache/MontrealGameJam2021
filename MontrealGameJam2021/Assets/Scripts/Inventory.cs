@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private Tuple<Collectibles, GameObject> Item = null;
+    private Tuple<Collectibles, GameObject> Item = new Tuple<Collectibles, GameObject>(Collectibles.None, null);
 
     public Collectibles GetTypeOfItem() => Item.Item1;
     public GameObject GetItemGameObject() => Item.Item2;
@@ -17,8 +17,11 @@ public class Inventory : MonoBehaviour
 
     public void ClearItem()
     {
-        Item = new Tuple<Collectibles, GameObject>(Collectibles.None, null);        
+        Debug.Log("ClearItem");
+        Item = new Tuple<Collectibles, GameObject>(Collectibles.None, null); 
+        Debug.Log(Item);
+
     }
 
-    public bool HasItem() => Item != null;
+    public bool HasItem() => Item.Item2 != null;
 }

@@ -7,19 +7,20 @@ using Photon.Pun;
 
 public class Collecting : Interactable {
 
-    [SerializeField] Collectibles itemType;
+    private bool canBePick = true;
 
     public override void Interact(GameObject player)
     {
         Inventory inventory = player.GetComponent<Inventory>();
-        if (inventory)
+        if (inventory  && canBePick)
         {
+            Debug.Log(inventory.HasItem());
             if (!(inventory.HasItem()))
             {
+                ;
                 Debug.Log("PLAYER GRAB");
-                photonView.RPC("SetLock", RpcTarget.All, true);
-                photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
-                inventory.SetItem(itemType, gameObject);
+                base.Interact(player);
+                inventory.SetItem(gameObject.GetComponent<ItemInfo>().Collectibles, gameObject);
 
                 gameObject.transform.SetParent(PlayerSpawner.LocalPlayer.transform);
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
@@ -31,5 +32,14 @@ public class Collecting : Interactable {
     public override void beInteractable(){
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         photonView.RPC("SetLock", RpcTarget.All, false);
+        canBePick = true;
     }
+
+    public void Disable() {
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        photonView.RPC("SetLock", RpcTarget.All, false);
+        canBePick = false;
+    }
+
+    public void Enable() => canBePick = true;
 }
