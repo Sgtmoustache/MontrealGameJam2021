@@ -17,6 +17,25 @@ public class ItemManager : MonoBehaviourPun
     {
         ItemsPrefabs = Resources.LoadAll<GameObject>("Prefabs/Item/").ToList();
         Debug.LogWarning($"Found {ItemsPrefabs.Count} in Item folder");
+
+        List<GameObject> ToKeep = new List<GameObject>();  
+        
+        foreach (var prefab in ItemsPrefabs)
+        {
+            var collectibles = prefab.GetComponent<ItemInfo>().Collectibles;
+
+            if (OutsidePlaceHolders.Select(b => b.itemType).Contains(collectibles))
+            {
+                ToKeep.Add(prefab);
+            }
+            else
+            {
+                Debug.LogWarning($"NO DROP SPOT OUTSIDE FOR {prefab.name} ({collectibles})");
+            }
+        }
+
+        ItemsPrefabs = ToKeep;
+        Debug.LogWarning($"Kept {ItemsPrefabs.Count} item prefab");
     }
 
     private void Randomize()
@@ -64,7 +83,6 @@ public class ItemManager : MonoBehaviourPun
             SpawnedItems.Add(spawnedItem);
                 
             lostAndFoundCount++;
-            
             itemSpawnedCount++;
         }
     }

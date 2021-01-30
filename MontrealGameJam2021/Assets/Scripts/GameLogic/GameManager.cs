@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviourPun
 
     private IEnumerator StartRound(int duration)
     {
-        //_itemManager.RefreshItems(); //TODO FIX THIS WITH VINX CHANGES
+        _itemManager.RefreshItems();
         photonView.RPC("RespawnPlayer", RpcTarget.All, Vector3.zero);
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);

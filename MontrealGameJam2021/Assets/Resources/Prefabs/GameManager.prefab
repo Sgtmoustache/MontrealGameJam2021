@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15d0bef13d03fe46a77e292db4082af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startBufferDuration: 3
+  startBufferDuration: 0
   roundDuration: 050000000500000005000000
   scoreBoardDuration: 5
   winnerScreenDuration: 15
