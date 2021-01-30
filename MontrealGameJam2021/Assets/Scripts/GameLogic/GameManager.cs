@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviourPun
             yield return new WaitForSeconds(bufferBetweenRounds);
         }
 
-        _playerSpawner.RespawnPlayer(endZonePosition);
+        _playerSpawner.RespawnPlayer(endZonePosition.position);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
         yield return FadeManager._Instance.FadeInRoutine();
 

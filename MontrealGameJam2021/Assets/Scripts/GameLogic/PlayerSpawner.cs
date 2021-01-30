@@ -42,12 +42,12 @@ public class PlayerSpawner : MonoBehaviourPun
     }
 
     [PunRPC]
-    public void RespawnPlayer(Transform forceLocation = null)
+    public void RespawnPlayer(Vector3 forceLocation)
     {
         if(PhotonNetwork.IsMasterClient)
             photonView.RPC("RespawnPlayer", RpcTarget.Others, forceLocation);
 
-        if (forceLocation == null)
+        if (forceLocation == Vector3.zero)
         {
             Debug.LogWarning("Respawning player");
             int randomValue = Random.Range(0, playerSpawns.Count-1);
@@ -58,8 +58,7 @@ public class PlayerSpawner : MonoBehaviourPun
         else
         {
             Debug.LogWarning("Going to specific location");
-            LocalPlayer.transform.position = forceLocation.position;
-            LocalPlayer.transform.rotation = forceLocation.rotation;
+            LocalPlayer.transform.position = forceLocation;
         }
         
         LocalPlayer.GetComponent<Inventory>().ClearItem();
