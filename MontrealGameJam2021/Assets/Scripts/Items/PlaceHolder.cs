@@ -90,6 +90,8 @@ public class PlaceHolder : Interactable
         canBePlace = false;
         canBePick = true;
         storeItem = item;
+        Collecting collect = storeItem.GetComponent<Collecting>();
+        collect.Disable();
     }
 
      public void removeItem(){
