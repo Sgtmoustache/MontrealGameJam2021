@@ -25,8 +25,14 @@ public class Dropping : MonoBehaviour
                 collect.beInteractable();
                 obj.transform.SetParent(null);
                 obj.transform.localPosition = new Vector3(vec.x, 2.0f, vec.z);
-                
+                if(this.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student")
+                    GameManager.TeacherScore += 20 ; 
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.T)){
+            Debug.Log(GameManager.StudentScore);
+            Debug.Log(GameManager.TeacherScore);
         }
     }
 }

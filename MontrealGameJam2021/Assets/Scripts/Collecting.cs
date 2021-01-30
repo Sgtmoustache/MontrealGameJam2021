@@ -25,6 +25,8 @@ public class Collecting : Interactable {
                 gameObject.transform.SetParent(PlayerSpawner.LocalPlayer.transform);
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 gameObject.transform.localPosition = new Vector3(0.0f, 8.0f, 0.0f);
+                if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
+                    GameManager.TeacherScore -= 20 ; 
             }
         }
     }

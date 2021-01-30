@@ -9,6 +9,9 @@ public class PlaceHolder : Interactable
 {
     [SerializeField] Collectibles itemType;
     [SerializeField] Transform itemDropPosition;
+
+    [SerializeField] bool hidingSpot;
+    [SerializeField] bool lostAndFound;
     
 
     public bool canBePlace = true;   
@@ -41,10 +44,29 @@ public class PlaceHolder : Interactable
                 Collecting collect = storeItem.GetComponent<Collecting>();
                 collect.Disable();
                 inventory.ClearItem();
-                TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
-                Description.SetText("Take");
+                if(player.GetComponent<PlayerInfo>().PlayerType == "Student"){
+                    TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
+                    Description.SetText("Take");
+
+                    if(hidingSpot)
+                        GameManager.StudentScore += 20 ;
+                    else if(lostAndFound)
+                        GameManager.StudentScore += 100 ;
+                    else if(!lostAndFound)
+                        GameManager.TeacherScore += 100 ;
+
+                }
+                else{
+                    if(lostAndFound)
+                        GameManager.StudentScore += 100 ;
+                    else if(!lostAndFound)
+                        GameManager.TeacherScore += 100 ;
+                }
+                
 
                 StartCoroutine(bufferPlace());
+
+                
 
             }
             else if(canBePick){
@@ -52,9 +74,19 @@ public class PlaceHolder : Interactable
                 Collecting collect = storeItem.GetComponent<Collecting>();
                 collect.Enable();
                 collect.Interact(player);
+                if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
+                    GameManager.TeacherScore += 20 ; 
+                if(hidingSpot)
+                    GameManager.StudentScore -= 20 ;
+                else if(lostAndFound)
+                    GameManager.StudentScore -= 100 ;
+                else if(!lostAndFound)
+                    GameManager.TeacherScore -= 100 ;
 
                 storeItem = null;
                 canBePick = false;
+
+
 
                 StartCoroutine(bufferGrab());
             }
@@ -65,8 +97,8 @@ public class PlaceHolder : Interactable
     {
         Debug.Log("Enter");
         Inventory inventory = player.GetComponent<Inventory>();
-        if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
-            if(inventory){
+        if(inventory){
+            if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
                 TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
                 if(storeItem)
                     Description.SetText("Take");
@@ -80,8 +112,8 @@ public class PlaceHolder : Interactable
     {
         Debug.Log("Leave");
         Inventory inventory = player.GetComponent<Inventory>();
-        if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
-            if(inventory){
+        if(inventory){
+            if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
                 TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
                 Description.SetText("");
             }

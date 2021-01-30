@@ -7,8 +7,8 @@ using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviourPun
 {
-    private int TeacherScore = 0;
-    private int StudentScore = 0;
+    public static int TeacherScore = 0;
+    public static int StudentScore = 0;
 
     private int currentRound = 0;
 
