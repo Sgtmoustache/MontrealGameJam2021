@@ -44,9 +44,6 @@ public class PlayerSpawner : MonoBehaviourPun
     [PunRPC]
     public void RespawnPlayer(Vector3 forceLocation)
     {
-        if(PhotonNetwork.IsMasterClient)
-            photonView.RPC("RespawnPlayer", RpcTarget.Others, forceLocation);
-
         if (forceLocation == Vector3.zero)
         {
             Debug.LogWarning("Respawning player");

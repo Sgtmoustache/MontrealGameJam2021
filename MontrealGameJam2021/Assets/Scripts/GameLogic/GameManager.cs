@@ -132,8 +132,8 @@ public class GameManager : MonoBehaviourPun
             yield return ShowScoreboard();
             yield return new WaitForSeconds(bufferBetweenRounds);
         }
-
-        _playerSpawner.RespawnPlayer(endZonePosition.position);
+        
+        photonView.RPC("RespawnPlayer", RpcTarget.Others, endZonePosition.position);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
         yield return FadeManager._Instance.FadeInRoutine();
 
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviourPun
     private IEnumerator StartRound(int duration)
     {
         //_itemManager.RefreshItems(); //TODO FIX THIS WITH VINX CHANGES
-        _playerSpawner.RespawnPlayer(Vector3.zero);    
+        photonView.RPC("RespawnPlayer", RpcTarget.Others, Vector3.zero);
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
         yield return FadeManager._Instance.FadeInRoutine();
