@@ -122,4 +122,18 @@ public class PlaceHolder : Interactable
     public override void beInteractable(){
         canBePlace = true;
     }
+
+    public void addItem(GameObject item){
+        canBePlace = false;
+        canBePick = true;
+        storeItem = item;
+    }
+
+     public void removeItem(){
+        canBePlace = true;
+        canBePick = false;
+        storeItem = null;
+    }
+
+    public bool HasItem() => storeItem != null;
 }
