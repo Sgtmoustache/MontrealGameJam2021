@@ -65,7 +65,7 @@ public class PlaceHolder : Interactable
     {
         Debug.Log("Enter");
         Inventory inventory = player.GetComponent<Inventory>();
-        if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
+        if(player.gameObject.GetComponent<PlayerInfo>()?.PlayerType == "Student"){
             if(inventory){
                 TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
                 if(storeItem)

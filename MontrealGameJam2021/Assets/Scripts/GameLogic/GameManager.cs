@@ -7,10 +7,9 @@ using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviourPun
 {
-    private int TeacherScore = 0;
-    private int StudentScore = 0;
-
-    private int currentRound = 0;
+    private static int TeacherScore = 0;
+    private static int StudentScore = 0;
+    private static int currentRound = 0;
 
     [SerializeField] private int startBufferDuration;
     [SerializeField] private int[] roundDuration;
@@ -25,7 +24,12 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] private TextMeshProUGUI winnerLabel;
     [SerializeField] private TextMeshProUGUI teacherScoreLabel;
     [SerializeField] private TextMeshProUGUI studentScoreLabel;
-    
+
+    [SerializeField] private PlayerSpawner PlayerSpawner;
+
+    [SerializeField] private Transform endzonePosition;
+
+    private PlayerMovement PlayerMovement;
     void Start()
     {
         StartCoroutine(StartGame());
@@ -40,6 +44,11 @@ public class GameManager : MonoBehaviourPun
         yield return FadeManager._Instance.FadeOutRoutine();
         yield return new WaitForSeconds(bufferBetweenRounds);
         
+        PlayerSpawner.SpawnPlayers();
+        PlayerSpawner.SpawnBots();
+        
+        PlayerMovement = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>();
+        
         for (currentRound = 0; currentRound < roundDuration.Length; currentRound++)
         {
             //Start Round
@@ -51,8 +60,9 @@ public class GameManager : MonoBehaviourPun
             yield return new WaitForSeconds(bufferBetweenRounds);
         }
 
-        FadeManager._Instance.FadeIn();
-        yield return new WaitForSeconds(bufferBetweenRounds);
+        PlayerSpawner.RespawnPlayer(endzonePosition);
+        yield return FadeManager._Instance.FadeInRoutine();
+
         yield return ShowWinner();
         
         PhotonNetwork.LoadLevel("MainMenu");
@@ -60,10 +70,12 @@ public class GameManager : MonoBehaviourPun
 
     private IEnumerator StartRound(int duration)
     {
+        PlayerSpawner.RespawnPlayer();        
         gameUI.SetActive(true);
+        PlayerMovement.CanMove = true;
         yield return FadeManager._Instance.FadeInRoutine();
         yield return new WaitForSeconds(duration);
-        TeacherScore++;
+        PlayerMovement.CanMove = false;
         gameUI.SetActive(false);
     }
 
