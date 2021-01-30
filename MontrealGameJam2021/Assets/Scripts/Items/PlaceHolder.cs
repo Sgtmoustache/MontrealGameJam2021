@@ -124,13 +124,14 @@ public class PlaceHolder : Interactable
         canBePlace = true;
     }
 
-    public void BroadcastNewItem(GameObject item)
+    [PunRPC]
+    public void BroadcastNewItem(String item)
     {
-        photonView.RPC("addItem", RpcTarget.All, item);
+        GameObject obj = GameObject.Find(item);
+        AddItem(item);
     }
 
-    [PunRPC]
-    public void addItem(GameObject item){
+    public void AddItem(GameObject item){
         canBePlace = false;
         canBePick = true;
         storeItem = item;
@@ -141,7 +142,7 @@ public class PlaceHolder : Interactable
         collect.Disable();
     }
 
-     public void removeItem(){
+     public void RemoveItem(){
         canBePlace = true;
         canBePick = false;
         storeItem = null;

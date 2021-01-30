@@ -79,7 +79,7 @@ public class ItemManager : MonoBehaviourPun
             }
             
             GameObject spawnedItem = PhotonNetwork.Instantiate("Prefabs/Item/" + item.name,  Vector3.zero, Quaternion.identity);
-            selectedPlaceholder.BroadcastNewItem(spawnedItem);
+            selectedPlaceholder.BroadcastNewItem(spawnedItem.name);
             SpawnedItems.Add(spawnedItem);
                 
             lostAndFoundCount++;
@@ -90,8 +90,8 @@ public class ItemManager : MonoBehaviourPun
     [PunRPC]
     private void ClearPlaceHolders()
     {
-        OutsidePlaceHolders.ForEach(b => b.removeItem());
-        LostAndFoundPlaceHolders.ForEach(b => b.removeItem());
+        OutsidePlaceHolders.ForEach(b => b.RemoveItem());
+        LostAndFoundPlaceHolders.ForEach(b => b.RemoveItem());
         SpawnedItems.ForEach(Destroy);
     }
 }
