@@ -53,17 +53,20 @@ public class PlayerMovement : MonoBehaviourPun
                 _controller.Move(
                     moveDirection.normalized * (Input.GetKey(KeyCode.LeftShift) ? RunningSpeed : WalkingSpeed) *
                     Time.deltaTime + new Vector3(0, GravityForce, 0));
-                _anim.SetBool("isRunning", true);
+                if(Input.GetKey(KeyCode.LeftShift))  
+                    _anim.SetInteger("Movement", 2);
+                else 
+                    _anim.SetInteger("Movement", 1);     
             }
             else
             {
                 _controller.Move(new Vector3(0, GravityForce, 0));
-                _anim.SetBool("isRunning", false);
+                _anim.SetInteger("Movement", 0);
             }
         }
         else
         {
-            _anim.SetBool("isRunning", false);
+            _anim.SetInteger("Movement", 0);
             _controller.Move(new Vector3(0, GravityForce, 0));
         }
     }

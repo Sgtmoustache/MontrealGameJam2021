@@ -54,7 +54,10 @@ namespace Assets.Scripts.Player
                 hasDestination = true;
             }
             
-            _animator.SetBool("isRunning", _agent.velocity.magnitude >= 1);
+            if(_agent.velocity.magnitude >= 1)
+            _animator.SetInteger("Movement", 1);
+            else
+             _animator.SetInteger("Movement", 0);
         }
     }
 }
