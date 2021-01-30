@@ -40,28 +40,30 @@ public class ItemManager : MonoBehaviourPun
         
         foreach (var item in ItemsPrefabs)
         {
+            PlaceHolder selectedPlaceholder;
+            
             //LostAndFoundPlaceOlder
             if (itemSpawnedCount < ItemsPrefabs.Count / 2)
             {
-                Transform wantedPosition = LostAndFoundPlaceHolders[lostAndFoundCount].transform;
-                Debug.LogWarning($"({lostAndFoundCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {wantedPosition.parent.name + "/" + wantedPosition.name}");
+                selectedPlaceholder = LostAndFoundPlaceHolders[lostAndFoundCount];
+                Debug.LogWarning($"({lostAndFoundCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {selectedPlaceholder.transform.parent.name + "/" + selectedPlaceholder.name}");
 
-                //TODO ADD ITEM TO PLACEHOLDER SCRIPT + RPC
-                SpawnedItems.Add(Instantiate(item, wantedPosition.position, wantedPosition.rotation));
-                lostAndFoundCount++;
             }
             //OutsidePlaceHolders
             else
             {
-                Transform wantedPosition = OutsidePlaceHolders.FirstOrDefault(b => b.itemType == item.GetComponent<ItemInfo>().Collectibles)?.transform;
-                Debug.LogWarning($"({outsideCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {wantedPosition.parent.name + "/" + wantedPosition.name}");
-
-                //TODO ADD ITEM TO PLACEHOLDER SCRIPT
+                selectedPlaceholder = OutsidePlaceHolders.FirstOrDefault(b => b.itemType == item.GetComponent<ItemInfo>().Collectibles);
+                if(selectedPlaceholder == null)
+                    Debug.LogWarning($"!!!NO PLACE TO PLACE OBJECT {item.name}!!!");
                 
-                
-                SpawnedItems.Add(Instantiate(item, wantedPosition.position, wantedPosition.rotation));
-                outsideCount++;
+                Debug.LogWarning($"({outsideCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {selectedPlaceholder.transform.parent.name + "/" + selectedPlaceholder.name}");
             }
+            
+            GameObject spawnedItem = Instantiate(item, Vector3.zero, Quaternion.identity);
+            selectedPlaceholder.addItem(spawnedItem);
+            SpawnedItems.Add(spawnedItem);
+                
+            lostAndFoundCount++;
             
             itemSpawnedCount++;
         }
@@ -70,7 +72,8 @@ public class ItemManager : MonoBehaviourPun
     [PunRPC]
     private void ClearPlaceHolders()
     {
-        //TODO REMOVE FROM PLACEHOLDERS
+        OutsidePlaceHolders.ForEach(b => b.removeItem());
+        LostAndFoundPlaceHolders.ForEach(b => b.removeItem());
         SpawnedItems.ForEach(Destroy);
     }
 }
