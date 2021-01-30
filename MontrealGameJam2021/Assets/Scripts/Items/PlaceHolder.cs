@@ -124,6 +124,12 @@ public class PlaceHolder : Interactable
         canBePlace = true;
     }
 
+    public void BroadcastNewItem(GameObject item)
+    {
+        photonView.RPC("addItem", RpcTarget.All, item);
+    }
+
+    [PunRPC]
     public void addItem(GameObject item){
         canBePlace = false;
         canBePick = true;
