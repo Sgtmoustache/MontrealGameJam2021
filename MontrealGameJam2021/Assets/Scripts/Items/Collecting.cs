@@ -14,11 +14,9 @@ public class Collecting : Interactable {
         Inventory inventory = player.GetComponent<Inventory>();
         if (inventory  && canBePick)
         {
-            Debug.Log(inventory.HasItem());
             if (!(inventory.HasItem()))
             {
                 ;
-                Debug.Log("PLAYER GRAB");
                 base.Interact(player);
                 inventory.SetItem(gameObject.GetComponent<ItemInfo>().Collectibles, gameObject);
 

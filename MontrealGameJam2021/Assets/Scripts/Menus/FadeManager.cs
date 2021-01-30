@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(Animation))]
-public class FadeManager : MonoBehaviour
+public class FadeManager : MonoBehaviourPun
 {
     public static FadeManager _Instance;
     
@@ -18,25 +19,31 @@ public class FadeManager : MonoBehaviour
         FadeIn();
     }
 
+    [PunRPC]
     public void FadeIn()
     {
+        Debug.LogWarning("--FADE IN--");
         _animations.Play("FadeIn");
     }
     
+    [PunRPC]
     public void FadeOut()
     {
+        Debug.LogWarning("--FADE OUT--");
         _animations.Play("FadeOut");
     }
 
     public IEnumerator FadeInRoutine()
     {
-        FadeIn();
+        Debug.LogWarning("--FADE IN ROUTINE--");
+        photonView.RPC("FadeIn", RpcTarget.All);
         yield return new WaitForSeconds(_animations["FadeIn"].length);
     }
     
     public IEnumerator FadeOutRoutine()
     {
-        FadeOut();
+        Debug.LogWarning("--FADE OUT ROUTINE--");
+        photonView.RPC("FadeOut", RpcTarget.All);
         yield return new WaitForSeconds(_animations["FadeOut"].length);
     }
 }

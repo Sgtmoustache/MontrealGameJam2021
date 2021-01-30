@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Photon.Pun;
 using UnityEngine;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : MonoBehaviourPun
 { 
     private List<GameObject> ItemsPrefabs = new List<GameObject>();
     [SerializeField] private List<PlaceHolder> OutsidePlaceHolders;
@@ -29,8 +30,8 @@ public class ItemManager : MonoBehaviour
 
     public void RefreshItems()
     {
-        ClearPlaceHolders();
-
+        photonView.RPC("ClearPlaceHolders", RpcTarget.All);
+        
         Randomize();
         
         int itemSpawnedCount = 0;
@@ -45,7 +46,7 @@ public class ItemManager : MonoBehaviour
                 Transform wantedPosition = LostAndFoundPlaceHolders[lostAndFoundCount].transform;
                 Debug.LogWarning($"({lostAndFoundCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {wantedPosition.parent.name + "/" + wantedPosition.name}");
 
-                //TODO ADD ITEM TO PLACEHOLDER SCRIPT
+                //TODO ADD ITEM TO PLACEHOLDER SCRIPT + RPC
                 SpawnedItems.Add(Instantiate(item, wantedPosition.position, wantedPosition.rotation));
                 lostAndFoundCount++;
             }
@@ -66,6 +67,7 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    [PunRPC]
     private void ClearPlaceHolders()
     {
         //TODO REMOVE FROM PLACEHOLDERS

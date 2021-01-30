@@ -17,9 +17,7 @@ public class Inventory : MonoBehaviour
 
     public void ClearItem()
     {
-        Debug.Log("ClearItem");
         Item = new Tuple<Collectibles, GameObject>(Collectibles.None, null); 
-        Debug.Log(Item);
 
     }
 

@@ -13,8 +13,6 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField] private float TurnSmoothTime = 0.1f;
     [SerializeField] private float GravityForce = -0.4f;
     private Animator _anim;
-    
-    public bool CanMove;
 
     private CharacterController _controller;
     private float _turnSmoothVelocity;
@@ -32,7 +30,7 @@ public class PlayerMovement : MonoBehaviourPun
             return;
         }
 
-        if (CanMove)
+        if (GameManager.PlayersCanMove)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");

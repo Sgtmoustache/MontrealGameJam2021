@@ -29,10 +29,8 @@ public class PlaceHolder : Interactable
     public override void Interact(GameObject player){
         Inventory inventory = player.GetComponent<Inventory>();
         if(inventory){
-            Debug.Log(inventory.GetTypeOfItem().ToString());
             if(canBePlace && inventory.HasItem() && player.layer == 6 && ((itemType != Collectibles.None) ? (inventory.GetTypeOfItem() == itemType) : true)){
                 canBePlace = false;
-                Debug.Log("PLAYER PLACE");
                 storeItem = inventory.GetItemGameObject();
 
                 storeItem.transform.SetParent(this.gameObject.transform);
@@ -48,7 +46,6 @@ public class PlaceHolder : Interactable
 
             }
             else if(canBePick){
-                Debug.Log("PLAYER GRAB FROM TABLE");
                 Collecting collect = storeItem.GetComponent<Collecting>();
                 collect.Enable();
                 collect.Interact(player);
@@ -63,7 +60,6 @@ public class PlaceHolder : Interactable
 
     private void OnTriggerEnter(Collider player)
     {
-        Debug.Log("Enter");
         Inventory inventory = player.GetComponent<Inventory>();
         if(player.gameObject.GetComponent<PlayerInfo>()?.PlayerType == "Student"){
             if(inventory){
@@ -78,7 +74,6 @@ public class PlaceHolder : Interactable
 
     private void OnTriggerExit(Collider player)
     {
-        Debug.Log("Leave");
         Inventory inventory = player.GetComponent<Inventory>();
         if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
             if(inventory){

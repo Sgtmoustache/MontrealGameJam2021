@@ -1585,6 +1585,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 354045221495251717, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251425513785190854, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507500961966356302, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1855269140391412404, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373121532863603934, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222368546462301402, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516188530314676971, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274135403050470551, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4776828928865239505, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: Items.Array.size
       value: 6
@@ -1645,6 +1677,10 @@ PrefabInstance:
       propertyPath: LostAndFoundPlaceHolders.Array.data[5]
       value: 
       objectReference: {fileID: 203259816}
+    - target: {fileID: 5917594529577882401, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6010860749356519738, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: camera
       value: 
@@ -1700,6 +1736,10 @@ PrefabInstance:
     - target: {fileID: 6714186348224660478, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322503951255300286, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: viewIdField
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}

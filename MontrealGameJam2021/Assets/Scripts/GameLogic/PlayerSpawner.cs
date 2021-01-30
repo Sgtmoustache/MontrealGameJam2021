@@ -17,16 +17,20 @@ public class PlayerSpawner : MonoBehaviourPun
 
     public static GameObject LocalPlayer;
 
+    [PunRPC]
     public void SpawnPlayers()
     {
+        Debug.LogWarning("Spawning player");
+
+        if(PhotonNetwork.IsMasterClient)
+            photonView.RPC("SpawnPlayers", RpcTarget.Others);
+        
         int randomValue = Random.Range(0, playerSpawns.Count-1);
 
         if (PhotonNetwork.IsConnected)
             LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
         else
             LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"), playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
-
-        Debug.LogWarning("Spawning player!");
         
         LocalPlayer.GetComponent<PlayerMovement>().Camera = MainCamera;
         LocalPlayer.gameObject.layer = 6;
@@ -37,8 +41,12 @@ public class PlayerSpawner : MonoBehaviourPun
         camera.Follow = LocalPlayer.transform;
     }
 
+    [PunRPC]
     public void RespawnPlayer(Transform forceLocation = null)
     {
+        if(PhotonNetwork.IsMasterClient)
+            photonView.RPC("RespawnPlayer", RpcTarget.Others, forceLocation);
+
         if (forceLocation == null)
         {
             Debug.LogWarning("Respawning player");
@@ -59,6 +67,8 @@ public class PlayerSpawner : MonoBehaviourPun
 
     public void SpawnBots()
     {
+        Debug.LogWarning("Spawning Bots");
+        
         List<GameObject> bots = new List<GameObject>();
         
         if (PhotonNetwork.IsMasterClient)
@@ -79,7 +89,7 @@ public class PlayerSpawner : MonoBehaviourPun
                 bots.Add((GameObject) Instantiate(Resources.Load("Prefabs/BotWithVisibility"), botsSpawns[randomIndex].position, botsSpawns[randomIndex].rotation));
             }
         }
-
+        
         foreach (GameObject bot in bots)
         {
             bot.GetComponent<BotMovement>()._bounds = MapBounds;

@@ -20,7 +20,6 @@ public class Dropping : MonoBehaviour
                 GameObject obj = inventory.GetItemGameObject();
                 inventory.ClearItem();
                 Vector3 vec = this.gameObject.transform.localPosition;
-                Debug.Log("Drop Item");
                 Collecting collect = obj.GetComponent<Collecting>();
                 collect.beInteractable();
                 obj.transform.SetParent(null);
