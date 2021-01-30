@@ -105,7 +105,14 @@ public class GameManager : MonoBehaviourPun
         Debug.LogWarning($"Setting {winnerLabel.name} value to {value}");
         winnerLabel.text = value;
     }
-    
+
+    [PunRPC]
+    private void ExitLobby()
+    {
+        PhotonNetwork.LeaveLobby();
+        PhotonNetwork.LoadLevel("MainMenu");
+    }
+
     private IEnumerator StartGame()
     {
         Debug.LogWarning("Starting game");
@@ -133,19 +140,19 @@ public class GameManager : MonoBehaviourPun
             yield return new WaitForSeconds(bufferBetweenRounds);
         }
         
-        photonView.RPC("RespawnPlayer", RpcTarget.Others, endZonePosition.position);
+        photonView.RPC("RespawnPlayer", RpcTarget.All, endZonePosition.position);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
         yield return FadeManager._Instance.FadeInRoutine();
 
         yield return ShowWinner();
         
-        PhotonNetwork.LoadLevel("MainMenu");
+        photonView.RPC("ExitLobby", RpcTarget.All);
     }
 
     private IEnumerator StartRound(int duration)
     {
         //_itemManager.RefreshItems(); //TODO FIX THIS WITH VINX CHANGES
-        photonView.RPC("RespawnPlayer", RpcTarget.Others, Vector3.zero);
+        photonView.RPC("RespawnPlayer", RpcTarget.All, Vector3.zero);
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
         yield return FadeManager._Instance.FadeInRoutine();
