@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviourPun
 
     [SerializeField] private Transform endZonePosition;
 
+    private void Awake() => PhotonNetwork.AutomaticallySyncScene = true;
+    
     private PlayerMovement PlayerMovement;
     void Start()
     {
@@ -106,27 +108,6 @@ public class GameManager : MonoBehaviourPun
         winnerLabel.text = value;
     }
 
-    [PunRPC]
-    private void ExitLobby()
-    {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            Debug.LogWarning("Returning to main menu because not master client");
-            PhotonNetwork.LoadLevel("MainMenu");
-            PhotonNetwork.LeaveRoom();
-        }
-        else
-            StartCoroutine("WaitForExist");
-    }
-
-    IEnumerator WaitForExist()
-    {
-        Debug.LogWarning("Waiting 5 seconds before leaving because master");
-        yield return new WaitForSeconds(5);
-        
-        PhotonNetwork.LoadLevel("MainMenu");
-    }
-
     private IEnumerator StartGame()
     {
         Debug.LogWarning("Starting game");
@@ -160,7 +141,7 @@ public class GameManager : MonoBehaviourPun
 
         yield return ShowWinner();
         
-        photonView.RPC("ExitLobby", RpcTarget.AllViaServer);
+        PhotonNetwork.LoadLevel("MainMenu");
     }
 
     private IEnumerator StartRound(int duration)
