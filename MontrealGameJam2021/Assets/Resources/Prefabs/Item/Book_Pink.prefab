@@ -583,7 +583,6 @@ GameObject:
   - component: {fileID: 4862907687435830539}
   - component: {fileID: 6460584214727792729}
   - component: {fileID: 5745041306027076392}
-  - component: {fileID: -1229779998839551003}
   m_Layer: 8
   m_Name: Book_Pink
   m_TagString: Item
@@ -689,7 +688,7 @@ MonoBehaviour:
   OwnershipTransfer: 1
   ObservedComponents:
   - {fileID: 4862907687435830539}
-  - {fileID: -1229779998839551003}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -735,22 +734,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collectibles: 2
---- !u!114 &-1229779998839551003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3343534160898535216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &3392427564979035276
 GameObject:
   m_ObjectHideFlags: 0

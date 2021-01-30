@@ -340,7 +340,6 @@ GameObject:
   - component: {fileID: 7041722954323604743}
   - component: {fileID: 6560797175618223066}
   - component: {fileID: 2937669670086842513}
-  - component: {fileID: 2097704155631331172}
   m_Layer: 8
   m_Name: phone
   m_TagString: Untagged
@@ -428,7 +427,7 @@ MonoBehaviour:
   OwnershipTransfer: 1
   ObservedComponents:
   - {fileID: 7041722954323604743}
-  - {fileID: 2097704155631331172}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -474,22 +473,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &2097704155631331172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3870190288515255709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &5600330121299996969
 GameObject:
   m_ObjectHideFlags: 0

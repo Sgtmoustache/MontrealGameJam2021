@@ -23,7 +23,7 @@ public class Collecting : Interactable {
                 gameObject.transform.SetParent(PlayerSpawner.LocalPlayer.transform);
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
-                gameObject.transform.position = new Vector3(vec.x, 8.0f, vec.z);
+                gameObject.transform.position = new Vector3(vec.x, (vec.y + 1.0f), vec.z);
                 if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
                     GameManager.TeacherScore -= 20 ; 
             }
