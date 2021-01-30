@@ -9,6 +9,12 @@ public class SceneLoader : MonoBehaviour
     
     public void LoadSoloGame()
     {
+        StartCoroutine(LoadSceneTransition());
+    }
+
+    public IEnumerator LoadSceneTransition()
+    {
+        yield return FadeManager._Instance.FadeOutRoutine();
         SceneManager.LoadScene(sceneToLoad);
     }
 }
