@@ -28,11 +28,8 @@ namespace Assets.Scripts.Player
 
         private IEnumerator Walk()
         {
-            Debug.Log("Starting walking");
             int time = Random.Range(2, 8);
-            Debug.Log($"Waiting for {time} seconds");
             yield return new WaitForSeconds(time);
-            Debug.Log("Ended walking");
             hasDestination = false;
         }
 
@@ -53,7 +50,6 @@ namespace Assets.Scripts.Player
                 if(_debugtarget != null)
                     _debugtarget.transform.position = _agent.destination;
                 
-                Debug.Log("Setting random destination");
                 StartCoroutine(Walk());
                 hasDestination = true;
             }
