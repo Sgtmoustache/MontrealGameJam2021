@@ -79,7 +79,7 @@ public class ItemManager : MonoBehaviourPun
             }
             
             GameObject spawnedItem = PhotonNetwork.Instantiate("Prefabs/Item/" + item.name,  Vector3.zero, Quaternion.identity);
-            selectedPlaceholder.BroadcastNewItem(spawnedItem.name);
+            selectedPlaceholder.BroadcastName(spawnedItem.name);
             SpawnedItems.Add(spawnedItem);
                 
             lostAndFoundCount++;

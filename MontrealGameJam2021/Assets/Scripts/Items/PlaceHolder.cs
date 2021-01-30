@@ -123,14 +123,17 @@ public class PlaceHolder : Interactable
     public override void beInteractable(){
         canBePlace = true;
     }
-
-    [PunRPC]
-    public void BroadcastNewItem(String item)
+    
+    public void BroadcastName(string name)
     {
-        AddItem(GameObject.Find(item));
+        photonView.RPC("AddItem", RpcTarget.All, name);
     }
 
-    public void AddItem(GameObject item){
+    [PunRPC]
+    public void AddItem(string itemName)
+    {
+        GameObject item = GameObject.Find(itemName);
+
         canBePlace = false;
         canBePick = true;
         storeItem = item;
