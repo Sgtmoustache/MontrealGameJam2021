@@ -231,7 +231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2678883348667823498, guid: 82e508c6715b8d5479af18273aa6a422, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.51
+      value: 8.092
       objectReference: {fileID: 0}
     - target: {fileID: 2678883348667823498, guid: 82e508c6715b8d5479af18273aa6a422, type: 3}
       propertyPath: m_LocalPosition.y
@@ -275,7 +275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6221090170978012357, guid: 82e508c6715b8d5479af18273aa6a422, type: 3}
       propertyPath: originHeight
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8423445211651822397, guid: 82e508c6715b8d5479af18273aa6a422, type: 3}
       propertyPath: viewIdField
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 65.816376
     OrthographicSize: 5
-    NearClipPlane: 0.1
+    NearClipPlane: 0.001
     FarClipPlane: 5000
     Dutch: 0
     LensShift: {x: 0, y: 0}
@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 7
+  m_CameraDistance: 18
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
@@ -2341,7 +2341,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.001
   far clip plane: 5000
   field of view: 65.816376
   orthographic: 1

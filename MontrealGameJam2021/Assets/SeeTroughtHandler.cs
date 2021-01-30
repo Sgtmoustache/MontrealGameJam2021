@@ -39,9 +39,9 @@ public class SeeTroughtHandler : MonoBehaviour
         RaycastHit hit;
 
         Vector3 origin = transform.position + new Vector3(0, originHeight, 0);
-        Vector3 direction = Camera.position - transform.position;
+        Vector3 direction = Camera.position - (transform.position + new Vector3(0, originHeight, 0));
 
-        int layerMask = 1 << 8;
+        int layerMask = 1 << 9;
         layerMask = ~layerMask;
         
         // Does the ray intersect any objects excluding the player layer
@@ -57,7 +57,6 @@ public class SeeTroughtHandler : MonoBehaviour
             {
                 Debug.DrawRay(origin, direction, Color.yellow);
                 Bubble.SetActive(true);
-
             }
         }
         else

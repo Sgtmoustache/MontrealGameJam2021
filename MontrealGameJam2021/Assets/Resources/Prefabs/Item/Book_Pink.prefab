@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2514727638278541611}
   - component: {fileID: 4626177755899615120}
   - component: {fileID: 7463474778632707387}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 1645844586401679939}
   - component: {fileID: 1438378979142634127}
   - component: {fileID: 5124623415321242834}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 7647041781596485865}
   - component: {fileID: 7528731854131215716}
   - component: {fileID: 6117038811951725433}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 7317853329120750221}
   - component: {fileID: 4999064873625844593}
   - component: {fileID: 2590577320527386178}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 5312450593126232797}
   - component: {fileID: 7994646188986528023}
   - component: {fileID: 1721455190462374282}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 7206099348784278294}
   - component: {fileID: 7794768381302493614}
   - component: {fileID: 5450893476595313865}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 5477676179594282297}
   - component: {fileID: 3584763315085594544}
   - component: {fileID: 7127873053966800062}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 8423445211651822397}
   - component: {fileID: 4862907687435830539}
   - component: {fileID: 6460584214727792729}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Book_Pink
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -731,7 +731,7 @@ GameObject:
   - component: {fileID: 3853540778088506286}
   - component: {fileID: 5279714601309874233}
   - component: {fileID: 9045330942506544315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: loveSchool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 5797817341149076572}
   - component: {fileID: 5826050609500652048}
   - component: {fileID: 1011241722186556584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -893,7 +893,7 @@ GameObject:
   - component: {fileID: 3129463424951461713}
   - component: {fileID: 435415358235637995}
   - component: {fileID: 1272999581568268799}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -974,7 +974,7 @@ GameObject:
   - component: {fileID: 6999676850651751310}
   - component: {fileID: 6475806494849157851}
   - component: {fileID: 705027453069619751}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1055,7 +1055,7 @@ GameObject:
   - component: {fileID: 8277556667923913918}
   - component: {fileID: 8550243916946568823}
   - component: {fileID: 5695751336162339570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1136,7 +1136,7 @@ GameObject:
   - component: {fileID: 4701265603633526375}
   - component: {fileID: 5209065384175700857}
   - component: {fileID: 5192813874648882868}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: coeur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1217,7 +1217,7 @@ GameObject:
   - component: {fileID: 7406384954782545493}
   - component: {fileID: 6992312924180630614}
   - component: {fileID: 3511570826159812795}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1298,7 +1298,7 @@ GameObject:
   - component: {fileID: 5491231587660867969}
   - component: {fileID: 6273670698107204938}
   - component: {fileID: 6229309039991339807}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,7 +1379,7 @@ GameObject:
   - component: {fileID: 6126852629891173574}
   - component: {fileID: 5996459139022449158}
   - component: {fileID: 6626036172170607296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1460,7 +1460,7 @@ GameObject:
   - component: {fileID: 7814507872626840152}
   - component: {fileID: 820147107910450609}
   - component: {fileID: 6067153636611487148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1541,7 +1541,7 @@ GameObject:
   - component: {fileID: 7675646098903271460}
   - component: {fileID: 2107388804326922653}
   - component: {fileID: 5114223926261097640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1622,7 +1622,7 @@ GameObject:
   - component: {fileID: 1877004759641672652}
   - component: {fileID: 1146164083566651873}
   - component: {fileID: 5269090147994873968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1703,7 +1703,7 @@ GameObject:
   - component: {fileID: 2910343538303719637}
   - component: {fileID: 862202433631131598}
   - component: {fileID: 256335362647492904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1784,7 +1784,7 @@ GameObject:
   - component: {fileID: 4226225100783861567}
   - component: {fileID: 9103266648425923123}
   - component: {fileID: 3357999880445185316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1865,7 +1865,7 @@ GameObject:
   - component: {fileID: 2154555125262006405}
   - component: {fileID: 5180666185959877694}
   - component: {fileID: 2985496702503705738}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Torus.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1946,6 +1946,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SeeThoughtSpere
       objectReference: {fileID: 0}
+    - target: {fileID: 274843610019303788, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4701066319637834386, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -1988,6 +1992,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4701066319637834386, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467155914817414454, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496705838754684705, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
+      propertyPath: originHeight
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
