@@ -178,7 +178,6 @@ GameObject:
   - component: {fileID: 5203081228758872347}
   - component: {fileID: 4362062347873820016}
   - component: {fileID: 9008091428487244287}
-  - component: {fileID: -1755444788761106246}
   m_Layer: 8
   m_Name: "boite\xE0lunch"
   m_TagString: Untagged
@@ -281,7 +280,7 @@ MonoBehaviour:
   OwnershipTransfer: 1
   ObservedComponents:
   - {fileID: 4362062347873820016}
-  - {fileID: -1755444788761106246}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -314,22 +313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collectibles: 5
---- !u!114 &-1755444788761106246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3374493815686197879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &4523726513889010519
 GameObject:
   m_ObjectHideFlags: 0

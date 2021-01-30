@@ -178,7 +178,6 @@ GameObject:
   - component: {fileID: 2369624801610175270}
   - component: {fileID: 2384132429557148488}
   - component: {fileID: 6555871897910522671}
-  - component: {fileID: 2274737212778924450}
   m_Layer: 0
   m_Name: laptop
   m_TagString: Untagged
@@ -285,7 +284,7 @@ MonoBehaviour:
   OwnershipTransfer: 1
   ObservedComponents:
   - {fileID: -7863647631431909661}
-  - {fileID: 2274737212778924450}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -315,22 +314,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 1, z: 1.6}
   m_Center: {x: 0, y: 0.4, z: 0}
---- !u!114 &2274737212778924450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064162322833016043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &1725591373937256920
 GameObject:
   m_ObjectHideFlags: 0
