@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviourPun
     {
         if (!PhotonNetwork.IsMasterClient)
         {
+            Debug.LogWarning("Returning to main menu because not master client");
             PhotonNetwork.LoadLevel("MainMenu");
             PhotonNetwork.LeaveRoom();
         }
@@ -120,6 +121,7 @@ public class GameManager : MonoBehaviourPun
 
     IEnumerator WaitForExist()
     {
+        Debug.LogWarning("Waiting 5 seconds before leaving because master");
         yield return new WaitForSeconds(5);
         
         PhotonNetwork.LoadLevel("MainMenu");
