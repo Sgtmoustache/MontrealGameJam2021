@@ -20,6 +20,12 @@ namespace Menus
 
         private void Awake() => PhotonNetwork.AutomaticallySyncScene = true;
 
+        private void Start()
+        {
+            if(PhotonNetwork.InRoom || PhotonNetwork.InLobby)
+                PhotonNetwork.LeaveRoom();
+        }
+
         public void FindOpponent()
         {
             isConnecting = true;

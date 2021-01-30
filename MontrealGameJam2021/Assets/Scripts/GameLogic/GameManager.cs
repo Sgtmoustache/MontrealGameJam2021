@@ -109,7 +109,6 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     private void ExitLobby()
     {
-        PhotonNetwork.LeaveRoom();
         PhotonNetwork.LoadLevel("MainMenu");
     }
 
