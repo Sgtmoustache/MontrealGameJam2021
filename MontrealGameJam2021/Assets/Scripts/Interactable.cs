@@ -4,7 +4,10 @@ using UnityEngine;
 using Photon.Pun;
 public abstract class Interactable: MonoBehaviourPun{
     public abstract void beInteractable();
-    public abstract void Interact(GameObject player);
+    public virtual void Interact(GameObject player){
+        photonView.RPC("SetLock", RpcTarget.All, true);
+        photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+    }
 
     protected bool Locked = false;
     

@@ -16,21 +16,15 @@ public class PlayerSpawner : MonoBehaviourPun
     [SerializeField] private List<Transform> playerSpawns = new List<Transform>();
 
     public static GameObject LocalPlayer;
-    
-    public void Start()
-    {
-        SpawnPlayers();
-        SpawnBots();
 
-        camera.Follow = LocalPlayer.transform;
-    }
-    
-    private void SpawnPlayers()
+    public void SpawnPlayers()
     {
+        int randomValue = Random.Range(0, playerSpawns.Count-1);
+
         if (PhotonNetwork.IsConnected)
-            LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", playerSpawns[photonView.ViewID-1].position, botsSpawns[photonView.ViewID-1].rotation);
+            LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
         else
-            LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"), playerSpawns[photonView.ViewID-1].position, botsSpawns[photonView.ViewID-1].rotation);
+            LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"), playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
 
         Debug.LogWarning("Spawning player!");
         
@@ -39,9 +33,29 @@ public class PlayerSpawner : MonoBehaviourPun
         LocalPlayer.GetComponentInChildren<Light>().enabled = true;
         LocalPlayer.GetComponent<VisibilityHandler>().enabled = false;
         LocalPlayer.gameObject.tag = "Player";
+        
+        camera.Follow = LocalPlayer.transform;
     }
 
-    private void SpawnBots()
+    public void RespawnPlayer(Transform forceLocation = null)
+    {
+        if (forceLocation == null)
+        {
+            Debug.LogWarning("Respawning player");
+            int randomValue = Random.Range(0, playerSpawns.Count-1);
+        
+            LocalPlayer.transform.position = playerSpawns[randomValue].position;
+            LocalPlayer.transform.rotation = playerSpawns[randomValue].rotation;
+        }
+        else
+        {
+            Debug.LogWarning("Going to specific location");
+            LocalPlayer.transform.position = forceLocation.position;
+            LocalPlayer.transform.rotation = forceLocation.rotation;
+        }
+    }
+
+    public void SpawnBots()
     {
         List<GameObject> bots = new List<GameObject>();
         

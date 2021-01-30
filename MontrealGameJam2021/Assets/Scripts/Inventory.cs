@@ -1,28 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory
+public class Inventory : MonoBehaviour
 {
-    public static int objectID;
-    public static GameObject objet;
+    private Tuple<Collectibles, GameObject> Item = new Tuple<Collectibles, GameObject>(Collectibles.None, null);
 
-    public static void setObject(int value, GameObject ob)
+    public Collectibles GetTypeOfItem() => Item.Item1;
+    public GameObject GetItemGameObject() => Item.Item2;
+    
+    public void SetItem(Collectibles type, GameObject obj)
     {
-        objectID = value;
-        objet = ob;
-    }
-    public static GameObject getItem()
-    {
-        return objet;
-    }
-    public static int getObjectID(){ 
-        return objectID;
+        Item = new Tuple<Collectibles, GameObject>(type, obj);
     }
 
-    public static bool HasObject()
+    public void ClearItem()
     {
-        //nightlight = !nightlight;
-        return (objectID > 0)? true : false;
+        Debug.Log("ClearItem");
+        Item = new Tuple<Collectibles, GameObject>(Collectibles.None, null); 
+        Debug.Log(Item);
+
     }
+
+    public bool HasItem() => Item.Item2 != null;
 }

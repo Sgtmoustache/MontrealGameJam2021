@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - OtherPlayer
+  - Camera
+  - VisibilityIndependant
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -14,8 +17,8 @@ TagManager:
   - UI
   - Player
   - Level
+  - Item
   - Bot
-  - 
   - 
   - 
   - 
