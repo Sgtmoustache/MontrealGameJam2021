@@ -128,6 +128,9 @@ public class PlaceHolder : Interactable
         canBePlace = false;
         canBePick = true;
         storeItem = item;
+        storeItem.transform.SetParent(this.gameObject.transform);
+        storeItem.transform.position = itemDropPosition.position;
+        storeItem.transform.rotation = itemDropPosition.rotation;
         Collecting collect = storeItem.GetComponent<Collecting>();
         collect.Disable();
     }
