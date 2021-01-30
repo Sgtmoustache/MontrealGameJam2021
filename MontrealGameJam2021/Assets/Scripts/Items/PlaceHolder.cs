@@ -9,6 +9,8 @@ public class PlaceHolder : Interactable
 {
     public Collectibles itemType;
     [SerializeField] Transform itemDropPosition;
+    [SerializeField] bool hidingSpot;
+    [SerializeField] bool lostAndFound;
     
 
     public bool canBePlace = true;   
@@ -40,7 +42,23 @@ public class PlaceHolder : Interactable
                 collect.Disable();
                 inventory.ClearItem();
                 TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
-                Description.SetText("Take");
+                if(player.GetComponent<PlayerInfo>().PlayerType == "Student"){
+                    Description.SetText("Take");
+
+                    if(hidingSpot)
+                        GameManager.StudentScore += 20 ;
+                    else if(lostAndFound)
+                        GameManager.StudentScore += 100 ;
+                    else if(!lostAndFound)
+                        GameManager.TeacherScore += 100 ;
+
+                }
+                else{
+                    if(lostAndFound)
+                        GameManager.StudentScore += 100 ;
+                    else if(!lostAndFound)
+                        GameManager.TeacherScore += 100 ;
+                }
 
                 StartCoroutine(bufferPlace());
 
@@ -49,6 +67,14 @@ public class PlaceHolder : Interactable
                 Collecting collect = storeItem.GetComponent<Collecting>();
                 collect.Enable();
                 collect.Interact(player);
+                if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
+                    GameManager.TeacherScore += 20 ; 
+                if(hidingSpot)
+                    GameManager.StudentScore -= 20 ;
+                else if(lostAndFound)
+                    GameManager.StudentScore -= 100 ;
+                else if(!lostAndFound)
+                    GameManager.TeacherScore -= 100 ;
 
                 storeItem = null;
                 canBePick = false;
@@ -62,12 +88,24 @@ public class PlaceHolder : Interactable
     {
         Inventory inventory = player.GetComponent<Inventory>();
         if(player.gameObject.GetComponent<PlayerInfo>()?.PlayerType == "Student"){
-            if(inventory){
+            if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
                 TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
-                if(storeItem)
-                    Description.SetText("Take");
-                else
-                    Description.SetText("Hide");
+                if(storeItem) 
+                    if(!inventory.HasItem()){
+                        if(hidingSpot)
+                            Description.SetText("Search");
+                        else
+                            Description.SetText("Take");
+                    }
+                else{
+                    if(inventory.HasItem()){
+                        if(hidingSpot)
+                            Description.SetText("Hide");
+                        else
+                            Description.SetText("Place");
+                    }
+
+                }
             }
         }
     }
