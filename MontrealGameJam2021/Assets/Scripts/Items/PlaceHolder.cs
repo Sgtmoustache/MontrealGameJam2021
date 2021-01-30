@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
-
+[RequireComponent(typeof(PhotonView))]
 public class PlaceHolder : Interactable
 {
     public Collectibles itemType;
