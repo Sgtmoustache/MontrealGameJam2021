@@ -19,10 +19,11 @@ public class Collecting : Interactable {
                 ;
                 base.Interact(player);
                 inventory.SetItem(gameObject.GetComponent<ItemInfo>().Collectibles, gameObject);
-
+                Vector3 vec = player.transform.position;
                 gameObject.transform.SetParent(PlayerSpawner.LocalPlayer.transform);
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                gameObject.transform.localPosition = new Vector3(0.0f, 8.0f, 0.0f);
+
+                gameObject.transform.position = new Vector3(vec.x, 8.0f, vec.z);
                 if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
                     GameManager.TeacherScore -= 20 ; 
             }
