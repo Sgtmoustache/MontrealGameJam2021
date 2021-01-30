@@ -15,6 +15,7 @@ public enum Collectibles
     GlassesYellow,
     WalletLeather,
     WalletBlack,
+    IdCard,
 }
 
 public class ItemInfo : MonoBehaviour

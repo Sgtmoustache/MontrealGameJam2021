@@ -100,10 +100,22 @@ public class PlaceHolder : Interactable
         if(inventory){
             if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
                 TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
-                if(storeItem)
-                    Description.SetText("Take");
-                else
-                    Description.SetText("Hide");
+                if(storeItem) 
+                    if(!inventory.HasItem()){
+                        if(hidingSpot)
+                            Description.SetText("Search");
+                        else
+                            Description.SetText("Take");
+                    }
+                else{
+                    if(inventory.HasItem()){
+                        if(hidingSpot)
+                            Description.SetText("Hide");
+                        else
+                            Description.SetText("Place");
+                    }
+
+                }
             }
         }
     }
