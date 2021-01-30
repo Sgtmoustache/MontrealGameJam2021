@@ -8,7 +8,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviourPun
 {
     public Transform Camera;
-    [SerializeField] private float WalkingSpeed = 6f;
+    [SerializeField] private float WalkingSpeed = 3.0f;
+    [SerializeField] private float RunningSpeed = 5.0f;
     [SerializeField] private float TurnSmoothTime = 0.1f;
     [SerializeField] private float GravityForce = -0.4f;
     private Animator _anim;
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviourPun
 
 
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            _controller.Move(Time.deltaTime * WalkingSpeed * moveDirection.normalized + new Vector3(0, GravityForce, 0));
+            _controller.Move(moveDirection.normalized * (Input.GetKey(KeyCode.LeftShift)? RunningSpeed : WalkingSpeed ) * Time.deltaTime + new Vector3(0, GravityForce, 0));
              _anim.SetBool("isRunning", true);
         }
         else 

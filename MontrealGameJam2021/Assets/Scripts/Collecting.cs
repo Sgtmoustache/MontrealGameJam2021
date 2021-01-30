@@ -9,11 +9,13 @@ public class Collecting : Interactable {
     [SerializeField] int objectID;
     
     public override void Interact(GameObject player){
-        if(!(Inventory.HasObject())){
-            Debug.Log("PLAYER GRAB");
-            photonView.RPC("SetLock", RpcTarget.All, true);
-            photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
-            Inventory.setObject(objectID, this.gameObject);
+        Inventory inventory = player.GetComponent<Inventory>();
+        if(inventory){
+            if(!(inventory.HasObject())){
+                Debug.Log("PLAYER GRAB");
+                photonView.RPC("SetLock", RpcTarget.All, true);
+                photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+                inventory.setObject(objectID, this.gameObject);
 
             this.gameObject.transform.SetParent(PlayerSpawner.LocalPlayer.transform);
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
