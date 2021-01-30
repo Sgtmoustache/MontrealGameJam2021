@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviourPun
     private IEnumerator StartRound(int duration)
     {
         //_itemManager.RefreshItems(); //TODO FIX THIS WITH VINX CHANGES
-        _playerSpawner.RespawnPlayer();    
+        _playerSpawner.RespawnPlayer(Vector3.zero);    
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
         yield return FadeManager._Instance.FadeInRoutine();
