@@ -127,8 +127,7 @@ public class PlaceHolder : Interactable
     [PunRPC]
     public void BroadcastNewItem(String item)
     {
-        GameObject obj = GameObject.Find(item);
-        AddItem(item);
+        AddItem(GameObject.Find(item));
     }
 
     public void AddItem(GameObject item){
