@@ -78,7 +78,7 @@ public class ItemManager : MonoBehaviourPun
                 Debug.LogWarning($"({outsideCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {selectedPlaceholder.transform.parent.name + "/" + selectedPlaceholder.name}");
             }
             
-            GameObject spawnedItem = Instantiate(item, Vector3.zero, Quaternion.identity);
+            GameObject spawnedItem = PhotonNetwork.Instantiate("Prefabs/Item/" + item.name,  Vector3.zero, Quaternion.identity);
             selectedPlaceholder.addItem(spawnedItem);
             SpawnedItems.Add(spawnedItem);
                 
