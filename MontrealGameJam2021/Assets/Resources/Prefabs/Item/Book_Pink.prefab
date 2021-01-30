@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7463474778632707387}
   m_Layer: 8
   m_Name: Torus.007
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5124623415321242834}
   m_Layer: 8
   m_Name: Test
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 6117038811951725433}
   m_Layer: 8
   m_Name: Torus.001
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 2590577320527386178}
   m_Layer: 8
   m_Name: Torus.003
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 1721455190462374282}
   m_Layer: 8
   m_Name: Torus.006
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 5450893476595313865}
   m_Layer: 8
   m_Name: Torus.011
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 7127873053966800062}
   m_Layer: 8
   m_Name: Torus.012
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -582,6 +582,7 @@ GameObject:
   - component: {fileID: 8423445211651822397}
   - component: {fileID: 4862907687435830539}
   - component: {fileID: 6460584214727792729}
+  - component: {fileID: 5745041306027076392}
   m_Layer: 8
   m_Name: Book_Pink
   m_TagString: Item
@@ -720,6 +721,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.21, y: 1.3, z: 3.35}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5745041306027076392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343534160898535216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca92bf5800a1911468369a74814a6e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Collectibles: 2
 --- !u!1 &3392427564979035276
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +747,7 @@ GameObject:
   - component: {fileID: 9045330942506544315}
   m_Layer: 8
   m_Name: loveSchool
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -814,7 +828,7 @@ GameObject:
   - component: {fileID: 1011241722186556584}
   m_Layer: 8
   m_Name: Torus.002
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -895,7 +909,7 @@ GameObject:
   - component: {fileID: 1272999581568268799}
   m_Layer: 8
   m_Name: Torus.005
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -976,7 +990,7 @@ GameObject:
   - component: {fileID: 705027453069619751}
   m_Layer: 8
   m_Name: Cube.004
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1057,7 +1071,7 @@ GameObject:
   - component: {fileID: 5695751336162339570}
   m_Layer: 8
   m_Name: Torus.010
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1138,7 +1152,7 @@ GameObject:
   - component: {fileID: 5192813874648882868}
   m_Layer: 8
   m_Name: coeur
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1219,7 +1233,7 @@ GameObject:
   - component: {fileID: 3511570826159812795}
   m_Layer: 8
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1300,7 +1314,7 @@ GameObject:
   - component: {fileID: 6229309039991339807}
   m_Layer: 8
   m_Name: Cube.003
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1381,7 +1395,7 @@ GameObject:
   - component: {fileID: 6626036172170607296}
   m_Layer: 8
   m_Name: Torus.009
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1462,7 +1476,7 @@ GameObject:
   - component: {fileID: 6067153636611487148}
   m_Layer: 8
   m_Name: Cube.002
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1543,7 +1557,7 @@ GameObject:
   - component: {fileID: 5114223926261097640}
   m_Layer: 8
   m_Name: Torus
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1624,7 +1638,7 @@ GameObject:
   - component: {fileID: 5269090147994873968}
   m_Layer: 8
   m_Name: Cube.001
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1705,7 +1719,7 @@ GameObject:
   - component: {fileID: 256335362647492904}
   m_Layer: 8
   m_Name: Torus.004
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1786,7 +1800,7 @@ GameObject:
   - component: {fileID: 3357999880445185316}
   m_Layer: 8
   m_Name: Plane.001
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1867,7 +1881,7 @@ GameObject:
   - component: {fileID: 2985496702503705738}
   m_Layer: 8
   m_Name: Torus.008
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1950,6 +1964,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 274843610019303788, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
+      propertyPath: m_TagString
+      value: VisibilityIndependant
+      objectReference: {fileID: 0}
     - target: {fileID: 4701066319637834386, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -1997,6 +2015,10 @@ PrefabInstance:
     - target: {fileID: 7467155914817414454, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467155914817414454, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
+      propertyPath: m_TagString
+      value: VisibilityIndependant
       objectReference: {fileID: 0}
     - target: {fileID: 8496705838754684705, guid: 814cd83e65cb5b24395a70668f8c6842, type: 3}
       propertyPath: originHeight

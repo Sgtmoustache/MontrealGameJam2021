@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlaceHolder : Interactable
 {
-    [SerializeField] int objectID;
+    [SerializeField] Collectibles objectType;
 
     public bool canBePlace = true;   
     public bool canBePick = false;  
@@ -23,14 +24,14 @@ public class PlaceHolder : Interactable
 
     public override void Interact(GameObject player){
         Inventory inventory = player.GetComponent<Inventory>();
-        if(canBePlace && inventory.HasObject() && player.layer == 6 && inventory.getObjectID() == objectID){
+        if(canBePlace && inventory.HasItem() && player.layer == 6 && inventory.GetTypeOfItem() == objectType){
             Debug.Log("PLAYER PLACE");
-            storeItem = inventory.getItem();
+            storeItem = inventory.GetItemGameObject();
             
             storeItem.transform.SetParent(this.gameObject.transform);
             storeItem.transform.localPosition = new Vector3(0.0f, 2.0f, 0.0f);
 
-            inventory.setObject(0, null);
+            inventory.ClearItem();
             canBePlace = false;
             
             StartCoroutine(bufferPlace());
@@ -38,7 +39,7 @@ public class PlaceHolder : Interactable
         }
         else if(canBePick){
             Debug.Log("PLAYER GRAB FROM TABLE");
-            inventory.setObject(objectID, storeItem);
+            inventory.SetItem(objectType, storeItem);
             
             storeItem.transform.SetParent(player.transform);
             storeItem.transform.localPosition = new Vector3(0.0f, 8.0f, 0.0f);

@@ -1,3 +1,4 @@
+using System;
 using System.Linq.Expressions;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,23 +7,23 @@ using Photon.Pun;
 
 public class Collecting : Interactable {
 
-    [SerializeField] int objectID;
+    [SerializeField] Collectibles itemType;
 
     public override void Interact(GameObject player)
     {
         Inventory inventory = player.GetComponent<Inventory>();
         if (inventory)
         {
-            if (!(inventory.HasObject()))
+            if (!(inventory.HasItem()))
             {
                 Debug.Log("PLAYER GRAB");
                 photonView.RPC("SetLock", RpcTarget.All, true);
                 photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
-                inventory.setObject(objectID, this.gameObject);
+                inventory.SetItem(itemType, gameObject);
 
-                this.gameObject.transform.SetParent(PlayerSpawner.LocalPlayer.transform);
+                gameObject.transform.SetParent(PlayerSpawner.LocalPlayer.transform);
                 gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                this.gameObject.transform.localPosition = new Vector3(0.0f, 8.0f, 0.0f);
+                gameObject.transform.localPosition = new Vector3(0.0f, 8.0f, 0.0f);
             }
         }
     }
