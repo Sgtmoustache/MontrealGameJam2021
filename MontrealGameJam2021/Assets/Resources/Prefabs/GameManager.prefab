@@ -40,6 +40,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6714186348224660416}
   - component: {fileID: 6714186348224660479}
+  - component: {fileID: 6010860749356519738}
+  - component: {fileID: 4776828928865239505}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -58,7 +60,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6714186349262652538}
   - {fileID: 6714186348393828966}
   - {fileID: 6714186349174691130}
   - {fileID: 6714186349098006627}
@@ -89,8 +90,50 @@ MonoBehaviour:
   winnerLabel: {fileID: 6714186350029068106}
   teacherScoreLabel: {fileID: 6714186349395048100}
   studentScoreLabel: {fileID: 6714186350046802947}
-  PlayerSpawner: {fileID: 6714186349174691129}
-  endzonePosition: {fileID: 6714186349098006627}
+  endZonePosition: {fileID: 6714186349098006627}
+--- !u!114 &6010860749356519738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6714186348224660478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bb142eeab4e4d46a5748edbc934ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 0}
+  MapBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 20, y: 0, z: 20}
+  numberOfBots: 50
+  camera: {fileID: 0}
+  botsSpawns:
+  - {fileID: 6714186348504726052}
+  - {fileID: 6714186348345612390}
+  - {fileID: 6714186348255555291}
+  - {fileID: 6714186348052330942}
+  playerSpawns:
+  - {fileID: 6714186348513015389}
+  - {fileID: 6714186349527915704}
+  - {fileID: 6714186349549375008}
+  - {fileID: 6714186348339827233}
+--- !u!114 &4776828928865239505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6714186348224660478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a128271f23cc04a81ba68ef08aacd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OutsidePlaceHolders: []
+  LostAndFoundPlaceHolders: []
+  Items: []
 --- !u!1 &6714186348255555290
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,8 +294,9 @@ RectTransform:
   - {fileID: 6714186349490919266}
   - {fileID: 6714186348440669593}
   - {fileID: 6714186348588359555}
+  - {fileID: 6714186349262652538}
   m_Father: {fileID: 6714186348224660416}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -560,7 +604,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6714186348224660416}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6714186349174691128
 GameObject:
@@ -571,10 +615,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6714186349174691130}
-  - component: {fileID: 6714186349174691129}
-  - component: {fileID: 6714186349174691131}
   m_Layer: 0
-  m_Name: PlayerSpawner
+  m_Name: Spawns
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,58 +636,8 @@ Transform:
   - {fileID: 6714186350053499311}
   - {fileID: 6714186349500793574}
   m_Father: {fileID: 6714186348224660416}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6714186349174691129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6714186349174691128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53bb142eeab4e4d46a5748edbc934ce1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MainCamera: {fileID: 0}
-  MapBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 20, y: 0, z: 20}
-  numberOfBots: 50
-  camera: {fileID: 0}
-  botsSpawns:
-  - {fileID: 6714186348504726052}
-  - {fileID: 6714186348345612390}
-  - {fileID: 6714186348255555291}
-  - {fileID: 6714186348052330942}
-  playerSpawns:
-  - {fileID: 6714186348513015389}
-  - {fileID: 6714186349527915704}
-  - {fileID: 6714186349549375008}
-  - {fileID: 6714186348339827233}
---- !u!114 &6714186349174691131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6714186349174691128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 3
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &6714186349262652535
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,11 +664,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6714186349262652535}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -960, y: -540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6714186348224660416}
-  m_RootOrder: 0
+  m_Father: {fileID: 6714186348393828966}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6714186349262652537
 MonoBehaviour:

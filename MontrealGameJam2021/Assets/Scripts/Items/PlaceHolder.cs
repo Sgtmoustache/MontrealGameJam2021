@@ -7,7 +7,7 @@ using TMPro;
 
 public class PlaceHolder : Interactable
 {
-    [SerializeField] Collectibles itemType;
+    public Collectibles itemType;
     [SerializeField] Transform itemDropPosition;
     
 

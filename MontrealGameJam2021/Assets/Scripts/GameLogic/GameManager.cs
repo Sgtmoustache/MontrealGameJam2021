@@ -5,11 +5,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[RequireComponent(typeof(ItemManager))]
+[RequireComponent(typeof(PlayerSpawner))]
 public class GameManager : MonoBehaviourPun
 {
-    private static int TeacherScore = 0;
-    private static int StudentScore = 0;
-    private static int currentRound = 0;
+    public static int TeacherScore = 0;
+    public static int StudentScore = 0;
+    private int CurrentRound = 0;
 
     [SerializeField] private int startBufferDuration;
     [SerializeField] private int[] roundDuration;
@@ -25,13 +27,18 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] private TextMeshProUGUI teacherScoreLabel;
     [SerializeField] private TextMeshProUGUI studentScoreLabel;
 
-    [SerializeField] private PlayerSpawner PlayerSpawner;
+    private PlayerSpawner _playerSpawner;
+    private ItemManager _itemManager;
 
-    [SerializeField] private Transform endzonePosition;
+    [SerializeField] private Transform endZonePosition;
 
     private PlayerMovement PlayerMovement;
     void Start()
     {
+        _playerSpawner = GetComponent<PlayerSpawner>();
+        _itemManager = GetComponent<ItemManager>();
+        
+        //TODO IF HOST
         StartCoroutine(StartGame());
     }
 
@@ -44,23 +51,23 @@ public class GameManager : MonoBehaviourPun
         yield return FadeManager._Instance.FadeOutRoutine();
         yield return new WaitForSeconds(bufferBetweenRounds);
         
-        PlayerSpawner.SpawnPlayers();
-        PlayerSpawner.SpawnBots();
+        _playerSpawner.SpawnPlayers();
+        _playerSpawner.SpawnBots();
         
         PlayerMovement = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>();
         
-        for (currentRound = 0; currentRound < roundDuration.Length; currentRound++)
+        for (CurrentRound = 0; CurrentRound < roundDuration.Length; CurrentRound++)
         {
             //Start Round
-            Debug.LogWarning($"Starting round {currentRound + 1}/{roundDuration.Length} for {roundDuration[currentRound]} seconds");
-            roundLabel.text = $"Round {currentRound + 1}/{roundDuration.Length}";
-            yield return StartRound(roundDuration[currentRound]);
+            Debug.LogWarning($"Starting round {CurrentRound + 1}/{roundDuration.Length} for {roundDuration[CurrentRound]} seconds");
+            roundLabel.text = $"Round {CurrentRound + 1}/{roundDuration.Length}";
+            yield return StartRound(roundDuration[CurrentRound]);
             //Show score
             yield return ShowScoreboard();
             yield return new WaitForSeconds(bufferBetweenRounds);
         }
 
-        PlayerSpawner.RespawnPlayer(endzonePosition);
+        _playerSpawner.RespawnPlayer(endZonePosition);
         yield return FadeManager._Instance.FadeInRoutine();
 
         yield return ShowWinner();
@@ -70,7 +77,8 @@ public class GameManager : MonoBehaviourPun
 
     private IEnumerator StartRound(int duration)
     {
-        PlayerSpawner.RespawnPlayer();        
+        _itemManager.RefreshItems();
+        _playerSpawner.RespawnPlayer();        
         gameUI.SetActive(true);
         PlayerMovement.CanMove = true;
         yield return FadeManager._Instance.FadeInRoutine();

@@ -53,6 +53,8 @@ public class PlayerSpawner : MonoBehaviourPun
             LocalPlayer.transform.position = forceLocation.position;
             LocalPlayer.transform.rotation = forceLocation.rotation;
         }
+        
+        LocalPlayer.GetComponent<Inventory>().ClearItem();
     }
 
     public void SpawnBots()
