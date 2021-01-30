@@ -109,6 +109,19 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     private void ExitLobby()
     {
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("MainMenu");
+            PhotonNetwork.LeaveRoom();
+        }
+        else
+            StartCoroutine("WaitForExist");
+    }
+
+    IEnumerator WaitForExist()
+    {
+        yield return new WaitForSeconds(5);
+        
         PhotonNetwork.LoadLevel("MainMenu");
     }
 
@@ -145,7 +158,7 @@ public class GameManager : MonoBehaviourPun
 
         yield return ShowWinner();
         
-        photonView.RPC("ExitLobby", RpcTarget.All);
+        photonView.RPC("ExitLobby", RpcTarget.AllViaServer);
     }
 
     private IEnumerator StartRound(int duration)
