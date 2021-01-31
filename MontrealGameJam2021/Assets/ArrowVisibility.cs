@@ -18,7 +18,7 @@ public class ArrowVisibility : MonoBehaviour
 
         if (!targetToFollow)
             return;
-            
+
         if (targetToFollow.GetComponent<Collecting>() != null)
         {
             IsOnItem = true;
@@ -33,7 +33,7 @@ public class ArrowVisibility : MonoBehaviour
     void Update()
     {
         if (!targetToFollow)
-            return;
+            Destroy(this.gameObject);
         
         transform.position = targetToFollow.transform.position + new Vector3(0, height, 0);
         

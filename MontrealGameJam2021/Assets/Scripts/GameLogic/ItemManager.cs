@@ -127,7 +127,7 @@ public class ItemManager : MonoBehaviourPun
         LostAndFoundPlaceHolders.ForEach(b => b.RemoveItem());
         HiddenSpotPlaceHolders.ForEach(b => b.RemoveItem());
 
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
         
         if(PhotonNetwork.IsMasterClient)
             SpawnedItems.ForEach(PhotonNetwork.Destroy);
