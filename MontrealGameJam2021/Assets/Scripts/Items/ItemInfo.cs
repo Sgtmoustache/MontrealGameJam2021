@@ -9,6 +9,13 @@ public enum Collectibles
     TessBook,
     Laptop,
     Cellphone,
+    LunchBox,
+    CoffreCrayon,
+    GlassesGreen,
+    GlassesYellow,
+    WalletLeather,
+    WalletBlack,
+    IdCard,
 }
 
 public class ItemInfo : MonoBehaviour

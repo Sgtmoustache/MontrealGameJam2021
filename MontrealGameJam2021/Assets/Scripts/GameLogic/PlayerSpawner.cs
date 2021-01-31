@@ -7,39 +7,45 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviourPun
 {
-    [SerializeField] private Transform MainCamera;
     [SerializeField] private Bounds MapBounds;
     [SerializeField] private int numberOfBots = 50;
-    [SerializeField] private CinemachineVirtualCamera camera;
+    [HideInInspector] public CinemachineVirtualCamera camera;
     
     [SerializeField] private List<Transform> botsSpawns = new List<Transform>();
     [SerializeField] private List<Transform> playerSpawns = new List<Transform>();
 
     public static GameObject LocalPlayer;
 
+    [PunRPC]
     public void SpawnPlayers()
     {
+        Debug.LogWarning("Spawning player");
+
+        if(PhotonNetwork.IsMasterClient)
+            photonView.RPC("SpawnPlayers", RpcTarget.Others);
+        
         int randomValue = Random.Range(0, playerSpawns.Count-1);
 
         if (PhotonNetwork.IsConnected)
             LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
         else
             LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"), playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
-
-        Debug.LogWarning("Spawning player!");
         
-        LocalPlayer.GetComponent<PlayerMovement>().Camera = MainCamera;
+        
+        LocalPlayer.GetComponent<PlayerMovement>().Camera = GameManager.CameraPosition;
         LocalPlayer.gameObject.layer = 6;
         LocalPlayer.GetComponentInChildren<Light>().enabled = true;
         LocalPlayer.GetComponent<VisibilityHandler>().enabled = false;
+        LocalPlayer.GetComponent<PlayerInfo>().isLocal = true;
         LocalPlayer.gameObject.tag = "Player";
         
         camera.Follow = LocalPlayer.transform;
     }
 
-    public void RespawnPlayer(Transform forceLocation = null)
+    [PunRPC]
+    public void RespawnPlayer(Vector3 forceLocation)
     {
-        if (forceLocation == null)
+        if (forceLocation == Vector3.zero)
         {
             Debug.LogWarning("Respawning player");
             int randomValue = Random.Range(0, playerSpawns.Count-1);
@@ -50,13 +56,16 @@ public class PlayerSpawner : MonoBehaviourPun
         else
         {
             Debug.LogWarning("Going to specific location");
-            LocalPlayer.transform.position = forceLocation.position;
-            LocalPlayer.transform.rotation = forceLocation.rotation;
+            LocalPlayer.transform.position = forceLocation;
         }
+        
+        LocalPlayer.GetComponent<Inventory>().ClearItem();
     }
 
     public void SpawnBots()
     {
+        Debug.LogWarning("Spawning Bots");
+        
         List<GameObject> bots = new List<GameObject>();
         
         if (PhotonNetwork.IsMasterClient)
@@ -77,7 +86,7 @@ public class PlayerSpawner : MonoBehaviourPun
                 bots.Add((GameObject) Instantiate(Resources.Load("Prefabs/BotWithVisibility"), botsSpawns[randomIndex].position, botsSpawns[randomIndex].rotation));
             }
         }
-
+        
         foreach (GameObject bot in bots)
         {
             bot.GetComponent<BotMovement>()._bounds = MapBounds;

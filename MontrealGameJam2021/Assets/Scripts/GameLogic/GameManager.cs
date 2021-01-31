@@ -1,16 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
+[RequireComponent(typeof(ItemManager))]
+[RequireComponent(typeof(PlayerSpawner))]
 public class GameManager : MonoBehaviourPun
 {
-    private static int TeacherScore = 0;
-    private static int StudentScore = 0;
-    private static int currentRound = 0;
-
+    public static GameManager _Instance;
+    
+    public static int TeacherScore = 0;
+    public static int StudentScore = 0;
+    private int CurrentRound = 0;
+    
+    public static bool PlayersCanMove = false;
+    public static bool PlayersSpawned = false;
+    public static Transform CameraPosition = null;
+    
+    [SerializeField] private bool SkipIntro = false;
+    [SerializeField] private Transform CameraTransform;
+    [SerializeField] private CinemachineVirtualCamera Camera;
     [SerializeField] private int startBufferDuration;
     [SerializeField] private int[] roundDuration;
     [SerializeField] private int scoreBoardDuration;
@@ -25,42 +35,132 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] private TextMeshProUGUI teacherScoreLabel;
     [SerializeField] private TextMeshProUGUI studentScoreLabel;
 
-    [SerializeField] private PlayerSpawner PlayerSpawner;
+    private PlayerSpawner _playerSpawner;
+    public ItemManager ItemManager;
 
-    [SerializeField] private Transform endzonePosition;
+    [SerializeField] private Transform endZonePosition;
 
+    private void Awake() => PhotonNetwork.AutomaticallySyncScene = true;
+    
     private PlayerMovement PlayerMovement;
     void Start()
     {
-        StartCoroutine(StartGame());
+        _Instance = this;
+        
+        _playerSpawner = GetComponent<PlayerSpawner>();
+        _playerSpawner.camera = Camera;
+        ItemManager = GetComponent<ItemManager>();
+        CameraPosition = CameraTransform.transform;
+        
+        if(PhotonNetwork.IsMasterClient)
+            StartCoroutine(StartGame());
+    }
+    
+    [PunRPC]
+    private void SetPlayerCanMove(bool value)
+    {
+        Debug.LogWarning(value ? "Unlocking players" : "Locking players");
+        PlayersCanMove = value;
+    }
+
+    [PunRPC]
+    private void PlayIntroAnimation()
+    {
+        Debug.LogWarning("Playing intro animation");
+    }
+    
+    [PunRPC]
+    private void SetGameUILablelVisibility(bool visibility)
+    {
+        Debug.LogWarning($"Setting {gameUI.name} visibility to {visibility.ToString()}");
+        gameUI.SetActive(visibility);
+    }
+    
+    [PunRPC]
+    private void SetRoundUILabel(string value)
+    {
+        Debug.LogWarning($"Setting {roundLabel.name} value to {value}");
+        roundLabel.text = value;
+    }
+    
+    [PunRPC]
+    private void SetTeacherScoreUILabel(string value)
+    {
+        Debug.LogWarning($"Setting {teacherScoreLabel.name} value to {value}");
+        teacherScoreLabel.text = value;
+    }
+    
+    [PunRPC]
+    private void SetStudentScoreUILabel(string value)
+    {
+        Debug.LogWarning($"Setting {studentScoreLabel.name} value to {value}");
+        studentScoreLabel.text = value;
+    }
+    
+    [PunRPC]
+    private void SetScoreboardVisibility(bool value)
+    {
+        Debug.LogWarning($"Setting {scoreBoard.name} visibility to {value}");
+        scoreBoard.SetActive(value);
+    }
+    
+    [PunRPC]
+    private void SetWinnerVisibility(bool value)
+    {
+        Debug.LogWarning($"Setting {winnerBoard.name} visibility to {value}");
+        winnerBoard.SetActive(value);
+    }
+    
+    [PunRPC]
+    private void SetWinnerUILabel(string value)
+    {
+        Debug.LogWarning($"Setting {winnerLabel.name} value to {value}");
+        winnerLabel.text = value;
+    }
+    
+    [PunRPC]
+    private void ActivateSeeTroughtHandlers(bool value)
+    {
+        Debug.LogWarning("Activating seethroughthandlers");
+        PlayersSpawned = value;
     }
 
     private IEnumerator StartGame()
     {
+        Debug.LogWarning("Starting game");
+        Debug.LogWarning($"Waiting start buffer for {startBufferDuration} seconds");
         yield return new WaitForSeconds(startBufferDuration);
-        //Start intro animation
-        Debug.LogWarning($"Playing intro animation for 5 seconds");
-        yield return new WaitForSeconds(5);
-        yield return FadeManager._Instance.FadeOutRoutine();
+
+        if (!SkipIntro)
+        {    
+            yield return FadeManager._Instance.FadeInRoutine();
+            //Start intro animation
+            photonView.RPC("PlayIntroAnimation", RpcTarget.All);
+            yield return new WaitForSeconds(5);
+            yield return FadeManager._Instance.FadeOutRoutine();
+        }
+
         yield return new WaitForSeconds(bufferBetweenRounds);
         
-        PlayerSpawner.SpawnPlayers();
-        PlayerSpawner.SpawnBots();
+        _playerSpawner.SpawnPlayers();
+        _playerSpawner.SpawnBots();
         
-        PlayerMovement = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>();
-        
-        for (currentRound = 0; currentRound < roundDuration.Length; currentRound++)
+        photonView.RPC("ActivateSeeTroughtHandlers", RpcTarget.All, true);
+
+        for (CurrentRound = 0; CurrentRound < roundDuration.Length; CurrentRound++)
         {
             //Start Round
-            Debug.LogWarning($"Starting round {currentRound + 1}/{roundDuration.Length} for {roundDuration[currentRound]} seconds");
-            roundLabel.text = $"Round {currentRound + 1}/{roundDuration.Length}";
-            yield return StartRound(roundDuration[currentRound]);
+            Debug.LogWarning($"Starting round {CurrentRound + 1}/{roundDuration.Length} for {roundDuration[CurrentRound]} seconds");
+            //Round UI refresh
+            photonView.RPC("SetRoundUILabel", RpcTarget.All, $"Round {CurrentRound + 1}/{roundDuration.Length}" );
+            yield return StartRound(roundDuration[CurrentRound]);
             //Show score
             yield return ShowScoreboard();
             yield return new WaitForSeconds(bufferBetweenRounds);
         }
-
-        PlayerSpawner.RespawnPlayer(endzonePosition);
+        
+        photonView.RPC("RespawnPlayer", RpcTarget.All, endZonePosition.position);
+        photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
         yield return FadeManager._Instance.FadeInRoutine();
 
         yield return ShowWinner();
@@ -70,40 +170,44 @@ public class GameManager : MonoBehaviourPun
 
     private IEnumerator StartRound(int duration)
     {
-        PlayerSpawner.RespawnPlayer();        
-        gameUI.SetActive(true);
-        PlayerMovement.CanMove = true;
+        ItemManager.RefreshItems();
+        photonView.RPC("RespawnPlayer", RpcTarget.All, Vector3.zero);
+        photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
+        photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
         yield return FadeManager._Instance.FadeInRoutine();
         yield return new WaitForSeconds(duration);
-        PlayerMovement.CanMove = false;
-        gameUI.SetActive(false);
+        photonView.RPC("SetPlayerCanMove", RpcTarget.All, false);
+        photonView.RPC("SetGameUILablelVisibility", RpcTarget.All,false);    
     }
 
     private IEnumerator ShowScoreboard()
     {
         Debug.LogWarning($"Showing scoreboard for {scoreBoardDuration} seconds");
-        teacherScoreLabel.text = TeacherScore.ToString();
-        studentScoreLabel.text = StudentScore.ToString();
-        scoreBoard.SetActive(true);
+        photonView.RPC("SetTeacherScoreUILabel", RpcTarget.All, TeacherScore.ToString() );
+        photonView.RPC("SetStudentScoreUILabel", RpcTarget.All, StudentScore.ToString() );
+        photonView.RPC("SetScoreboardVisibility", RpcTarget.All, true);
         yield return new WaitForSeconds(scoreBoardDuration/2);
-        FadeManager._Instance.FadeOut();
+        yield return FadeManager._Instance.FadeOutRoutine();
         yield return new WaitForSeconds(scoreBoardDuration/2);
-        scoreBoard.SetActive(false);
+        photonView.RPC("SetScoreboardVisibility", RpcTarget.All, false);
     }
 
     private IEnumerator ShowWinner()
     {
         Debug.LogWarning($"Showing winner for {winnerScreenDuration}");
-        if (StudentScore == TeacherScore)
-            winnerLabel.text = "DRAW";
-        else if (StudentScore > TeacherScore)
-            winnerLabel.text = "STUDENTS WIN";
-        else
-            winnerLabel.text = "TEACHER WINS";
+        string result;
         
-        winnerBoard.SetActive(true);
+        if (StudentScore == TeacherScore)
+            result = "DRAW";
+        else if (StudentScore > TeacherScore)
+            result = "STUDENTS WIN";
+        else
+            result = "TEACHER WINS";
+        
+        photonView.RPC("SetWinnerUILabel", RpcTarget.All, result);
+        photonView.RPC("SetWinnerVisibility", RpcTarget.All, true);
         yield return new WaitForSeconds(winnerScreenDuration);
         yield return FadeManager._Instance.FadeOutRoutine();
-        winnerBoard.SetActive(false);
+        photonView.RPC("SetWinnerVisibility", RpcTarget.All, false);
     }
 }

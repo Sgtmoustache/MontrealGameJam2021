@@ -1219,7 +1219,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
   WalkingSpeed: 6
+  RunningSpeed: 5
   TurnSmoothTime: 0.1
+  GravityForce: -0.4
 --- !u!114 &8448366988620289109
 MonoBehaviour:
   m_ObjectHideFlags: 0
