@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -46,7 +46,7 @@ public class Dropping : MonoBehaviour
                 if(!PlaceHolderOutsideLocation)
                 {
                     List<PlaceHolder> OutsidePlaceHolders = GameManager._Instance.ItemManager.OutsidePlaceHolders;
-                    var find =  OutsidePlaceHolders.Find(element => element.gameObject.GetComponent<ItemInfo>().Collectibles == inventory.GetItemGameObject().GetComponent<ItemInfo>().Collectibles);
+                    var find =  OutsidePlaceHolders.FirstOrDefault(element => element.gameObject.GetComponent<ItemInfo>().Collectibles == inventory.GetItemGameObject().GetComponent<ItemInfo>().Collectibles);
                     PlaceHolderOutsideLocation = find.gameObject.transform;
                 }
                 
