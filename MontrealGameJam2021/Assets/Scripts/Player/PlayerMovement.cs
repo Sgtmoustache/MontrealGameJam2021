@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviourPun
                 _anim.SetInteger("Movement", 3);
                 _anim.SetBool("isDropping", true);
                 timer = 0.5f;
-                CanMove = false;
+                //CanMove = false;
             }
         }
         
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviourPun
                     _anim.SetInteger("Movement", 3);
                     _anim.SetBool("isGrabbing", true);
                     timer = 0.7f;
-                    CanMove = false;
+                    //CanMove = false;
                 }
             }
         }
@@ -67,11 +67,11 @@ public class PlayerMovement : MonoBehaviourPun
             _anim.SetBool("isGrabbing", false);
             _anim.SetBool("isDropping", false);
             _anim.SetInteger("Movement", 0);
-            CanMove = true;
+            //CanMove = true;
         }
 
 
-        if (CanMove)
+        if (GameManager.PlayersCanMove)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
