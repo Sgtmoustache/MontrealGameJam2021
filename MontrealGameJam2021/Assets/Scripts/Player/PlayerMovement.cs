@@ -125,7 +125,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     [PunRPC]
     public void MovePlayer(string name, Vector3 detentionSpawn , Vector3 detentionSpawnExit){
-        StartCoroutine(MovingPlayer(GameObject.Find(name), 30, detentionSpawn, detentionSpawnExit));
+        StartCoroutine(MovingPlayer(GameObject.Find(name), 10, detentionSpawn, detentionSpawnExit));
     }
 
     public IEnumerator MovingPlayer(GameObject player, int timer, Vector3 detentionSpawn , Vector3 detentionSpawnExit){

@@ -15,7 +15,7 @@ public class Attack : MonoBehaviour
 
     public IEnumerator bufferAttack(){
         GameManager._Instance.SetTeacherSpellColor(Color.gray);
-        yield return new WaitForSeconds(12);
+        yield return new WaitForSeconds(20);
         canUsePower = true;
         GameManager._Instance.SetTeacherSpellColor(Color.white);
     }
@@ -82,7 +82,7 @@ public class Attack : MonoBehaviour
                 }
             }
             if(!hasHitPlayer)
-                StartCoroutine(MovingPlayer(8));
+                StartCoroutine(MovingPlayer(4));
 
             StartCoroutine(bufferAttack());
         }
