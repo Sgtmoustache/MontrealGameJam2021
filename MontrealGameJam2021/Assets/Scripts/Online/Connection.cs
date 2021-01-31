@@ -11,7 +11,7 @@ namespace Menus
         [SerializeField] private GameObject findOpponentPanel = null;
         [SerializeField] private GameObject waitingStatusPanel = null;
         [SerializeField] private TextMeshProUGUI waitingStatusText = null;
-        [SerializeField] private string sceneToLoad = "FinalLevel";
+        [SerializeField] private string sceneToLoad = "";
         
         private bool isConnecting = false;
 

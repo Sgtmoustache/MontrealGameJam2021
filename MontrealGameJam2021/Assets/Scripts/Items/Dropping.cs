@@ -13,12 +13,9 @@ public class Dropping : MonoBehaviour
 
     private PlayerInfo playerInfo;
 
-    private Transform PlaceHolderOutsideLocation;
-
     private void Start()
     {
         FloatingText.gameObject.SetActive(true);
-        PlaceHolderOutsideLocation = null;
     }
     // Update is called once per frame
     void Update()
@@ -37,28 +34,20 @@ public class Dropping : MonoBehaviour
                     GameManager.TeacherScore += 20 ; 
             }
             if(this.gameObject.GetComponent<PlayerInfo>()?.PlayerType == "Student"){
-                Vector3 targetPosition = new Vector3(20f, -14f , 21f);
+                Vector3 targetPosition = new Vector3(10f, -1f , -26f);
                 targetPosition.y = arrow.transform.position.y;
                 arrow.gameObject.SetActive(true);
                 arrow.LookAt(targetPosition);
             }
             else{
-                if(!PlaceHolderOutsideLocation)
-                {
-                    List<PlaceHolder> OutsidePlaceHolders = GameManager._Instance.ItemManager.OutsidePlaceHolders;
-                    var find =  OutsidePlaceHolders.Find(element => element.gameObject.GetComponent<ItemInfo>().Collectibles == inventory.GetItemGameObject().GetComponent<ItemInfo>().Collectibles);
-                    PlaceHolderOutsideLocation = find.gameObject.transform;
-                }
-                
-                Vector3 targetPosition = PlaceHolderOutsideLocation.position;
-                targetPosition.y = arrow.transform.position.y;
+                Vector3 targetPosition = new Vector3(-19f, 0f , 0f);
+                targetPosition.y = transform.position.y;
                 arrow.gameObject.SetActive(true);
                 arrow.LookAt(targetPosition);
             }
         }
         else{
             arrow.gameObject.SetActive(false);
-            PlaceHolderOutsideLocation = null;
         }
 
 

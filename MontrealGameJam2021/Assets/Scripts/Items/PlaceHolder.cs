@@ -32,25 +32,17 @@ public class PlaceHolder : Interactable
         Inventory inventory = player.GetComponent<Inventory>();
         if(inventory){
             if(canBePlace && inventory.HasItem() && player.layer == 6 && ((itemType != Collectibles.None) ? (inventory.GetTypeOfItem() == itemType) : true)){
-                bool isPlayer = (player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student");
-
-                if(!isPlayer && hidingSpot) return;
-
                 storeItem = inventory.GetItemGameObject();
                 inventory.ClearItem();
 
                 photonView.RPC("AddItem", RpcTarget.All, storeItem.name);
 
                 TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
-                
 
-                
-                if(hidingSpot)
-                    Description.SetText("Search");
-                else
+
+                if(player.GetComponent<PlayerInfo>().PlayerType == "Student"){
                     Description.SetText("Take");
 
-                if(isPlayer){
                     if(hidingSpot)//test
                         GameManager.StudentScore += 20 ;
                     else if(lostAndFound)
@@ -95,7 +87,7 @@ public class PlaceHolder : Interactable
     {
         Inventory inventory = player.GetComponent<Inventory>();
         if (!inventory) return;
-
+        
         TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
         bool isPlayer = (player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student");
         if(storeItem && !inventory.HasItem() && !hidingSpot) 
