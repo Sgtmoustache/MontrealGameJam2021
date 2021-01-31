@@ -1,5 +1,6 @@
+using System.Linq.Expressions;
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Photon.Pun;
 
@@ -8,8 +9,8 @@ public class Attack : MonoBehaviour
 {
     public bool canUsePower = true;
 
-    [SerializeField] Transform detentionSpawn;
-    [SerializeField] Transform detentionSpawnExit;
+    [SerializeField] public Transform detentionSpawn;
+    [SerializeField] public Transform detentionSpawnExit;
 
     public IEnumerator bufferAttack(){
         canUsePower = false;
@@ -17,23 +18,23 @@ public class Attack : MonoBehaviour
         canUsePower = true;
     }
 
-    public IEnumerator MovingPlayer(GameObject player, int timer){
-        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+    public IEnumerator MovingPlayer(int timer){
+        PlayerMovement movement = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>();
 
         movement.setMovement(false);
-        FadeManager._Instance.FadeIn();
-        yield return new WaitForSeconds(2);
         FadeManager._Instance.FadeOut();
-        player.transform.position = detentionSpawn.position;
+        yield return new WaitForSeconds(2);
+        FadeManager._Instance.FadeIn();
+        PlayerSpawner.LocalPlayer.transform.position = detentionSpawn.position;
         movement.setMovement(true);
 
         yield return new WaitForSeconds(timer);
 
         movement.setMovement(false);
-        FadeManager._Instance.FadeIn();
-        yield return new WaitForSeconds(2);
         FadeManager._Instance.FadeOut();
-        player.transform.position = detentionSpawnExit.position;
+        yield return new WaitForSeconds(2);
+        FadeManager._Instance.FadeIn();
+        PlayerSpawner.LocalPlayer.transform.position = detentionSpawnExit.position;
         movement.setMovement(true);
     }
 
@@ -41,20 +42,27 @@ public class Attack : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R) && canUsePower){
-            Collider[] collider = Physics.OverlapSphere(this.transform.position, 4f, LayerMask.NameToLayer("OtherPlayer"));
+            Collider[] collider = Physics.OverlapSphere(this.transform.position, 4f);
+            string[] alreadyCheck = new string[0];
             bool hasHitPlayer = false;
-            
             foreach (var hit in collider)
             {
-                PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
-                if(player)
+                if(hit.gameObject.name.Substring(0,7) == "Student" && !(alreadyCheck.Any(element => element == hit.gameObject.name)))
                 {
+                    string[] temp = alreadyCheck;
+                    alreadyCheck = new string[temp.Length + 1];
+                    for(int i = 0; i < temp.Length; i++)
+                        alreadyCheck[i] = temp[i];
+                    alreadyCheck[alreadyCheck.Length - 1] = hit.gameObject.name;     
+
+                    PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
+                    Debug.LogError(hit.gameObject.name);
                     hasHitPlayer = true;
-                    player.BroadcastMovementState(player.gameObject.name);
+                    player.BroadcastMovementState(player.gameObject.name, this.detentionSpawn.position, this.detentionSpawnExit.position);
                 }
             }
             if(!hasHitPlayer)
-                StartCoroutine(MovingPlayer(this.gameObject, 8));
+                StartCoroutine(MovingPlayer(8));
 
             StartCoroutine(bufferAttack());
         }

@@ -9,38 +9,52 @@ using UnityEngine;
 public class GameManager : MonoBehaviourPun
 {
     public static GameManager _Instance;
-    
-    public static int TeacherScore = 0;
-    public static int StudentScore = 0;
-    private int CurrentRound = 0;
+    private static int TeacherScore = 0;
+    private static int StudentScore = 0;
+    public int CurrentRound = 0;
+    [HideInInspector] public int NumberOfStudentDetention = 0;
+    [HideInInspector] public int NumberOfFalseAccusation = 0;
     
     public static bool PlayersCanMove = false;
     public static bool PlayersSpawned = false;
     public static Transform CameraPosition = null;
     public static int TeacherViewID = 0;
-
+    
+    [Header("Debug")]
     [SerializeField] public Transform BotDebugTargetOverwrite = null;
     [SerializeField] private bool SkipIntro = false;
+    
+    [Header("Score settings")]
+    [SerializeField] private int FalseAccusationMultiplier = 20;
+    [SerializeField] private int DetentionMultiplier = 10;
+    [SerializeField] private int LostAndFoundScore = 100;
+    [SerializeField] private int OutsideScore = 100;
+    [SerializeField] private int HiddenScore = 10;
+    
+    [Header("Settings")]
     [SerializeField] private Transform CameraTransform;
     [SerializeField] private CinemachineVirtualCamera Camera;
+    [SerializeField] private Transform endZonePosition;
+    
+    [Header("Timer")]
     [SerializeField] private int startBufferDuration;
     [SerializeField] private int[] roundDuration;
     [SerializeField] private int scoreBoardDuration;
     [SerializeField] private int winnerScreenDuration;
     [SerializeField] private int bufferBetweenRounds;
-    [SerializeField] private GameObject winnerBoard;
-    [SerializeField] private GameObject scoreBoard;
-    [SerializeField] private GameObject gameUI;
 
+    [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI roundLabel;
     [SerializeField] private TextMeshProUGUI winnerLabel;
     [SerializeField] private TextMeshProUGUI teacherScoreLabel;
     [SerializeField] private TextMeshProUGUI studentScoreLabel;
+    [SerializeField] private GameObject winnerBoard;
+    [SerializeField] private GameObject scoreBoard;
+    [SerializeField] private GameObject gameUI;
 
     private PlayerSpawner _playerSpawner;
-    public ItemManager ItemManager;
+    [HideInInspector] public ItemManager ItemManager;
 
-    [SerializeField] private Transform endZonePosition;
 
     private void Awake() => PhotonNetwork.AutomaticallySyncScene = true;
     
@@ -62,7 +76,29 @@ public class GameManager : MonoBehaviourPun
         if(PhotonNetwork.IsMasterClient)
             StartCoroutine(StartGame());
     }
+
+    public void BroadcastFalseAccusation()
+    {
+        photonView.RPC("ReportFalseAccusation", RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    public void ReportFalseAccusation()
+    {
+        FalseAccusationMultiplier++;
+    }
+
+    public void BroadcastDetention()
+    {
+        photonView.RPC("ReportDetention", RpcTarget.MasterClient);
+    }
     
+    [PunRPC]
+    public void ReportDetention()
+    {
+        NumberOfStudentDetention++;
+    }
+
     [PunRPC]
     private void SetViewIDTeacher(int value)
     {
@@ -139,6 +175,13 @@ public class GameManager : MonoBehaviourPun
         PlayersSpawned = value;
     }
 
+    [PunRPC]
+    void SyncCurrentRoundCount(int value)
+    {
+        Debug.LogWarning("Sync current round");
+        CurrentRound = value;
+    }
+
     private IEnumerator StartGame()
     {
         Debug.LogWarning("Starting game");
@@ -164,12 +207,14 @@ public class GameManager : MonoBehaviourPun
 
         for (CurrentRound = 0; CurrentRound < roundDuration.Length; CurrentRound++)
         {
+            photonView.RPC("SyncCurrentRoundCount", RpcTarget.Others, CurrentRound);
             //Start Round
             Debug.LogWarning($"Starting round {CurrentRound + 1}/{roundDuration.Length} for {roundDuration[CurrentRound]} seconds");
             //Round UI refresh
             photonView.RPC("SetRoundUILabel", RpcTarget.All, $"Round {CurrentRound + 1}/{roundDuration.Length}" );
             yield return StartRound(roundDuration[CurrentRound]);
             //Show score
+            CalculateScore();
             yield return ShowScoreboard();
             yield return new WaitForSeconds(bufferBetweenRounds);
         }
@@ -185,7 +230,7 @@ public class GameManager : MonoBehaviourPun
 
     private IEnumerator StartRound(int duration)
     {
-        ItemManager.RefreshItems();
+        ItemManager.RefreshItems(CurrentRound != 0);
         photonView.RPC("RespawnPlayer", RpcTarget.All, Vector3.zero);
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
@@ -193,6 +238,38 @@ public class GameManager : MonoBehaviourPun
         yield return new WaitForSeconds(duration);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, false);
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All,false);    
+    }
+
+    private void CalculateScore()
+    {
+        //Calculating teacher score
+        foreach (var holder in ItemManager.OutsidePlaceHolders)
+        {
+            if (holder.HasItem())
+            {
+                TeacherScore += OutsideScore;
+            }
+        }
+        
+        TeacherScore += NumberOfStudentDetention * DetentionMultiplier;
+        TeacherScore -= NumberOfFalseAccusation * FalseAccusationMultiplier;
+        
+        //Calculating student score
+        foreach (var holder in ItemManager.HiddenSpotPlaceHolders)
+        {
+            if (holder.HasItem())
+            {
+                StudentScore += HiddenScore;
+            }
+        }
+        
+        foreach (var holder in ItemManager.LostAndFoundPlaceHolders)
+        {
+            if (holder.HasItem())
+            {
+                StudentScore += LostAndFoundScore;
+            }
+        }
     }
 
     private IEnumerator ShowScoreboard()

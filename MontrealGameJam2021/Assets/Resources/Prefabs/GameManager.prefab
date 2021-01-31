@@ -48,23 +48,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15d0bef13d03fe46a77e292db4082af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NumberOfStudentDetention: 0
+  NumberOfFalseAccusation: 0
+  BotDebugTargetOverwrite: {fileID: 0}
   SkipIntro: 0
+  FalseAccusationMultiplier: 20
+  DetentionMultiplier: 10
+  LostAndFoundScore: 100
+  OutsideScore: 100
+  HiddenScore: 10
   CameraTransform: {fileID: 0}
   Camera: {fileID: 0}
+  endZonePosition: {fileID: 6714186349098006627}
   startBufferDuration: 0
   roundDuration: 050000000500000005000000
   scoreBoardDuration: 5
   winnerScreenDuration: 15
   bufferBetweenRounds: 3
-  winnerBoard: {fileID: 6714186349490919265}
-  scoreBoard: {fileID: 6714186348440669592}
-  gameUI: {fileID: 6714186348287849514}
   roundLabel: {fileID: 6714186349526471466}
   winnerLabel: {fileID: 6714186350029068106}
   teacherScoreLabel: {fileID: 6714186349395048100}
   studentScoreLabel: {fileID: 6714186350046802947}
+  winnerBoard: {fileID: 6714186349490919265}
+  scoreBoard: {fileID: 6714186348440669592}
+  gameUI: {fileID: 6714186348287849514}
   ItemManager: {fileID: 0}
-  endZonePosition: {fileID: 6714186349098006627}
 --- !u!114 &6010860749356519738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,11 +95,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  playerSpawns:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  studentsSpawns: []
+  teacherSpawns: []
+  detentionEnter: {fileID: 0}
+  detentionExit: {fileID: 0}
 --- !u!114 &4776828928865239505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OutsidePlaceHolders: []
   LostAndFoundPlaceHolders: []
+  HiddenSpotPlaceHolders: []
 --- !u!114 &1507500961966356302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +629,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -33, y: -66}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6714186349395048101
 CanvasRenderer:
@@ -685,8 +693,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1430,7 +1438,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -10, y: -71}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6714186350046802948
 CanvasRenderer:
@@ -1494,8 +1502,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

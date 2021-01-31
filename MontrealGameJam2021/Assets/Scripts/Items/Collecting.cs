@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class Collecting : Interactable {
 
@@ -23,8 +24,9 @@ public class Collecting : Interactable {
                 photonView.RPC("SetRigibodyConstraint", RpcTarget.All, RigidbodyConstraints.FreezeAll);
                 
                 gameObject.transform.position = new Vector3(vec.x, (vec.y + (isPlayer? 2.5f : 3.5f)), vec.z);
-                if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
-                    GameManager.TeacherScore -= 20 ; 
+
+                TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
+                    Description.SetText("");
             }
         }
     }
@@ -46,4 +48,23 @@ public class Collecting : Interactable {
     }
 
     public void Enable() => photonView.RPC("SetLock", RpcTarget.All, false);
+
+
+
+    private void OnTriggerEnter(Collider player)
+    {
+        Inventory inventory = player.GetComponent<Inventory>();
+        if (!inventory || Locked) return;
+
+        TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
+        Description.SetText("Place");
+    }
+
+    private void OnTriggerExit(Collider player)
+    {
+        Inventory inventory = player.GetComponent<Inventory>();
+        if (!inventory || Locked) return;    
+        TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
+        Description.SetText("");
+    }
 }

@@ -9,11 +9,21 @@ public class SeeTroughtHandler : MonoBehaviour
     [SerializeField] private GameObject Bubble;
     [SerializeField] private float originHeight = 0.4f;
     
-    public void Update()
+    public void Start()
     {
-        if (!Camera)
+        var playerInfo = transform.root.gameObject.GetComponent<PlayerInfo>();
+
+        if (playerInfo == null)
             return;
         
+        if(!playerInfo.isLocal)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void Update()
+    {
         RaycastHit hit;
 
         Vector3 origin = transform.position + new Vector3(0, originHeight, 0);

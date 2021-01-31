@@ -118,35 +118,40 @@ public class PlayerMovement : MonoBehaviourPun
         CanMove = mov;
     }
 
-    public void BroadcastMovementState(string name)
+    public void BroadcastMovementState(string name, Vector3 detentionSpawn , Vector3 detentionSpawnExit)
     {
-        photonView.RPC("MovePlayer", RpcTarget.All, name);
+        Debug.LogError("BeforeBroadcast");
+        photonView.RPC("MovePlayer", RpcTarget.All, name , detentionSpawn, detentionSpawnExit);
     }
 
 [PunRPC]
-    public void MovePlayer(string name){
-        MovingPlayer(GameObject.Find(name), 30);
+    public void MovePlayer(string name, Vector3 detentionSpawn , Vector3 detentionSpawnExit){
+        Debug.LogError("BeforeSousroutine");
+        StartCoroutine(MovingPlayer(GameObject.Find(name), 30, detentionSpawn, detentionSpawnExit));
     }
 
-    public IEnumerator MovingPlayer(GameObject player, int timer){
+    public IEnumerator MovingPlayer(GameObject player, int timer, Vector3 detentionSpawn , Vector3 detentionSpawnExit){
+        Debug.LogError("BeforeTP");
         PlayerMovement movement = player.GetComponent<PlayerMovement>();
 
-        movement.setMovement(false);
-        FadeManager._Instance.FadeIn();
-        yield return new WaitForSeconds(2);
-        FadeManager._Instance.FadeOut();
-        player.transform.position = detentionSpawn.position;
-        movement.setMovement(true);
+        if(player.GetComponent<PlayerInfo>().isLocal)
+        {
+            movement.setMovement(false);
+            FadeManager._Instance.FadeOut();
+            yield return new WaitForSeconds(2);
+            FadeManager._Instance.FadeIn();
+            player.transform.position = detentionSpawn;
+            movement.setMovement(true);
 
-        yield return new WaitForSeconds(timer);
+            yield return new WaitForSeconds(timer);
 
-        movement.setMovement(false);
-        FadeManager._Instance.FadeIn();
-        yield return new WaitForSeconds(2);
-        FadeManager._Instance.FadeOut();
-        player.transform.position = detentionSpawnExit.position;
-        movement.setMovement(true);
+            movement.setMovement(false);
+            FadeManager._Instance.FadeOut();
+            yield return new WaitForSeconds(2);
+            FadeManager._Instance.FadeIn();
+            player.transform.position = detentionSpawnExit;
+            movement.setMovement(true);
+        }
     }
-
 
 }
