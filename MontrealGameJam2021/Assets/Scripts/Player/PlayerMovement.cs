@@ -132,18 +132,18 @@ public class PlayerMovement : MonoBehaviourPun
         PlayerMovement movement = player.GetComponent<PlayerMovement>();
 
         movement.setMovement(false);
-        FadeManager._Instance.FadeIn();
-        yield return new WaitForSeconds(2);
         FadeManager._Instance.FadeOut();
+        yield return new WaitForSeconds(2);
+        FadeManager._Instance.FadeIn();
         player.transform.position = detentionSpawn.position;
         movement.setMovement(true);
 
         yield return new WaitForSeconds(timer);
 
         movement.setMovement(false);
-        FadeManager._Instance.FadeIn();
-        yield return new WaitForSeconds(2);
         FadeManager._Instance.FadeOut();
+        yield return new WaitForSeconds(2);
+        FadeManager._Instance.FadeIn();
         player.transform.position = detentionSpawnExit.position;
         movement.setMovement(true);
     }
