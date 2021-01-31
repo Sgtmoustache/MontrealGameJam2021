@@ -234,15 +234,19 @@ public class GameManager : MonoBehaviourPun
 
     private void CalculateScore()
     {
-        //Calculating student score
+        //Calculating teacher score
         foreach (var holder in ItemManager.OutsidePlaceHolders)
         {
             if (holder.HasItem())
             {
-                StudentScore += OutsideScore;
+                TeacherScore += OutsideScore;
             }
         }
         
+        TeacherScore += NumberOfStudentDetention * DetentionMultiplier;
+        TeacherScore -= NumberOfFalseAccusation * FalseAccusationMultiplier;
+        
+        //Calculating student score
         foreach (var holder in ItemManager.HiddenSpotPlaceHolders)
         {
             if (holder.HasItem())
@@ -251,17 +255,13 @@ public class GameManager : MonoBehaviourPun
             }
         }
         
-        //Calculating teacher score
         foreach (var holder in ItemManager.LostAndFoundPlaceHolders)
         {
             if (holder.HasItem())
             {
-                TeacherScore += LostAndFoundScore;
+                StudentScore += LostAndFoundScore;
             }
         }
-
-        TeacherScore += NumberOfStudentDetention * DetentionMultiplier;
-        TeacherScore -= NumberOfFalseAccusation * FalseAccusationMultiplier;
     }
 
     private IEnumerator ShowScoreboard()
