@@ -9,9 +9,14 @@ public class Dropping : MonoBehaviour
 
 
     [SerializeField] Transform arrow;
+    [SerializeField] Canvas FloatingText;
 
     private PlayerInfo playerInfo;
 
+    private void Start()
+    {
+        FloatingText.gameObject.SetActive(true);
+    }
     // Update is called once per frame
     void Update()
     {

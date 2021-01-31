@@ -1298,6 +1298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 167244882155523315}
+  FloatingText: {fileID: 3843366381314248850}
 --- !u!114 &7261799001313126471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2351,6 +2352,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloatingText
       objectReference: {fileID: 0}
+    - target: {fileID: 187504616253111434, guid: 151e688e77b031a459b4202e3a31e0e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 187504616253111437, guid: 151e688e77b031a459b4202e3a31e0e2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2440,6 +2445,11 @@ PrefabInstance:
 --- !u!224 &3843366381314248849 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 187504616253111437, guid: 151e688e77b031a459b4202e3a31e0e2, type: 3}
+  m_PrefabInstance: {fileID: 4020666805103701020}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &3843366381314248850 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 187504616253111438, guid: 151e688e77b031a459b4202e3a31e0e2, type: 3}
   m_PrefabInstance: {fileID: 4020666805103701020}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &3843366381288458206 stripped
