@@ -86,27 +86,17 @@ public class PlaceHolder : Interactable
     private void OnTriggerEnter(Collider player)
     {
         Inventory inventory = player.GetComponent<Inventory>();
-        if(player.gameObject.GetComponent<PlayerInfo>()?.PlayerType == "Student"){
-            if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
-                TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
-                if(storeItem) 
-                    if(!inventory.HasItem()){
-                        if(hidingSpot)
-                            Description.SetText("Search");
-                        else
-                            Description.SetText("Take");
-                    }
-                else{
-                    if(inventory.HasItem()){
-                        if(hidingSpot)
-                            Description.SetText("Hide");
-                        else
-                            Description.SetText("Place");
-                    }
-
-                }
-            }
-        }
+        TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
+        bool isPlayer = (player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student");
+        if(storeItem && !inventory.HasItem() && !hidingSpot) 
+            Description.SetText("Take");
+        else if(!inventory.HasItem() && hidingSpot)
+            Description.SetText("Search");
+        else if(inventory.HasItem() && isPlayer && hidingSpot)
+                Description.SetText("Hide");
+        else if(inventory.HasItem() && !hidingSpot)
+                Description.SetText("Place");
+        
     }
 
     private void OnTriggerExit(Collider player)
