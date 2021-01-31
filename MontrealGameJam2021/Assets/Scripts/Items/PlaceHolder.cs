@@ -32,6 +32,7 @@ public class PlaceHolder : Interactable
         Inventory inventory = player.GetComponent<Inventory>();
         if(inventory){
             if(canBePlace && inventory.HasItem() && player.layer == 6 && ((itemType != Collectibles.None) ? (inventory.GetTypeOfItem() == itemType) : true)){
+                storeItem = inventory.GetItemGameObject();
 
                 photonView.RPC("AddItemFromClass", RpcTarget.All);
 
