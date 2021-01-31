@@ -54,10 +54,10 @@ public class Attack : MonoBehaviour
                 if(hit.gameObject.name.Substring(0,7) == "Student" && hit.gameObject.name != find)
                 {
                     string[] temp = alreadyCheck;
-                    alreadyCheck = new string[temp.Length + 1];
+                    alreadyCheck = new string[(temp.Length + 1)];
                     for(int i = 0; i < temp.Length; i++)
                         alreadyCheck[i] = temp[i];
-                    alreadyCheck[alreadyCheck.Length - 1] = hit.gameObject.name;     
+                    alreadyCheck[(alreadyCheck.Length - 1)] = hit.gameObject.name;     
 
                     PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
                     Debug.LogWarning(hit.gameObject.name);

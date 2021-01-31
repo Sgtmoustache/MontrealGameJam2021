@@ -146,6 +146,8 @@ MonoBehaviour:
   winnerBoard: {fileID: 6714186349490919265}
   scoreBoard: {fileID: 6714186348440669592}
   gameUI: {fileID: 6714186348287849514}
+  rawImage: {fileID: 1769708934569322238}
+  hurryUpDuration: 60
   baseMusic: {fileID: 8300000, guid: 769a98cd376573d40b252a5c25a2d81b, type: 3}
   hurryUpSound: {fileID: 8300000, guid: 7cf2c54ac08103a41a8c480bdc777b87, type: 3}
   hurryUpMusic: {fileID: 8300000, guid: da5feb2c3b2b8dc40ada6cbfee713501, type: 3}
