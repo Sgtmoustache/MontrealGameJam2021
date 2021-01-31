@@ -51,6 +51,12 @@ public class GameManager : MonoBehaviourPun
         _playerSpawner.camera = Camera;
         ItemManager = GetComponent<ItemManager>();
         CameraPosition = CameraTransform.transform;
+
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.OfflineMode = true;
+            PhotonNetwork.CreateRoom("TestRoom");
+        }
         
         if(PhotonNetwork.IsMasterClient)
             StartCoroutine(StartGame());
