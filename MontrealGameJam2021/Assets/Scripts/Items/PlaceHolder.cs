@@ -28,45 +28,36 @@ public class PlaceHolder : Interactable
         canBePlace = true;
     }
 
+    public IEnumerator HideItem( GameObject player){
+        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+        movement.setMovement(false);
+        
+        storeItemFunction(player);
+        yield return new WaitForSeconds(5);
+        movement.setMovement(true);
+    }
+
     public override void Interact(GameObject player){
         Inventory inventory = player.GetComponent<Inventory>();
         if(inventory){
             if(canBePlace && inventory.HasItem() && player.layer == 6 && ((itemType != Collectibles.None) ? (inventory.GetTypeOfItem() == itemType) : true)){
-                bool isPlayer = (player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student");
+                bool isPlayer = player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student";
 
                 if(!isPlayer && hidingSpot) return;
 
                 storeItem = inventory.GetItemGameObject();
                 inventory.ClearItem();
 
-                photonView.RPC("AddItem", RpcTarget.All, storeItem.name);
-
-                TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
-                
-                if(hidingSpot)
-                    Description.SetText("Search");
+                if(isPlayer && hidingSpot) 
+                {
+                    StartCoroutine(HideItem(player));
+                }
                 else
-                    Description.SetText("Take");        
-
-                if(isPlayer){
-                    if(hidingSpot)//test
-                        GameManager.StudentScore += 20 ;
-                    else if(lostAndFound)
-                        GameManager.StudentScore += 100 ;
-                    else if(!lostAndFound)
-                        GameManager.TeacherScore += 100 ;
-
-                }
-                else{
-                    if(lostAndFound)
-                        GameManager.StudentScore += 100 ;
-                    else if(!lostAndFound)
-                        GameManager.TeacherScore += 100 ;
-                }
-
+                    storeItemFunction(player);
             }
-            else if(canBePick){
-                bool isPlayer = (player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student");
+            else if(canBePick)
+            {
+                bool isPlayer = player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student";
                 TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
                 Collecting collect = storeItem.GetComponent<Collecting>();
                 collect.Enable();
@@ -91,6 +82,35 @@ public class PlaceHolder : Interactable
 
                 
             }
+        }
+    }
+
+    private void storeItemFunction(GameObject player){
+        bool isPlayer = player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student";
+
+        photonView.RPC("AddItem", RpcTarget.All, storeItem.name);
+
+        TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
+        
+        if(hidingSpot)
+            Description.SetText("Search");
+        else
+            Description.SetText("Take");        
+
+        if(isPlayer){
+            if(hidingSpot)//test
+                GameManager.StudentScore += 20 ;
+            else if(lostAndFound)
+                GameManager.StudentScore += 100 ;
+            else if(!lostAndFound)
+                GameManager.TeacherScore += 100 ;
+
+        }
+        else{
+            if(lostAndFound)
+                GameManager.StudentScore += 100 ;
+            else if(!lostAndFound)
+                GameManager.TeacherScore += 100 ;
         }
     }
 
@@ -156,4 +176,7 @@ public class PlaceHolder : Interactable
     }
 
     public bool HasItem() => storeItem != null;
+
+
+
 }
