@@ -18,6 +18,7 @@ public class Attack : MonoBehaviour
     }
 
     public IEnumerator MovingPlayer(int timer){
+        Debug.LogError("soucourtube");
         PlayerMovement movement = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>();
 
         movement.setMovement(false);
@@ -41,14 +42,16 @@ public class Attack : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R) && canUsePower){
-            Collider[] collider = Physics.OverlapSphere(this.transform.position, 4f, LayerMask.NameToLayer("OtherPlayer"));
+            Collider[] collider = Physics.OverlapSphere(this.transform.position, 4f, ~LayerMask.NameToLayer("OtherPlayer"));
             bool hasHitPlayer = false;
+            Debug.LogError("keyPRessed");
             
             foreach (var hit in collider)
             {
                 PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
                 if(player)
                 {
+                    Debug.LogError("FindPLayer");
                     hasHitPlayer = true;
                     player.BroadcastMovementState(player.gameObject.name);
                 }
