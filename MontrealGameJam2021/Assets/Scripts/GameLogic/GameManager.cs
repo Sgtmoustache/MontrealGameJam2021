@@ -4,6 +4,7 @@ using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(ItemManager))]
 [RequireComponent(typeof(PlayerSpawner))]
 public class GameManager : MonoBehaviourPun
@@ -52,6 +53,19 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] private GameObject scoreBoard;
     [SerializeField] private GameObject gameUI;
 
+    private AudioSource AudioSource;
+    [Header("Music and sounds")]
+    [SerializeField] private int hurryUpDuration = 60;
+    [SerializeField] private AudioClip baseMusic;
+    [SerializeField] private AudioClip hurryUpSound;
+    [SerializeField] private AudioClip hurryUpMusic;
+    [SerializeField] private AudioClip winMusic;
+    [SerializeField] private AudioClip loseMusic;
+    [SerializeField] private AudioClip scoreBoardMusic;
+
+    [SerializeField] private AudioClip endOfRoundSound;
+
+    
     private PlayerSpawner _playerSpawner;
     [HideInInspector] public ItemManager ItemManager;
 
@@ -65,6 +79,7 @@ public class GameManager : MonoBehaviourPun
         _playerSpawner = GetComponent<PlayerSpawner>();
         _playerSpawner.camera = Camera;
         ItemManager = GetComponent<ItemManager>();
+        AudioSource = GetComponent<AudioSource>();
         CameraPosition = CameraTransform.transform;
 
         if (!PhotonNetwork.IsConnected)
@@ -77,6 +92,54 @@ public class GameManager : MonoBehaviourPun
             StartCoroutine(StartGame());
     }
 
+    [PunRPC]
+    public void PlayBaseMusic()
+    {
+        AudioSource.clip = baseMusic;
+        AudioSource.loop = true;
+        AudioSource.Play();
+    }
+    
+    [PunRPC]
+    public void PlayHurryUpSound()
+    {
+        AudioSource.clip = hurryUpSound;
+        AudioSource.loop = false;
+        AudioSource.Play();
+    }
+    
+    [PunRPC]
+    public void PlayHurryUpMusic()
+    {
+        AudioSource.clip = hurryUpMusic;
+        AudioSource.loop = true;
+        AudioSource.Play();
+    }
+
+    [PunRPC]
+    public void PlayEndRoundSound()
+    {
+        AudioSource.clip = endOfRoundSound;
+        AudioSource.loop = true;
+        AudioSource.Play();
+    }
+
+    [PunRPC]
+    public void PlayEndGameFanfare(bool hasWin)
+    {
+        AudioSource.clip = hasWin ? winMusic : loseMusic;
+        AudioSource.loop = false;
+        AudioSource.Play();
+    }
+    
+    [PunRPC]
+    public void PlayScoreBoardMusic()
+    {
+        AudioSource.clip = scoreBoardMusic;
+        AudioSource.loop = false;
+        AudioSource.Play();
+    }
+    
     public void BroadcastFalseAccusation()
     {
         photonView.RPC("ReportFalseAccusation", RpcTarget.MasterClient);
@@ -235,7 +298,14 @@ public class GameManager : MonoBehaviourPun
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
         yield return FadeManager._Instance.FadeInRoutine();
-        yield return new WaitForSeconds(duration);
+        photonView.RPC("PlayBaseMusic", RpcTarget.All);
+        yield return new WaitForSeconds(duration-hurryUpDuration);
+        photonView.RPC("PlayHurryUpSound", RpcTarget.All);
+        yield return new WaitForSeconds(hurryUpSound.length);
+        photonView.RPC("PlayHurryUpMusic", RpcTarget.All);
+        yield return new WaitForSeconds(hurryUpDuration);
+        photonView.RPC("PlayEndRoundSound", RpcTarget.All);
+
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, false);
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All,false);    
     }
@@ -274,6 +344,7 @@ public class GameManager : MonoBehaviourPun
 
     private IEnumerator ShowScoreboard()
     {
+        photonView.RPC("PlayScoreBoardMusic", RpcTarget.All);
         Debug.LogWarning($"Showing scoreboard for {scoreBoardDuration} seconds");
         photonView.RPC("SetTeacherScoreUILabel", RpcTarget.All, TeacherScore.ToString() );
         photonView.RPC("SetStudentScoreUILabel", RpcTarget.All, StudentScore.ToString() );
@@ -292,9 +363,23 @@ public class GameManager : MonoBehaviourPun
         if (StudentScore == TeacherScore)
             result = "DRAW";
         else if (StudentScore > TeacherScore)
-            result = "STUDENTS WIN";
+        {
+            if(PlayerSpawner.LocalPlayer.GetComponent<PlayerInfo>().PlayerType == "Student")
+                photonView.RPC("PlayEndGameFanfare", RpcTarget.All, true);
+            else
+                photonView.RPC("PlayEndGameFanfare", RpcTarget.All, false);
+
+            result = "STUDENTS WIN";    
+        }
         else
+        {
+            if(PlayerSpawner.LocalPlayer.GetComponent<PlayerInfo>().PlayerType == "Student")
+                photonView.RPC("PlayEndGameFanfare", RpcTarget.All, false);
+            else
+                photonView.RPC("PlayEndGameFanfare", RpcTarget.All, true);
+            
             result = "TEACHER WINS";
+        }
         
         photonView.RPC("SetWinnerUILabel", RpcTarget.All, result);
         photonView.RPC("SetWinnerVisibility", RpcTarget.All, true);

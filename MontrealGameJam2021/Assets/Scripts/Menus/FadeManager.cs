@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -9,12 +10,12 @@ public class FadeManager : MonoBehaviourPun
     public static FadeManager _Instance;
     
     private Animation _animations;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         _Instance = this;
         _animations = GetComponent<Animation>();
+
     }
 
     [PunRPC]

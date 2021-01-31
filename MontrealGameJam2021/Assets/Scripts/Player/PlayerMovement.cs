@@ -120,18 +120,15 @@ public class PlayerMovement : MonoBehaviourPun
 
     public void BroadcastMovementState(string name, Vector3 detentionSpawn , Vector3 detentionSpawnExit)
     {
-        Debug.LogError("BeforeBroadcast");
         photonView.RPC("MovePlayer", RpcTarget.All, name , detentionSpawn, detentionSpawnExit);
     }
 
-[PunRPC]
+    [PunRPC]
     public void MovePlayer(string name, Vector3 detentionSpawn , Vector3 detentionSpawnExit){
-        Debug.LogError("BeforeSousroutine");
         StartCoroutine(MovingPlayer(GameObject.Find(name), 30, detentionSpawn, detentionSpawnExit));
     }
 
     public IEnumerator MovingPlayer(GameObject player, int timer, Vector3 detentionSpawn , Vector3 detentionSpawnExit){
-        Debug.LogError("BeforeTP");
         PlayerMovement movement = player.GetComponent<PlayerMovement>();
 
         if(player.GetComponent<PlayerInfo>().isLocal)
