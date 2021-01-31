@@ -32,16 +32,12 @@ public class PlaceHolder : Interactable
         Inventory inventory = player.GetComponent<Inventory>();
         if(inventory){
             if(canBePlace && inventory.HasItem() && player.layer == 6 && ((itemType != Collectibles.None) ? (inventory.GetTypeOfItem() == itemType) : true)){
-                canBePlace = false;
-                storeItem = inventory.GetItemGameObject();
 
-                storeItem.transform.SetParent(this.gameObject.transform);
-                storeItem.transform.position = itemDropPosition.position;
-                storeItem.transform.rotation = itemDropPosition.rotation;
-                Collecting collect = storeItem.GetComponent<Collecting>();
-                collect.Disable();
-                inventory.ClearItem();
+                photonView.RPC("AddItemFromClass", RpcTarget.All);
+
                 TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
+
+
                 if(player.GetComponent<PlayerInfo>().PlayerType == "Student"){
                     Description.SetText("Take");
 
@@ -60,13 +56,17 @@ public class PlaceHolder : Interactable
                         GameManager.TeacherScore += 100 ;
                 }
 
-                StartCoroutine(bufferPlace());
+                
 
             }
             else if(canBePick){
                 Collecting collect = storeItem.GetComponent<Collecting>();
                 collect.Enable();
                 collect.Interact(player);
+                
+                 photonView.RPC("RemoveItem", RpcTarget.All, name);
+
+
                 if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
                     GameManager.TeacherScore += 20 ; 
                 if(hidingSpot)
@@ -76,10 +76,7 @@ public class PlaceHolder : Interactable
                 else if(!lostAndFound)
                     GameManager.TeacherScore -= 100 ;
 
-                storeItem = null;
-                canBePick = false;
-
-                StartCoroutine(bufferGrab());
+                
             }
         }
     }
@@ -129,24 +126,27 @@ public class PlaceHolder : Interactable
     }
 
     [PunRPC]
-    public void AddItem(string itemName)
-    {
-        GameObject item = GameObject.Find(itemName);
+    public void AddItem(string itemName) => AddItem(GameObject.Find(itemName));
 
+    [PunRPC]
+    public void AddItemFromClass() => AddItem(storeItem);
+    private void AddItem(GameObject item){
         canBePlace = false;
-        canBePick = true;
         storeItem = item;
+
         storeItem.transform.SetParent(this.gameObject.transform);
         storeItem.transform.position = itemDropPosition.position;
         storeItem.transform.rotation = itemDropPosition.rotation;
         Collecting collect = storeItem.GetComponent<Collecting>();
         collect.Disable();
+        StartCoroutine(bufferPlace());
     }
 
+    [PunRPC]
      public void RemoveItem(){
-        canBePlace = true;
         canBePick = false;
         storeItem = null;
+        StartCoroutine(bufferGrab());
     }
 
     public bool HasItem() => storeItem != null;
