@@ -175,6 +175,13 @@ public class GameManager : MonoBehaviourPun
         PlayersSpawned = value;
     }
 
+    [PunRPC]
+    void SyncCurrentRoundCount(int value)
+    {
+        Debug.LogWarning("Sync current round");
+        CurrentRound = value;
+    }
+
     private IEnumerator StartGame()
     {
         Debug.LogWarning("Starting game");
@@ -200,6 +207,7 @@ public class GameManager : MonoBehaviourPun
 
         for (CurrentRound = 0; CurrentRound < roundDuration.Length; CurrentRound++)
         {
+            photonView.RPC("SyncCurrentRoundCount", RpcTarget.Others, CurrentRound);
             //Start Round
             Debug.LogWarning($"Starting round {CurrentRound + 1}/{roundDuration.Length} for {roundDuration[CurrentRound]} seconds");
             //Round UI refresh
