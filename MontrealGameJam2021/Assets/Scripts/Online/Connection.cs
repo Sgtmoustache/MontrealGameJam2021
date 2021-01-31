@@ -43,7 +43,6 @@ namespace Menus
             if (PhotonNetwork.IsConnected)
             {
                 PhotonNetwork.JoinRandomRoom();
-                
             }
             else
             {
