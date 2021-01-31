@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 using System.Collections;
 using System.Linq;
@@ -14,13 +15,21 @@ public class Attack : MonoBehaviour
 
     public IEnumerator bufferAttack(){
         GameManager._Instance.SetTeacherSpellColor(Color.gray);
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(20);
         canUsePower = true;
         GameManager._Instance.SetTeacherSpellColor(Color.white);
     }
 
     public IEnumerator MovingPlayer(int timer){
         PlayerMovement movement = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>();
+        Inventory inventory = this.gameObject.GetComponent<Inventory>();
+        GameObject obj = inventory.GetItemGameObject();
+        inventory.ClearItem();
+        Vector3 vec = this.gameObject.transform.localPosition;
+        Collecting collect = obj.GetComponent<Collecting>();
+        collect.beInteractable();
+        obj.transform.SetParent(null);
+        obj.transform.localPosition = new Vector3(vec.x, (vec.y + 3.5f), vec.z);
 
         movement.setMovement(false);
         FadeManager._Instance.FadeOut();
@@ -52,7 +61,7 @@ public class Attack : MonoBehaviour
             {
                 string find = alreadyCheck.FirstOrDefault(element => element == hit.gameObject.name);
                 if(hit.gameObject.name.Length > 7){
-                    if(hit.gameObject.name.Substring(0,7) == "Student" && hit.gameObject.name != find)
+                    if(hit.gameObject.name.Substring(0,7) == "Student" && hit.gameObject.name != find && hit.gameObject.name != "StudentBot(Clone)")
                     {
                         string[] temp = alreadyCheck;
                         alreadyCheck = new string[(temp.Length + 1)];
@@ -64,12 +73,16 @@ public class Attack : MonoBehaviour
                         PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
                         Debug.LogWarning(hit.gameObject.name);
                         hasHitPlayer = true;
+                        Debug.LogError(player.gameObject.name);
+                        Debug.LogError(this.detentionSpawn.position);
+                        Debug.LogError(this.detentionSpawnExit.position);
+
                         player.BroadcastMovementState(player.gameObject.name, this.detentionSpawn.position, this.detentionSpawnExit.position);
                     }
                 }
             }
             if(!hasHitPlayer)
-                StartCoroutine(MovingPlayer(8));
+                StartCoroutine(MovingPlayer(4));
 
             StartCoroutine(bufferAttack());
         }

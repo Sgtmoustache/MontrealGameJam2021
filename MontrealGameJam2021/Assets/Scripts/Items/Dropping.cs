@@ -17,7 +17,8 @@ public class Dropping : MonoBehaviour
 
     private void Start()
     {
-        FloatingText.gameObject.SetActive(true);
+        if(this.gameObject.GetComponent<PlayerInfo>().isLocal)
+            FloatingText.gameObject.SetActive(true);
         PlaceHolderOutsideLocation = null;
     }
     // Update is called once per frame
