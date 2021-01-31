@@ -56,7 +56,7 @@ public class Attack : MonoBehaviour
                     alreadyCheck[alreadyCheck.Length - 1] = hit.gameObject.name;     
 
                     PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
-                    Debug.LogError(hit.gameObject.name);
+                    Debug.LogWarning(hit.gameObject.name);
                     hasHitPlayer = true;
                     player.BroadcastMovementState(player.gameObject.name, this.detentionSpawn.position, this.detentionSpawnExit.position);
                 }
