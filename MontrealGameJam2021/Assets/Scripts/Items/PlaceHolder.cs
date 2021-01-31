@@ -15,7 +15,7 @@ public class PlaceHolder : Interactable
 
     public bool canBePlace = true;   
     public bool canBePick = false;  
-    GameObject storeItem = null;
+    public GameObject storeItem = null;
 
     public IEnumerator bufferPlace(){
         canBePick = false;
