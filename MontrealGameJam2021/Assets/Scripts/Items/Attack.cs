@@ -17,14 +17,14 @@ public class Attack : MonoBehaviour
         canUsePower = true;
     }
 
-    public IEnumerator MovingPlayer(GameObject player, int timer){
-        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+    public IEnumerator MovingPlayer(int timer){
+        PlayerMovement movement = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>();
 
         movement.setMovement(false);
         FadeManager._Instance.FadeIn();
         yield return new WaitForSeconds(2);
         FadeManager._Instance.FadeOut();
-        player.transform.position = detentionSpawn.position;
+        PlayerSpawner.LocalPlayer.transform.position = detentionSpawn.position;
         movement.setMovement(true);
 
         yield return new WaitForSeconds(timer);
@@ -33,7 +33,7 @@ public class Attack : MonoBehaviour
         FadeManager._Instance.FadeIn();
         yield return new WaitForSeconds(2);
         FadeManager._Instance.FadeOut();
-        player.transform.position = detentionSpawnExit.position;
+        PlayerSpawner.LocalPlayer.transform.position = detentionSpawnExit.position;
         movement.setMovement(true);
     }
 
@@ -54,7 +54,7 @@ public class Attack : MonoBehaviour
                 }
             }
             if(!hasHitPlayer)
-                StartCoroutine(MovingPlayer(this.gameObject, 8));
+                StartCoroutine(MovingPlayer(8));
 
             StartCoroutine(bufferAttack());
         }

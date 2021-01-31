@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviourPun
 
     public void BroadcastMovementState(string name)
     {
-        photonView.RPC("MovePlayer", RpcTarget.All, name);
+        photonView.RPC("MovePlayer", RpcTarget.Others, name);
     }
 
 [PunRPC]
