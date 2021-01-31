@@ -35,7 +35,7 @@ public class PlaceHolder : Interactable
                 storeItem = inventory.GetItemGameObject();
                 inventory.ClearItem();
 
-                photonView.RPC("AddItemFromClass", RpcTarget.All);
+                photonView.RPC("AddItem", RpcTarget.All, storeItem.name);
 
                 TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
 
@@ -43,7 +43,7 @@ public class PlaceHolder : Interactable
                 if(player.GetComponent<PlayerInfo>().PlayerType == "Student"){
                     Description.SetText("Take");
 
-                    if(hidingSpot)
+                    if(hidingSpot)//test
                         GameManager.StudentScore += 20 ;
                     else if(lostAndFound)
                         GameManager.StudentScore += 100 ;
@@ -130,8 +130,6 @@ public class PlaceHolder : Interactable
     [PunRPC]
     public void AddItem(string itemName) => AddItem(GameObject.Find(itemName));
 
-    [PunRPC]
-    public void AddItemFromClass() => AddItem(storeItem);
     private void AddItem(GameObject item){
         canBePlace = false;
         storeItem = item;
