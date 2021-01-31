@@ -14,6 +14,7 @@ public class Collecting : Interactable {
         {
             if (!(inventory.HasItem()))
             {
+                bool isPlayer = (player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student");
                 base.Interact(player);
                 inventory.SetItem(gameObject.GetComponent<ItemInfo>().Collectibles, gameObject);
                 Vector3 vec = player.transform.position;
@@ -21,7 +22,7 @@ public class Collecting : Interactable {
                 
                 photonView.RPC("SetRigibodyConstraint", RpcTarget.All, RigidbodyConstraints.FreezeAll);
                 
-                gameObject.transform.position = new Vector3(vec.x, (vec.y + 2.2f), vec.z);
+                gameObject.transform.position = new Vector3(vec.x, (vec.y + (isPlayer? 2.5f : 3f)), vec.z);
                 if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
                     GameManager.TeacherScore -= 20 ; 
             }

@@ -43,12 +43,10 @@ public class PlaceHolder : Interactable
 
                 TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
                 
-
-                
                 if(hidingSpot)
                     Description.SetText("Search");
                 else
-                    Description.SetText("Take");
+                    Description.SetText("Take");        
 
                 if(isPlayer){
                     if(hidingSpot)//test
@@ -66,15 +64,20 @@ public class PlaceHolder : Interactable
                         GameManager.TeacherScore += 100 ;
                 }
 
-                
-
             }
             else if(canBePick){
+                bool isPlayer = (player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student");
+                TextMeshProUGUI Description = player.GetComponent<PlayerInfo>().Display;
                 Collecting collect = storeItem.GetComponent<Collecting>();
                 collect.Enable();
                 collect.Interact(player);
                 
-                 photonView.RPC("RemoveItem", RpcTarget.All);
+                photonView.RPC("RemoveItem", RpcTarget.All);
+
+                if(hidingSpot)
+                    Description.SetText(isPlayer? "Hide" : "");
+                else
+                    Description.SetText("Place"); 
 
 
                 if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
