@@ -22,6 +22,9 @@ public class VisibilityHandler : MonoBehaviour
 
     void Update()
     {
+        if (!_player)
+            return;
+        
         RaycastHit hit;
 
         Vector3 origin = transform.position + new Vector3(0, RayHeight, 0);

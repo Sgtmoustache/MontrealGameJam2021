@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Player
 {
-    [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(NavMeshAgent))]
     public class BotMovement : MonoBehaviourPun
     {
@@ -16,14 +15,14 @@ namespace Assets.Scripts.Player
         [SerializeField]
         private GameObject _debugtarget;
 
-        private bool hasDestination = false;
+        public bool hasDestination = false;
 
         public Bounds _bounds;
         
         public void Start()
         {
             _agent = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<Animator>();
+            _animator = GetComponentInChildren<Animator>();
         }
 
         private IEnumerator Walk()
@@ -37,17 +36,21 @@ namespace Assets.Scripts.Player
         {
             if (PhotonNetwork.IsConnected && !PhotonNetwork.IsMasterClient)
                 return;
-            
+
             if (!hasDestination)
             {
-                _agent.SetDestination (new Vector3(
-                    Random.Range(_bounds.min.x, _bounds.max.x),
-                    Random.Range(_bounds.min.y, _bounds.max.y),
-                    Random.Range(_bounds.min.z, _bounds.max.z)
-                ) + transform.position);
+                if (GameManager._Instance?.BotDebugTargetOverwrite != null)
+                    _agent.SetDestination(GameManager._Instance.BotDebugTargetOverwrite.position);
+                else
+                {
+                    _agent.SetDestination (new Vector3(
+                        Random.Range(_bounds.min.x, _bounds.max.x),
+                        Random.Range(_bounds.min.y, _bounds.max.y),
+                        Random.Range(_bounds.min.z, _bounds.max.z)
+                    )+ _agent.transform.position) ;    
+                }
                 
-                Debug.Log($"Bot walking to : {_agent.destination.ToString()}");
-
+                Debug.Log($"Bot has destination : {_agent.destination}");
                 
                 //Allows to see target position
                 if(_debugtarget != null)
