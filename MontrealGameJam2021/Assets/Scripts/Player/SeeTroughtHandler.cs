@@ -11,7 +11,12 @@ public class SeeTroughtHandler : MonoBehaviour
     
     public void Start()
     {
-        if(!transform.root.gameObject.GetComponent<PlayerInfo>().isLocal)
+        var playerInfo = transform.root.gameObject.GetComponent<PlayerInfo>();
+
+        if (playerInfo == null)
+            return;
+        
+        if(!playerInfo.isLocal)
         {
             Destroy(gameObject);
         }
