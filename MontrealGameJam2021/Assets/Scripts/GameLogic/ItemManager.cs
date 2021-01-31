@@ -9,6 +9,8 @@ public class ItemManager : MonoBehaviourPun
     private List<GameObject> ItemsPrefabs = new List<GameObject>();
     [SerializeField] public List<PlaceHolder> OutsidePlaceHolders;
     [SerializeField] public List<PlaceHolder> LostAndFoundPlaceHolders;
+    [SerializeField] public List<PlaceHolder> HiddenSpotPlaceHolders;
+    
     private List<GameObject> Items;
 
     private List<GameObject> SpawnedItems = new List<GameObject>();

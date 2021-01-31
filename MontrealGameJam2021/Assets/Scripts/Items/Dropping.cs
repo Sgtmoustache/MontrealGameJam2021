@@ -34,8 +34,6 @@ public class Dropping : MonoBehaviour
                 collect.beInteractable();
                 obj.transform.SetParent(null);
                 obj.transform.localPosition = new Vector3(vec.x, (vec.y + (isPlayer? 2.5f : 3.5f)), vec.z);
-                if(this.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student")
-                    GameManager.TeacherScore += 20 ; 
             }
             if(this.gameObject.GetComponent<PlayerInfo>()?.PlayerType == "Student"){
                 Vector3 targetPosition = new Vector3(20f, -14f , 21f);
@@ -61,12 +59,5 @@ public class Dropping : MonoBehaviour
             arrow.gameObject.SetActive(false);
             PlaceHolderOutsideLocation = null;
         }
-
-
-        if (Input.GetKeyDown(KeyCode.T)){
-            Debug.Log(GameManager.StudentScore);
-            Debug.Log(GameManager.TeacherScore);
-        }
-
     }
 }

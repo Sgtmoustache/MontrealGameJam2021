@@ -4995,7 +4995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8611122585381484070, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
       propertyPath: m_Name
-      value: plant3D (2)
+      value: HiddingPlace4
       objectReference: {fileID: 0}
     - target: {fileID: 8992293118589136028, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
       propertyPath: m_RootOrder
@@ -5048,6 +5048,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8992293118589136028, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
   m_PrefabInstance: {fileID: 144077544}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &144077546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8881577371158814247, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
+  m_PrefabInstance: {fileID: 144077544}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504264de18e078644b5f0bd76bd25de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &148925863
 Mesh:
   m_ObjectHideFlags: 0
@@ -23897,7 +23908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8611122585381484070, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
       propertyPath: m_Name
-      value: plant3D
+      value: HiddingPlace2
       objectReference: {fileID: 0}
     - target: {fileID: 8992293118589136028, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
       propertyPath: m_RootOrder
@@ -23962,6 +23973,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8992293118589136028, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
   m_PrefabInstance: {fileID: 598975052}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &598975054 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8881577371158814247, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
+  m_PrefabInstance: {fileID: 598975052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504264de18e078644b5f0bd76bd25de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &606296017
 Mesh:
   m_ObjectHideFlags: 0
@@ -43273,6 +43295,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4776828928865239505, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: HiddenSpotPlaceHolders.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776828928865239505, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: OutsidePlaceHolders.Array.data[0]
       value: 
       objectReference: {fileID: 1904581581}
@@ -43284,6 +43310,22 @@ PrefabInstance:
       propertyPath: LostAndFoundPlaceHolders.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4776828928865239505, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: HiddenSpotPlaceHolders.Array.data[0]
+      value: 
+      objectReference: {fileID: 1313787364}
+    - target: {fileID: 4776828928865239505, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: HiddenSpotPlaceHolders.Array.data[1]
+      value: 
+      objectReference: {fileID: 598975054}
+    - target: {fileID: 4776828928865239505, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: HiddenSpotPlaceHolders.Array.data[2]
+      value: 
+      objectReference: {fileID: 1941344122}
+    - target: {fileID: 4776828928865239505, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: HiddenSpotPlaceHolders.Array.data[3]
+      value: 
+      objectReference: {fileID: 144077546}
     - target: {fileID: 4776828928865239505, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: LostAndFoundPlaceHolders.Array.data[0]
       value: 
@@ -43490,15 +43532,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: roundDuration.Array.data[0]
-      value: 120
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: roundDuration.Array.data[1]
-      value: 120
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: roundDuration.Array.data[2]
-      value: 120
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714186349098006627, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714186349098006627, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.358
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714186349098006627, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 55.881
       objectReference: {fileID: 0}
     - target: {fileID: 7322503951255300286, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: viewIdField
@@ -48077,6 +48131,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
+--- !u!114 &1313787364 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8881577371158814247, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
+  m_PrefabInstance: {fileID: 1313787363}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504264de18e078644b5f0bd76bd25de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1319185764
 Mesh:
   m_ObjectHideFlags: 0
@@ -69291,7 +69356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8611122585381484070, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
       propertyPath: m_Name
-      value: plant3D (1)
+      value: HiddingPlace3
       objectReference: {fileID: 0}
     - target: {fileID: 8992293118589136028, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
       propertyPath: m_RootOrder
@@ -69344,6 +69409,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8992293118589136028, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
   m_PrefabInstance: {fileID: 1941344120}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1941344122 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8881577371158814247, guid: 03c65d2ccafa0a547ba1250fce321b6e, type: 3}
+  m_PrefabInstance: {fileID: 1941344120}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504264de18e078644b5f0bd76bd25de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1942982680
 Mesh:
   m_ObjectHideFlags: 0

@@ -24,8 +24,6 @@ public class Collecting : Interactable {
                 photonView.RPC("SetRigibodyConstraint", RpcTarget.All, RigidbodyConstraints.FreezeAll);
                 
                 gameObject.transform.position = new Vector3(vec.x, (vec.y + (isPlayer? 2.5f : 3.5f)), vec.z);
-                if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
-                    GameManager.TeacherScore -= 20 ; 
 
                 TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
                     Description.SetText("");

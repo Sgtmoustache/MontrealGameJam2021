@@ -68,19 +68,7 @@ public class PlaceHolder : Interactable
                 if(hidingSpot)
                     Description.SetText(isPlayer? "Hide" : "");
                 else
-                    Description.SetText("Place"); 
-
-
-                if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
-                    GameManager.TeacherScore += 20 ; 
-                if(hidingSpot)
-                    GameManager.StudentScore -= 20 ;
-                else if(lostAndFound)
-                    GameManager.StudentScore -= 100 ;
-                else if(!lostAndFound)
-                    GameManager.TeacherScore -= 100 ;
-
-                
+                    Description.SetText("Place");
             }
         }
     }
@@ -95,23 +83,7 @@ public class PlaceHolder : Interactable
         if(hidingSpot)
             Description.SetText("Search");
         else
-            Description.SetText("Take");        
-
-        if(isPlayer){
-            if(hidingSpot)//test
-                GameManager.StudentScore += 20 ;
-            else if(lostAndFound)
-                GameManager.StudentScore += 100 ;
-            else if(!lostAndFound)
-                GameManager.TeacherScore += 100 ;
-
-        }
-        else{
-            if(lostAndFound)
-                GameManager.StudentScore += 100 ;
-            else if(!lostAndFound)
-                GameManager.TeacherScore += 100 ;
-        }
+            Description.SetText("Take");
     }
 
     private void OnTriggerEnter(Collider player)
