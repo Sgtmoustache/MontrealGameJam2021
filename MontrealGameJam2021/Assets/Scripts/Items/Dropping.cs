@@ -26,13 +26,14 @@ public class Dropping : MonoBehaviour
         Inventory inventory = this.gameObject.GetComponent<Inventory>();
         if(inventory.HasItem()){
             if (Input.GetKeyDown(KeyCode.Q)){
+                bool isPlayer = (this.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student");
                 GameObject obj = inventory.GetItemGameObject();
                 inventory.ClearItem();
                 Vector3 vec = this.gameObject.transform.localPosition;
                 Collecting collect = obj.GetComponent<Collecting>();
                 collect.beInteractable();
                 obj.transform.SetParent(null);
-                obj.transform.localPosition = new Vector3(vec.x, 2.0f, vec.z);
+                obj.transform.localPosition = new Vector3(vec.x, (vec.y + (isPlayer? 2.5f : 3.5f)), vec.z);
                 if(this.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student")
                     GameManager.TeacherScore += 20 ; 
             }
