@@ -22,18 +22,18 @@ public class Attack : MonoBehaviour
         PlayerMovement movement = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>();
 
         movement.setMovement(false);
-        FadeManager._Instance.FadeIn();
-        yield return new WaitForSeconds(2);
         FadeManager._Instance.FadeOut();
+        yield return new WaitForSeconds(2);
+        FadeManager._Instance.FadeIn();
         PlayerSpawner.LocalPlayer.transform.position = detentionSpawn.position;
         movement.setMovement(true);
 
         yield return new WaitForSeconds(timer);
 
         movement.setMovement(false);
-        FadeManager._Instance.FadeIn();
-        yield return new WaitForSeconds(2);
         FadeManager._Instance.FadeOut();
+        yield return new WaitForSeconds(2);
+        FadeManager._Instance.FadeIn();
         PlayerSpawner.LocalPlayer.transform.position = detentionSpawnExit.position;
         movement.setMovement(true);
     }
