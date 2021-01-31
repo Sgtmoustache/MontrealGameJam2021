@@ -133,6 +133,16 @@ public class PlayerMovement : MonoBehaviourPun
 
         if(player.GetComponent<PlayerInfo>().isLocal)
         {
+            Inventory inventory = this.gameObject.GetComponent<Inventory>();
+            GameObject obj = inventory.GetItemGameObject();
+            inventory.ClearItem();
+            Vector3 vec = this.gameObject.transform.localPosition;
+            Collecting collect = obj.GetComponent<Collecting>();
+            collect.beInteractable();
+            obj.transform.SetParent(null);
+            obj.transform.localPosition = new Vector3(vec.x, (vec.y + 2.5f), vec.z);
+
+
             movement.setMovement(false);
             FadeManager._Instance.FadeOut();
             yield return new WaitForSeconds(2);
