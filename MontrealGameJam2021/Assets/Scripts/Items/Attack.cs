@@ -51,18 +51,21 @@ public class Attack : MonoBehaviour
             foreach (var hit in collider)
             {
                 string find = alreadyCheck.FirstOrDefault(element => element == hit.gameObject.name);
-                if(hit.gameObject.name.Substring(0,7) == "Student" && hit.gameObject.name != find)
-                {
-                    string[] temp = alreadyCheck;
-                    alreadyCheck = new string[(temp.Length + 1)];
-                    for(int i = 0; i < temp.Length; i++)
-                        alreadyCheck[i] = temp[i];
-                    alreadyCheck[(alreadyCheck.Length - 1)] = hit.gameObject.name;     
-
-                    PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
-                    Debug.LogWarning(hit.gameObject.name);
-                    hasHitPlayer = true;
-                    player.BroadcastMovementState(player.gameObject.name, this.detentionSpawn.position, this.detentionSpawnExit.position);
+                if(hit.gameObject.name.Length > 7){
+                    if(hit.gameObject.name.Substring(0,7) == "Student" && hit.gameObject.name != find)
+                    {
+                        string[] temp = alreadyCheck;
+                        alreadyCheck = new string[(temp.Length + 1)];
+                        for(int i = 0; i < temp.Length; i++)
+                            alreadyCheck[i] = temp[i];
+                        alreadyCheck[(alreadyCheck.Length - 1)] = hit.gameObject.name;     
+    
+    
+                        PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
+                        Debug.LogWarning(hit.gameObject.name);
+                        hasHitPlayer = true;
+                        player.BroadcastMovementState(player.gameObject.name, this.detentionSpawn.position, this.detentionSpawnExit.position);
+                    }
                 }
             }
             if(!hasHitPlayer)
