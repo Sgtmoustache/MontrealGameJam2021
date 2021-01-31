@@ -120,15 +120,18 @@ public class PlayerMovement : MonoBehaviourPun
 
     public void BroadcastMovementState(string name)
     {
-        photonView.RPC("MovePlayer", RpcTarget.Others, name);
+        Debug.LogError("BeforeBroadcast");
+        photonView.RPC("MovePlayer", RpcTarget.All, name);
     }
 
 [PunRPC]
     public void MovePlayer(string name){
+        Debug.LogError("BeforeSousroutine");
         MovingPlayer(GameObject.Find(name), 30);
     }
 
     public IEnumerator MovingPlayer(GameObject player, int timer){
+        Debug.LogError("BeforeTP");
         PlayerMovement movement = player.GetComponent<PlayerMovement>();
 
         movement.setMovement(false);

@@ -47,11 +47,10 @@ public class Attack : MonoBehaviour
             
             foreach (var hit in collider)
             {
-                Debug.LogError("test1");
-                Debug.LogError(hit.gameObject.name);
                 PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
                 if(player)
                 {
+                    Debug.LogError(hit.gameObject.name);
                     hasHitPlayer = true;
                     player.BroadcastMovementState(player.gameObject.name);
                 }
