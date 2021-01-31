@@ -167,41 +167,41 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     private void SetViewIDTeacher(int value)
     {
-        Debug.LogWarning($"Teacher is {value}");
+        Debug.Log($"Teacher is {value}");
         TeacherViewID = value;
     }
     
     [PunRPC]
     private void SetPlayerCanMove(bool value)
     {
-        Debug.LogWarning(value ? "Unlocking players" : "Locking players");
+        Debug.Log(value ? "Unlocking players" : "Locking players");
         PlayersCanMove = value;
     }
 
     [PunRPC]
     private void PlayIntroAnimation()
     {
-        Debug.LogWarning("Playing intro animation");
+        Debug.Log("Playing intro animation");
     }
     
     [PunRPC]
     private void SetGameUILablelVisibility(bool visibility)
     {
-        Debug.LogWarning($"Setting {gameUI.name} visibility to {visibility.ToString()}");
+        Debug.Log($"Setting {gameUI.name} visibility to {visibility.ToString()}");
         gameUI.SetActive(visibility);
     }
     
     [PunRPC]
     private void SetRoundUILabel(string value)
     {
-        Debug.LogWarning($"Setting {roundLabel.name} value to {value}");
+        Debug.Log($"Setting {roundLabel.name} value to {value}");
         roundLabel.text = value;
     }
     
     [PunRPC]
     private void SetTeacherScoreUILabel(string value)
     {
-        Debug.LogWarning($"Setting {teacherScoreLabel.name} value to {value}");
+        Debug.Log($"Setting {teacherScoreLabel.name} value to {value}");
         teacherScoreLabel.text = value;
     }
 
@@ -213,49 +213,49 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     private void SetStudentScoreUILabel(string value)
     {
-        Debug.LogWarning($"Setting {studentScoreLabel.name} value to {value}");
+        Debug.Log($"Setting {studentScoreLabel.name} value to {value}");
         studentScoreLabel.text = value;
     }
     
     [PunRPC]
     private void SetScoreboardVisibility(bool value)
     {
-        Debug.LogWarning($"Setting {scoreBoard.name} visibility to {value}");
+        Debug.Log($"Setting {scoreBoard.name} visibility to {value}");
         scoreBoard.SetActive(value);
     }
     
     [PunRPC]
     private void SetWinnerVisibility(bool value)
     {
-        Debug.LogWarning($"Setting {winnerBoard.name} visibility to {value}");
+        Debug.Log($"Setting {winnerBoard.name} visibility to {value}");
         winnerBoard.SetActive(value);
     }
     
     [PunRPC]
     private void SetWinnerUILabel(string value)
     {
-        Debug.LogWarning($"Setting {winnerLabel.name} value to {value}");
+        Debug.Log($"Setting {winnerLabel.name} value to {value}");
         winnerLabel.text = value;
     }
     
     [PunRPC]
     private void ActivateSeeTroughtHandlers(bool value)
     {
-        Debug.LogWarning("Activating seethroughthandlers");
+        Debug.Log("Activating seethroughthandlers");
         PlayersSpawned = value;
     }
 
     [PunRPC]
     void SyncCurrentRoundCount(int value)
     {
-        Debug.LogWarning("Sync current round");
+        Debug.Log("Sync current round");
         CurrentRound = value;
     }
 
     private IEnumerator StartGame()
     {
-        Debug.LogWarning("Starting game");
-        Debug.LogWarning($"Waiting start buffer for {startBufferDuration} seconds");
+        Debug.Log("Starting game");
+        Debug.Log($"Waiting start buffer for {startBufferDuration} seconds");
         yield return new WaitForSeconds(startBufferDuration);
 
         if (!SkipIntro)
@@ -279,7 +279,7 @@ public class GameManager : MonoBehaviourPun
         {
             photonView.RPC("SyncCurrentRoundCount", RpcTarget.Others, CurrentRound);
             //Start Round
-            Debug.LogWarning($"Starting round {CurrentRound + 1}/{roundDuration.Length} for {roundDuration[CurrentRound]} seconds");
+            Debug.Log($"Starting round {CurrentRound + 1}/{roundDuration.Length} for {roundDuration[CurrentRound]} seconds");
             //Round UI refresh
             photonView.RPC("SetRoundUILabel", RpcTarget.All, $"Round {CurrentRound + 1}/{roundDuration.Length}" );
             yield return StartRound(roundDuration[CurrentRound]);
@@ -352,7 +352,7 @@ public class GameManager : MonoBehaviourPun
     private IEnumerator ShowScoreboard()
     {
         photonView.RPC("PlayScoreBoardMusic", RpcTarget.All);
-        Debug.LogWarning($"Showing scoreboard for {scoreBoardDuration} seconds");
+        Debug.Log($"Showing scoreboard for {scoreBoardDuration} seconds");
         photonView.RPC("SetTeacherScoreUILabel", RpcTarget.All, TeacherScore.ToString() );
         photonView.RPC("SetStudentScoreUILabel", RpcTarget.All, StudentScore.ToString() );
         photonView.RPC("SetScoreboardVisibility", RpcTarget.All, true);
@@ -364,7 +364,7 @@ public class GameManager : MonoBehaviourPun
 
     private IEnumerator ShowWinner()
     {
-        Debug.LogWarning($"Showing winner for {winnerScreenDuration}");
+        Debug.Log($"Showing winner for {winnerScreenDuration}");
         string result;
         
         if (StudentScore == TeacherScore)
