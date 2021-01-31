@@ -16,7 +16,7 @@ namespace Menus
         private bool isConnecting = false;
 
         private const string GameVersion = "0.1";
-        private const int MaxPlayersPerRoom = 2;
+        private int MaxPlayersPerRoom = 2;
 
         private void Awake()
         {
@@ -31,8 +31,12 @@ namespace Menus
             FadeManager._Instance.FadeIn();
         }
 
-        public void FindOpponent()
+        
+        
+        public void FindOpponent(int numberplayer)
         {
+            MaxPlayersPerRoom = numberplayer;
+            
             isConnecting = true;
             
             findOpponentPanel.SetActive(false);
@@ -50,6 +54,8 @@ namespace Menus
                 PhotonNetwork.ConnectUsingSettings();
             }
         }
+        
+        
 
         public override void OnConnectedToMaster()
         {
@@ -71,7 +77,7 @@ namespace Menus
         {
             Debug.Log("No clients are waiting for an opponent, creating a new room");
 
-            PhotonNetwork.CreateRoom(null, new RoomOptions() {MaxPlayers = MaxPlayersPerRoom});
+            PhotonNetwork.CreateRoom(null, new RoomOptions() {MaxPlayers = (byte) MaxPlayersPerRoom});
         }
 
         public override void OnJoinedRoom()
