@@ -64,7 +64,7 @@ public class PlaceHolder : Interactable
                 collect.Enable();
                 collect.Interact(player);
                 
-                 photonView.RPC("RemoveItem", RpcTarget.All, name);
+                 photonView.RPC("RemoveItem", RpcTarget.All);
 
 
                 if(player.GetComponent<PlayerInfo>().PlayerType == "Student")
