@@ -36,6 +36,7 @@ public class PlayerSpawner : MonoBehaviourPun
         LocalPlayer.gameObject.layer = 6;
         LocalPlayer.GetComponentInChildren<Light>().enabled = true;
         LocalPlayer.GetComponent<VisibilityHandler>().enabled = false;
+        LocalPlayer.GetComponent<PlayerInfo>().isLocal = true;
         LocalPlayer.gameObject.tag = "Player";
         
         camera.Follow = LocalPlayer.transform;

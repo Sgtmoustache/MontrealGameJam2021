@@ -9,4 +9,6 @@ public class PlayerInfo : MonoBehaviour
     [SerializeField] public TextMeshProUGUI Display;
 
     [SerializeField] public string PlayerType;
+
+    public bool isLocal = false;
 }

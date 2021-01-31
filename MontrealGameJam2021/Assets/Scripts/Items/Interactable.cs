@@ -19,7 +19,10 @@ public abstract class Interactable: MonoBehaviourPun{
 
     public void OnTriggerStay(Collider other)
     {
-        if (Input.GetKey(KeyCode.E) && !Locked){
+        var info = other.GetComponent<PlayerInfo>();
+        if(!info) return;
+
+        if( info.isLocal && Input.GetKey(KeyCode.E) && !Locked){
             Interact(other.gameObject);
         }
     }
