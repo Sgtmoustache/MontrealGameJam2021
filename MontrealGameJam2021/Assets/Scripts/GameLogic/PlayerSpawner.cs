@@ -4,6 +4,7 @@ using Assets.Scripts.Player;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerSpawner : MonoBehaviourPun
 {
@@ -23,7 +24,7 @@ public class PlayerSpawner : MonoBehaviourPun
 
     
     [PunRPC]
-    public void SpawnPlayers()
+    public void SpawnPlayers(RawImage image)
     {
         Debug.LogWarning("Spawning player");
 
@@ -40,6 +41,7 @@ public class PlayerSpawner : MonoBehaviourPun
             role = "Teacher";
             position = teacherSpawns[randomValue].position;
             rotation = teacherSpawns[randomValue].rotation;
+            image.gameObject.SetActive(true);
         }
         else
         {

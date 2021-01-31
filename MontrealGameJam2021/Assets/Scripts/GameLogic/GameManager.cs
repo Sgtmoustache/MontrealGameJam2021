@@ -3,6 +3,7 @@ using Cinemachine;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(ItemManager))]
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] private GameObject winnerBoard;
     [SerializeField] private GameObject scoreBoard;
     [SerializeField] private GameObject gameUI;
+    [SerializeField] public RawImage rawImage;
 
     private AudioSource AudioSource;
     [Header("Music and sounds")]
@@ -202,6 +204,11 @@ public class GameManager : MonoBehaviourPun
         Debug.LogWarning($"Setting {teacherScoreLabel.name} value to {value}");
         teacherScoreLabel.text = value;
     }
+
+    public void SetTeacherSpellColor(Color value)
+    {
+        rawImage.color = value;
+    }
     
     [PunRPC]
     private void SetStudentScoreUILabel(string value)
@@ -263,7 +270,7 @@ public class GameManager : MonoBehaviourPun
         yield return new WaitForSeconds(bufferBetweenRounds);
         photonView.RPC("SetViewIDTeacher", RpcTarget.All, Random.Range(1, PhotonNetwork.CountOfPlayers));
         
-        _playerSpawner.SpawnPlayers();
+        _playerSpawner.SpawnPlayers(rawImage);
         _playerSpawner.SpawnBots();
         
         photonView.RPC("ActivateSeeTroughtHandlers", RpcTarget.All, true);
