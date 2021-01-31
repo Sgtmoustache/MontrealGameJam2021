@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,11 +42,13 @@ public class Attack : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R) && canUsePower){
-            Collider[] collider = Physics.OverlapSphere(this.transform.position, 4f, ~LayerMask.NameToLayer("Item"));
+            Collider[] collider = Physics.OverlapSphere(this.transform.position, 4f);
             bool hasHitPlayer = false;
             
             foreach (var hit in collider)
             {
+                Debug.LogError("test1");
+                Debug.LogError(hit.gameObject.name);
                 PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
                 if(player)
                 {
