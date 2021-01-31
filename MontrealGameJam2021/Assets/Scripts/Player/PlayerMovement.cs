@@ -13,10 +13,11 @@ public class PlayerMovement : MonoBehaviourPun
     [SerializeField] private float TurnSmoothTime = 0.1f;
     [SerializeField] private float GravityForce = -0.4f;
     private Animator _anim;
-
+    
     private CharacterController _controller;
     private float _turnSmoothVelocity;
     private float timer = 0.0f;
+    private bool CanMove = true;
 
     void Start()
     {
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviourPun
                 _anim.SetInteger("Movement", 3);
                 _anim.SetBool("isDropping", true);
                 timer = 0.5f;
-                //CanMove = false;
+                CanMove = false;
             }
         }
         
@@ -47,7 +48,7 @@ public class PlayerMovement : MonoBehaviourPun
                     _anim.SetInteger("Movement", 3);
                     _anim.SetBool("isGrabbing", true);
                     timer = 0.7f;
-                    //CanMove = false;
+                    CanMove = false;
                 }
             }
         }
@@ -67,11 +68,11 @@ public class PlayerMovement : MonoBehaviourPun
             _anim.SetBool("isGrabbing", false);
             _anim.SetBool("isDropping", false);
             _anim.SetInteger("Movement", 0);
-            //CanMove = true;
+            CanMove = true;
         }
 
 
-        if (GameManager.PlayersCanMove)
+        if (GameManager.PlayersCanMove && CanMove)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
