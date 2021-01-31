@@ -64,6 +64,10 @@ public class Attack : MonoBehaviour
                         PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
                         Debug.LogWarning(hit.gameObject.name);
                         hasHitPlayer = true;
+                        Debug.LogError(player.gameObject.name);
+                        Debug.LogError(this.detentionSpawn.position);
+                        Debug.LogError(this.detentionSpawnExit.position);
+
                         player.BroadcastMovementState(player.gameObject.name, this.detentionSpawn.position, this.detentionSpawnExit.position);
                     }
                 }
