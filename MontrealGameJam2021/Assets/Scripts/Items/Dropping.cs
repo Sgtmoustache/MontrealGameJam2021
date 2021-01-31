@@ -12,11 +12,7 @@ public class Dropping : MonoBehaviour
 
     private bool triggerExit = false;
 
-    Transform arrow;
-
-    private void start(){
-        arrow = this.gameObject.transform.Find("ArrowDirection");
-    }
+    [SerializeField] Transform arrow;
 
     // Update is called once per frame
     void Update()
@@ -47,8 +43,10 @@ public class Dropping : MonoBehaviour
                 arrow.LookAt(targetPosition);
             }
         }
-        else
+        else{
             arrow.gameObject.SetActive(false);
+        }
+            
 
         if (Input.GetKeyDown(KeyCode.T)){
             Debug.Log(GameManager.StudentScore);

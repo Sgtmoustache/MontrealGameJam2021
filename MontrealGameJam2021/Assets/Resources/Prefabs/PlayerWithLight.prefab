@@ -1297,6 +1297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3038b859d742e4a80ff3793e2abb80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrow: {fileID: 167244882155523315}
 --- !u!114 &7261799001313126471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2505,6 +2506,10 @@ PrefabInstance:
     - target: {fileID: 8250963638965067803, guid: e4f84c5b01a77b541bdebe1ffd1d70a3, type: 3}
       propertyPath: m_Name
       value: ArrowDirection
+      objectReference: {fileID: 0}
+    - target: {fileID: 8250963638965067803, guid: e4f84c5b01a77b541bdebe1ffd1d70a3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4f84c5b01a77b541bdebe1ffd1d70a3, type: 3}
