@@ -14,7 +14,7 @@ public class Attack : MonoBehaviour
 
     public IEnumerator bufferAttack(){
         GameManager._Instance.SetTeacherSpellColor(Color.gray);
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(12);
         canUsePower = true;
         GameManager._Instance.SetTeacherSpellColor(Color.white);
     }
@@ -52,7 +52,7 @@ public class Attack : MonoBehaviour
             {
                 string find = alreadyCheck.FirstOrDefault(element => element == hit.gameObject.name);
                 if(hit.gameObject.name.Length > 7){
-                    if(hit.gameObject.name.Substring(0,7) == "Student" && hit.gameObject.name != find)
+                    if(hit.gameObject.name.Substring(0,7) == "Student" && hit.gameObject.name != find && hit.gameObject.name != "StudentBot(Clone)")
                     {
                         string[] temp = alreadyCheck;
                         alreadyCheck = new string[(temp.Length + 1)];
