@@ -24,12 +24,12 @@ public class PlayerSpawner : MonoBehaviourPun
 
     
     [PunRPC]
-    public void SpawnPlayers(RawImage image)
+    public void SpawnPlayers()
     {
         Debug.LogWarning("Spawning player");
 
         if(PhotonNetwork.IsMasterClient)
-            photonView.RPC("SpawnPlayers", RpcTarget.Others, image);
+            photonView.RPC("SpawnPlayers", RpcTarget.Others);
 
         string role;
         Vector3 position;
@@ -41,7 +41,7 @@ public class PlayerSpawner : MonoBehaviourPun
             role = "Teacher";
             position = teacherSpawns[randomValue].position;
             rotation = teacherSpawns[randomValue].rotation;
-            image.gameObject.SetActive(true);
+            GameManager._Instance.rawImage.gameObject.SetActive(true);
         }
         else
         {
