@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviourPun
     public static bool PlayersCanMove = false;
     public static bool PlayersSpawned = false;
     public static Transform CameraPosition = null;
+    public static int TeacherViewID = 0;
 
     [SerializeField] public Transform BotDebugTargetOverwrite = null;
     [SerializeField] private bool SkipIntro = false;
@@ -60,6 +61,13 @@ public class GameManager : MonoBehaviourPun
         
         if(PhotonNetwork.IsMasterClient)
             StartCoroutine(StartGame());
+    }
+    
+    [PunRPC]
+    private void SetViewIDTeacher(int value)
+    {
+        Debug.LogWarning($"Teacher is {value}");
+        TeacherViewID = value;
     }
     
     [PunRPC]
@@ -147,6 +155,7 @@ public class GameManager : MonoBehaviourPun
         }
 
         yield return new WaitForSeconds(bufferBetweenRounds);
+        photonView.RPC("SetViewIDTeacher", RpcTarget.All, Random.Range(1, PhotonNetwork.CountOfPlayers));
         
         _playerSpawner.SpawnPlayers();
         _playerSpawner.SpawnBots();
