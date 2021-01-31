@@ -46,7 +46,7 @@ public class Attack : MonoBehaviour
         movement.setMovement(true);
 
         yield return new WaitForSeconds(timer);
-        if(GameManager._Instance.CurrentRound != current)
+        if(GameManager._Instance.CurrentRound == current)
         {
             movement.setMovement(false);
             FadeManager._Instance.FadeOut();
