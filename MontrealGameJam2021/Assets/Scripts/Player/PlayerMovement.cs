@@ -136,12 +136,15 @@ public class PlayerMovement : MonoBehaviourPun
             if(inventory)
             {
                 GameObject obj = inventory.GetItemGameObject();
-                inventory.ClearItem();
-                Vector3 vec = this.gameObject.transform.localPosition;
-                Collecting collect = obj.GetComponent<Collecting>();
-                collect.beInteractable();
-                obj.transform.SetParent(null);
-                obj.transform.localPosition = new Vector3(vec.x, (vec.y + 3f), vec.z);
+                if(obj)
+                {
+                    inventory.ClearItem();
+                    Vector3 vec = this.gameObject.transform.localPosition;
+                    Collecting collect = obj.GetComponent<Collecting>();
+                    collect.beInteractable();
+                    obj.transform.SetParent(null);
+                    obj.transform.localPosition = new Vector3(vec.x, (vec.y + 3f), vec.z);
+                }
             }
 
 
