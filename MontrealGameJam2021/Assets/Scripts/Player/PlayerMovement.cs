@@ -85,16 +85,14 @@ public class PlayerMovement : MonoBehaviourPun
             if (direction.magnitude >= 0.1f)
             {
                 float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.eulerAngles.y;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
-                    TurnSmoothTime);
-
-
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, TurnSmoothTime);
+                bool isPlayer = this.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student";
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
 
                 Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 _controller.Move(
-                    moveDirection.normalized * (Input.GetKey(KeyCode.LeftShift) ? RunningSpeed : WalkingSpeed) *
+                    moveDirection.normalized * (Input.GetKey(KeyCode.LeftShift) ? (isPlayer? (this.gameObject.GetComponent<Inventory>().HasItem()? WalkingSpeed: RunningSpeed) : RunningSpeed) : WalkingSpeed) *
                     Time.deltaTime + new Vector3(0, GravityForce, 0));
                 if(Input.GetKey(KeyCode.LeftShift))  
                     _anim.SetInteger("Movement", 2);
@@ -138,12 +136,15 @@ public class PlayerMovement : MonoBehaviourPun
             if(inventory)
             {
                 GameObject obj = inventory.GetItemGameObject();
-                inventory.ClearItem();
-                Vector3 vec = this.gameObject.transform.localPosition;
-                Collecting collect = obj.GetComponent<Collecting>();
-                collect.beInteractable();
-                obj.transform.SetParent(null);
-                obj.transform.localPosition = new Vector3(vec.x, (vec.y + 2.5f), vec.z);
+                if(obj)
+                {
+                    inventory.ClearItem();
+                    Vector3 vec = this.gameObject.transform.localPosition;
+                    Collecting collect = obj.GetComponent<Collecting>();
+                    collect.beInteractable();
+                    obj.transform.SetParent(null);
+                    obj.transform.localPosition = new Vector3(vec.x, (vec.y + 3f), vec.z);
+                }
             }
 
 
@@ -157,7 +158,7 @@ public class PlayerMovement : MonoBehaviourPun
             yield return new WaitForSeconds(timer);
 
             yield return new WaitForSeconds(timer);
-            if(GameManager._Instance.CurrentRound != current)
+            if(GameManager._Instance.CurrentRound == current)
             {
                 movement.setMovement(false);
                 FadeManager._Instance.FadeOut();

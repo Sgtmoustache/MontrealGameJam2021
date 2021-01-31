@@ -9,7 +9,7 @@ public class VisibilityHandler : MonoBehaviour
     private GameObject Player;
     private GameObject _player => Player ? Player : PlayerSpawner.LocalPlayer;
 
-    private const float RayHeight = 1.0f;
+    private const float RayHeight = 1.5f;
     private const float Range = 15;
     
     private List<Renderer> GFX = new List<Renderer>();

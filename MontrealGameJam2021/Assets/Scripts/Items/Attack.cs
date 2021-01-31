@@ -26,12 +26,15 @@ public class Attack : MonoBehaviour
         var current = GameManager._Instance.CurrentRound;
         if(inventory){
             GameObject obj = inventory.GetItemGameObject();
-            inventory.ClearItem();
-            Vector3 vec = this.gameObject.transform.localPosition;
-            Collecting collect = obj.GetComponent<Collecting>();
-            collect.beInteractable();
-            obj.transform.SetParent(null);
-            obj.transform.localPosition = new Vector3(vec.x, (vec.y + 3.5f), vec.z);
+            if(obj)
+            {
+                inventory.ClearItem();
+                Vector3 vec = this.gameObject.transform.localPosition;
+                Collecting collect = obj.GetComponent<Collecting>();
+                collect.beInteractable();
+                obj.transform.SetParent(null);
+                obj.transform.localPosition = new Vector3(vec.x, (vec.y + 4f), vec.z);
+            }
         }
         
 
@@ -43,7 +46,7 @@ public class Attack : MonoBehaviour
         movement.setMovement(true);
 
         yield return new WaitForSeconds(timer);
-        if(GameManager._Instance.CurrentRound != current)
+        if(GameManager._Instance.CurrentRound == current)
         {
             movement.setMovement(false);
             FadeManager._Instance.FadeOut();
@@ -79,9 +82,6 @@ public class Attack : MonoBehaviour
                         PlayerMovement player = hit.gameObject.GetComponent<PlayerMovement>();
                         Debug.LogWarning(hit.gameObject.name);
                         hasHitPlayer = true;
-                        Debug.LogError(player.gameObject.name);
-                        Debug.LogError(this.detentionSpawn.position);
-                        Debug.LogError(this.detentionSpawnExit.position);
 
                         player.BroadcastMovementState(player.gameObject.name, this.detentionSpawn.position, this.detentionSpawnExit.position);
                     }

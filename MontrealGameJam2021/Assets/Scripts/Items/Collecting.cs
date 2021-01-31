@@ -23,7 +23,7 @@ public class Collecting : Interactable {
                 
                 photonView.RPC("SetRigibodyConstraint", RpcTarget.All, RigidbodyConstraints.FreezeAll);
                 
-                gameObject.transform.position = new Vector3(vec.x, (vec.y + (isPlayer? 2.5f : 3.5f)), vec.z);
+                gameObject.transform.position = new Vector3(vec.x, (vec.y + (isPlayer? 3f : 4f)), vec.z);
 
                 TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
                     Description.SetText("");

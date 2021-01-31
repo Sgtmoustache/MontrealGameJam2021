@@ -19,7 +19,7 @@ public class ItemManager : MonoBehaviourPun
     public void Start()
     {
         ItemsPrefabs = Resources.LoadAll<GameObject>("Prefabs/Item/").ToList();
-        Debug.LogWarning($"Found {ItemsPrefabs.Count} in Item folder");
+        Debug.Log($"Found {ItemsPrefabs.Count} in Item folder");
 
         List<GameObject> ToKeep = new List<GameObject>();  
         
@@ -33,12 +33,12 @@ public class ItemManager : MonoBehaviourPun
             }
             else
             {
-                Debug.LogWarning($"NO DROP SPOT OUTSIDE FOR {prefab.name} ({collectibles})");
+                Debug.Log($"NO DROP SPOT OUTSIDE FOR {prefab.name} ({collectibles})");
             }
         }
 
         ItemsPrefabs = ToKeep;
-        Debug.LogWarning($"Kept {ItemsPrefabs.Count} item prefab");
+        Debug.Log($"Kept {ItemsPrefabs.Count} item prefab");
     }
 
     private void Randomize()
@@ -69,14 +69,14 @@ public class ItemManager : MonoBehaviourPun
             if (itemSpawnedCount < ItemsPrefabs.Count / 2)
             {
                 selectedPlaceholder = LostAndFoundPlaceHolders[lostAndFoundCount];
-                Debug.LogWarning($"({lostAndFoundCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {selectedPlaceholder.transform.parent.name + "/" + selectedPlaceholder.name}");
+                Debug.Log($"({lostAndFoundCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {selectedPlaceholder.transform.parent.name + "/" + selectedPlaceholder.name}");
 
             }
             //OutsidePlaceHolders
             else
             {
                 selectedPlaceholder = OutsidePlaceHolders.FirstOrDefault(b => b.itemType == item.GetComponent<ItemInfo>().Collectibles);
-                Debug.LogWarning($"({outsideCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {selectedPlaceholder.transform.parent.name + "/" + selectedPlaceholder.name}");
+                Debug.Log($"({outsideCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {selectedPlaceholder.transform.parent.name + "/" + selectedPlaceholder.name}");
             }
 
             if (selectedPlaceholder == null)
@@ -117,7 +117,7 @@ public class ItemManager : MonoBehaviourPun
     [PunRPC]
     private void ClearPlaceHolders()
     {
-        Debug.LogWarning("*****Clearing objects!");
+        Debug.Log("*****Clearing objects!");
         
         PlayerSpawner.LocalPlayer.GetComponent<Inventory>().ClearItem();
         OutsidePlaceHolders.ForEach(b => b.RemoveItem());
@@ -127,7 +127,7 @@ public class ItemManager : MonoBehaviourPun
         if(PhotonNetwork.IsMasterClient)
             SpawnedItems.ForEach(PhotonNetwork.Destroy);
         
-        Debug.LogWarning("*****End clear objects!");
+        Debug.Log("*****End clear objects!");
 
     }
 }
