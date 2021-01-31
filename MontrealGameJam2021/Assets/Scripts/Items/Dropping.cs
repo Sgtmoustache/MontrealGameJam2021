@@ -35,7 +35,7 @@ public class Dropping : MonoBehaviour
                     GameManager.TeacherScore += 20 ; 
             }
             if(this.gameObject.GetComponent<PlayerInfo>()?.PlayerType == "Student"){
-                Vector3 targetPosition = new Vector3(-19f, 0f , 0f);
+                Vector3 targetPosition = new Vector3(10f, -1f , -26f);
                 targetPosition.y = transform.position.y;
                 arrow.gameObject.SetActive(true);
                 arrow.LookAt(targetPosition);
