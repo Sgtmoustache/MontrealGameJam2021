@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviourPun
     public static bool PlayersCanMove = false;
     public static bool PlayersSpawned = false;
     public static Transform CameraPosition = null;
-    
+
+    [SerializeField] public Transform BotDebugTargetOverwrite = null;
     [SerializeField] private bool SkipIntro = false;
     [SerializeField] private Transform CameraTransform;
     [SerializeField] private CinemachineVirtualCamera Camera;
@@ -46,11 +47,16 @@ public class GameManager : MonoBehaviourPun
     void Start()
     {
         _Instance = this;
-        
         _playerSpawner = GetComponent<PlayerSpawner>();
         _playerSpawner.camera = Camera;
         ItemManager = GetComponent<ItemManager>();
         CameraPosition = CameraTransform.transform;
+
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.OfflineMode = true;
+            PhotonNetwork.CreateRoom("TestRoom");
+        }
         
         if(PhotonNetwork.IsMasterClient)
             StartCoroutine(StartGame());

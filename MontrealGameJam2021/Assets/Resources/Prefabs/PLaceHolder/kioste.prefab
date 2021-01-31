@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 739301512823491040}
   - component: {fileID: 5351885806852378954}
   - component: {fileID: 8593156653487749365}
+  - component: {fileID: 5664318893616181469}
   m_Layer: 4
   m_Name: PlaceHolder (3)
   m_TagString: Untagged
@@ -125,6 +126,7 @@ MonoBehaviour:
   lostAndFound: 1
   canBePlace: 1
   canBePick: 0
+  storeItem: {fileID: 0}
 --- !u!114 &8593156653487749365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +149,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &5664318893616181469
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3582408108506637092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.61}
+  m_Center: {x: -1.43, y: 0, z: 0}
 --- !u!1 &4590027669862061234
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +435,7 @@ GameObject:
   - component: {fileID: 1445732266207454752}
   - component: {fileID: 1243039818188128970}
   - component: {fileID: 5269360837927975600}
+  - component: {fileID: 8741930073448711558}
   m_Layer: 4
   m_Name: PlaceHolder (2)
   m_TagString: Untagged
@@ -473,6 +489,7 @@ MonoBehaviour:
   lostAndFound: 1
   canBePlace: 1
   canBePick: 0
+  storeItem: {fileID: 0}
 --- !u!114 &5269360837927975600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,6 +512,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &8741930073448711558
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6017494307126556443}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.69, y: 1, z: 1.94}
+  m_Center: {x: -0.86, y: 0, z: 1.2}
 --- !u!1 &6767752246614873627
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +567,7 @@ GameObject:
   - component: {fileID: 3822718886308775460}
   - component: {fileID: 1173556430231378307}
   - component: {fileID: 8543720055905463140}
+  - component: {fileID: 2726851410806263844}
   m_Layer: 4
   m_Name: PlaceHolder (1)
   m_TagString: Untagged
@@ -590,6 +621,7 @@ MonoBehaviour:
   lostAndFound: 1
   canBePlace: 1
   canBePick: 0
+  storeItem: {fileID: 0}
 --- !u!114 &8543720055905463140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,6 +644,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &2726851410806263844
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6933824675580028011}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.58, y: 1, z: 2.28}
+  m_Center: {x: 0, y: 0, z: 1.17}
 --- !u!1 &7012742905908749234
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,6 +669,7 @@ GameObject:
   - component: {fileID: 7330886495506349083}
   - component: {fileID: 5702497454123725586}
   - component: {fileID: 7726045437152662025}
+  - component: {fileID: 8040910015755622495}
   m_Layer: 4
   m_Name: PlaceHolder (4)
   m_TagString: Untagged
@@ -677,6 +723,7 @@ MonoBehaviour:
   lostAndFound: 1
   canBePlace: 1
   canBePick: 0
+  storeItem: {fileID: 0}
 --- !u!114 &7726045437152662025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,6 +746,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &8040910015755622495
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7012742905908749234}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.93, y: 1, z: 2.01}
+  m_Center: {x: -1.06, y: 0, z: -1.05}
 --- !u!1 &8053061361727055428
 GameObject:
   m_ObjectHideFlags: 0
@@ -711,6 +771,7 @@ GameObject:
   - component: {fileID: 7855153287315197272}
   - component: {fileID: 7195760489324956398}
   - component: {fileID: 5368349347985467660}
+  - component: {fileID: 6068523010349547235}
   m_Layer: 4
   m_Name: PlaceHolder
   m_TagString: Untagged
@@ -764,6 +825,7 @@ MonoBehaviour:
   lostAndFound: 1
   canBePlace: 1
   canBePick: 0
+  storeItem: {fileID: 0}
 --- !u!114 &5368349347985467660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,3 +848,16 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!65 &6068523010349547235
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053061361727055428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.42, y: 2, z: 2.4}
+  m_Center: {x: 1, y: 0, z: 1}

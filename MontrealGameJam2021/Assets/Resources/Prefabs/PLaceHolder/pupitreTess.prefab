@@ -42,8 +42,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 1, z: 1}
-  m_Center: {x: 0, y: 1, z: -2}
+  m_Size: {x: 3, y: 1, z: 0.09}
+  m_Center: {x: 0, y: 1, z: -1.22}
 --- !u!1 &403052845527622657
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403052845527622657}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.944, z: 0.56}
+  m_LocalPosition: {x: 0, y: 1.93, z: 0.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 152373690681062897}
@@ -127,7 +127,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 152373690681062897}
-  - component: {fileID: 403052845511458077}
   - component: {fileID: 403052845511458074}
   - component: {fileID: 403052845511458072}
   - component: {fileID: 403052845511458076}
@@ -175,22 +174,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &403052845511458077
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 672874439630171979}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!65 &403052845511458074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -202,7 +185,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 3, z: 3}
+  m_Size: {x: 5, y: 3.09, z: 4.53}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &403052845511458072
 BoxCollider:
@@ -215,8 +198,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 1, z: 4}
-  m_Center: {x: 0, y: 0, z: -0.8}
+  m_Size: {x: 1.27, y: 1, z: 2.04}
+  m_Center: {x: 0, y: -0.22, z: -1.91}
 --- !u!114 &403052845511458076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +218,7 @@ MonoBehaviour:
   lostAndFound: 0
   canBePlace: 1
   canBePick: 0
+  storeItem: {fileID: 0}
 --- !u!114 &6344604752230166259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +257,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   observableSearch: 2
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 0
   ObservedComponents: []
   viewIdField: 0
