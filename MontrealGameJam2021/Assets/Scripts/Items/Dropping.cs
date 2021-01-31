@@ -60,7 +60,7 @@ public class Dropping : MonoBehaviour
             Debug.Log(GameManager.TeacherScore);
         }
 
-        if(!playerInfo.isLocal)
+        if(false)
         {
 
             RaycastHit hit;
