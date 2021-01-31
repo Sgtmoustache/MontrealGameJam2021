@@ -1048,6 +1048,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
+  detentionSpawn: {fileID: 0}
+  detentionSpawnExit: {fileID: 0}
   WalkingSpeed: 3.5
   RunningSpeed: 6
   TurnSmoothTime: 0.1
