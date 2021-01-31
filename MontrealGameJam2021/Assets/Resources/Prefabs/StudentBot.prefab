@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 1853273676360902883}
   - component: {fileID: 1853273676360902882}
   - component: {fileID: 1853273676360902887}
+  - component: {fileID: 3005519084355056925}
   m_Layer: 0
   m_Name: StudentBot
   m_TagString: Untagged
@@ -280,6 +281,20 @@ MonoBehaviour:
   _bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 10, y: 0, z: 10}
+--- !u!136 &3005519084355056925
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853273676360902893}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.52
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.31, z: 0}
 --- !u!1 &1964118714682577690
 GameObject:
   m_ObjectHideFlags: 0
