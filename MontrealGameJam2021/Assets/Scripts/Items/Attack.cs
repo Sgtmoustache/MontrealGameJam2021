@@ -41,7 +41,7 @@ public class Attack : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R) && canUsePower){
-            Collider[] collider = Physics.OverlapSphere(this.transform.position, 4f, LayerMask.NameToLayer("Item"));
+            Collider[] collider = Physics.OverlapSphere(this.transform.position, 4f, ~LayerMask.NameToLayer("Item"));
             bool hasHitPlayer = false;
             
             foreach (var hit in collider)
