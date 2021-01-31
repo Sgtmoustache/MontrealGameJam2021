@@ -53,7 +53,7 @@ public class ItemManager : MonoBehaviourPun
     public void RefreshItems(bool clearPlaceHolders)
     {
         if(clearPlaceHolders)
-            photonView.RPC("ClearPlaceHolders", RpcTarget.All);
+            photonView.RPC("ClearPlaceHoldersFunction", RpcTarget.All);
         
         Randomize();
         
@@ -115,7 +115,10 @@ public class ItemManager : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void ClearPlaceHolders()
+    public void ClearPlaceHoldersFunction(){
+        StartCoroutine(ClearPlaceHolders());
+    }
+    public IEnumerator ClearPlaceHolders()
     {
         Debug.Log("*****Clearing objects!");
         
@@ -123,6 +126,8 @@ public class ItemManager : MonoBehaviourPun
         OutsidePlaceHolders.ForEach(b => b.RemoveItem());
         LostAndFoundPlaceHolders.ForEach(b => b.RemoveItem());
         HiddenSpotPlaceHolders.ForEach(b => b.RemoveItem());
+
+        yield return new WaitForSeconds(10);
         
         if(PhotonNetwork.IsMasterClient)
             SpawnedItems.ForEach(PhotonNetwork.Destroy);

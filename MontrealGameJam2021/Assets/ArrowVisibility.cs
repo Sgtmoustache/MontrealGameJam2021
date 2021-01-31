@@ -15,6 +15,10 @@ public class ArrowVisibility : MonoBehaviour
 
     private void Start()
     {
+
+        if (!targetToFollow)
+            return;
+            
         if (targetToFollow.GetComponent<Collecting>() != null)
         {
             IsOnItem = true;
