@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using Debug = UnityEngine.Debug;
+
 [RequireComponent(typeof(PhotonView))]
 public class PlaceHolder : Interactable
 {
@@ -126,7 +129,13 @@ public class PlaceHolder : Interactable
     }
 
     [PunRPC]
-    public void AddItem(string itemName) => AddItem(GameObject.Find(itemName));
+    public void AddItem(string itemName)
+    {
+        Debug.LogError($"Receive name string {itemName}");
+        GameObject OBJ = GameObject.Find(itemName);
+        Debug.LogError($"Found obj {OBJ?.name ?? "NONE"}");
+        AddItem(OBJ);
+    }
 
     private void AddItem(GameObject item){
         canBePlace = false;

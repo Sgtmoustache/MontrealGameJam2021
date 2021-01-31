@@ -83,14 +83,27 @@ public class ItemManager : MonoBehaviourPun
                 throw new MissingComponentException($"NO PLACE TO PLACE OBJECT {item.name}");
             }
             
+            photonView.RPC(
+                "CreateAndRenamme", 
+                RpcTarget.Others, "Prefabs/Item/" + item.name, "[" + GameManager._Instance.CurrentRound + "]",
+                selectedPlaceholder.itemDropPosition.position, 
+                selectedPlaceholder.itemDropPosition.rotation);
+            
             GameObject spawnedItem = PhotonNetwork.Instantiate("Prefabs/Item/" + item.name,  selectedPlaceholder.itemDropPosition.position, selectedPlaceholder.itemDropPosition.rotation);
-            spawnedItem.name = spawnedItem.name + "[" + GameManager._Instance.CurrentRound + "]";
+            spawnedItem.name = spawnedItem.name + name;
             selectedPlaceholder.BroadcastName(spawnedItem.name);
             SpawnedItems.Add(spawnedItem);
                 
             lostAndFoundCount++;
             itemSpawnedCount++;
         }
+    }
+
+    [PunRPC]
+    private void CreateAndRenamme(string prefabpath, string name, Vector3 position, Quaternion rotation)
+    {
+        GameObject spawnedItem = PhotonNetwork.Instantiate(prefabpath,  position, rotation);
+        spawnedItem.name = spawnedItem.name + name;
     }
 
     [PunRPC]
