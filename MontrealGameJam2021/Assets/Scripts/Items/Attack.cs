@@ -31,7 +31,7 @@ public class Attack : MonoBehaviour
             Collecting collect = obj.GetComponent<Collecting>();
             collect.beInteractable();
             obj.transform.SetParent(null);
-            obj.transform.localPosition = new Vector3(vec.x, (vec.y + 3.5f), vec.z);
+            obj.transform.localPosition = new Vector3(vec.x, (vec.y + 4f), vec.z);
         }
         
 

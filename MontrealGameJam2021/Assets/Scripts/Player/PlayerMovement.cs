@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviourPun
                 Collecting collect = obj.GetComponent<Collecting>();
                 collect.beInteractable();
                 obj.transform.SetParent(null);
-                obj.transform.localPosition = new Vector3(vec.x, (vec.y + 2.5f), vec.z);
+                obj.transform.localPosition = new Vector3(vec.x, (vec.y + 3f), vec.z);
             }
 
 

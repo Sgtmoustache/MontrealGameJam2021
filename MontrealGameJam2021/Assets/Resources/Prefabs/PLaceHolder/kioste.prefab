@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8036616549959145145}
   - component: {fileID: 212989828240781910}
   - component: {fileID: 2064726105098374791}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4671600212502491462}
   - component: {fileID: 4665144273505533005}
   - component: {fileID: 1644183392323993608}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 86266903092145477}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: DropZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8960468912529522036}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: DropZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 5351885806852378954}
   - component: {fileID: 8593156653487749365}
   - component: {fileID: 5664318893616181469}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: PlaceHolder (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 9209576426986573071}
   - component: {fileID: 7648650643304705826}
   - component: {fileID: 3232767078621443763}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 8111149650792585585}
   - component: {fileID: 906546674721610273}
   - component: {fileID: 3733045377096493796}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4679177492248769353}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: kioste
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 8403261368723089452}
   - component: {fileID: 964667667520544434}
   - component: {fileID: 8675408195184853613}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -658,7 +658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6223904591898595341}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: DropZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 7465082474889152517}
   - component: {fileID: 5221873375972432293}
   - component: {fileID: 1818052550628123947}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -783,7 +783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8316254403014449943}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: DropZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -817,7 +817,7 @@ GameObject:
   - component: {fileID: 1243039818188128970}
   - component: {fileID: 5269360837927975600}
   - component: {fileID: 8741930073448711558}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: PlaceHolder (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -916,7 +916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8552454943690680609}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: DropZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -950,7 +950,7 @@ GameObject:
   - component: {fileID: 1173556430231378307}
   - component: {fileID: 8543720055905463140}
   - component: {fileID: 2726851410806263844}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: PlaceHolder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1053,7 +1053,7 @@ GameObject:
   - component: {fileID: 5702497454123725586}
   - component: {fileID: 7726045437152662025}
   - component: {fileID: 8040910015755622495}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: PlaceHolder (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1155,7 @@ GameObject:
   - component: {fileID: 6351958947776239993}
   - component: {fileID: 7564778016295991038}
   - component: {fileID: 5747346414574681933}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1251,7 +1251,7 @@ GameObject:
   - component: {fileID: 7195760489324956398}
   - component: {fileID: 5368349347985467660}
   - component: {fileID: 6068523010349547235}
-  m_Layer: 4
+  m_Layer: 8
   m_Name: PlaceHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
