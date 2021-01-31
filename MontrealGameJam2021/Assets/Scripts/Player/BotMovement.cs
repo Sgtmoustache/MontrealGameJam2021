@@ -50,8 +50,6 @@ namespace Assets.Scripts.Player
                     )+ _agent.transform.position) ;    
                 }
                 
-                Debug.Log($"Bot has destination : {_agent.destination}");
-                
                 //Allows to see target position
                 if(_debugtarget != null)
                     _debugtarget.transform.position = _agent.destination;

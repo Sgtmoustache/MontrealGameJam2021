@@ -46,7 +46,7 @@ public class Dropping : MonoBehaviour
                 if(!PlaceHolderOutsideLocation)
                 {
                     List<PlaceHolder> OutsidePlaceHolders = GameManager._Instance.ItemManager.OutsidePlaceHolders;
-                    var find =  OutsidePlaceHolders.FirstOrDefault(element => element.gameObject.GetComponent<ItemInfo>().Collectibles == inventory.GetItemGameObject().GetComponent<ItemInfo>().Collectibles);
+                    var find =  OutsidePlaceHolders.FirstOrDefault(element => element.itemType == inventory.GetTypeOfItem());
                     PlaceHolderOutsideLocation = find.gameObject.transform;
                 }
                 
