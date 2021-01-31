@@ -8,6 +8,9 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviourPun
 {
     public Transform Camera;
+
+    [SerializeField] Transform detentionSpawn;
+    [SerializeField] Transform detentionSpawnExit;
     [SerializeField] private float WalkingSpeed = 3.0f;
     [SerializeField] private float RunningSpeed = 5.0f;
     [SerializeField] private float TurnSmoothTime = 0.1f;
@@ -110,4 +113,40 @@ public class PlayerMovement : MonoBehaviourPun
             _controller.Move(new Vector3(0, GravityForce, 0));
         }
     }
+
+    public void setMovement(bool mov){
+        CanMove = mov;
+    }
+
+    public void BroadcastMovementState(string name)
+    {
+        photonView.RPC("MovePlayer", RpcTarget.All, name);
+    }
+
+[PunRPC]
+    public void MovePlayer(string name){
+        MovingPlayer(GameObject.Find(name), 30);
+    }
+
+    public IEnumerator MovingPlayer(GameObject player, int timer){
+        PlayerMovement movement = player.GetComponent<PlayerMovement>();
+
+        movement.setMovement(false);
+        FadeManager._Instance.FadeIn();
+        yield return new WaitForSeconds(2);
+        FadeManager._Instance.FadeOut();
+        player.transform.position = detentionSpawn.position;
+        movement.setMovement(true);
+
+        yield return new WaitForSeconds(timer);
+
+        movement.setMovement(false);
+        FadeManager._Instance.FadeIn();
+        yield return new WaitForSeconds(2);
+        FadeManager._Instance.FadeOut();
+        player.transform.position = detentionSpawnExit.position;
+        movement.setMovement(true);
+    }
+
+
 }
