@@ -8,7 +8,7 @@ using TMPro;
 public class PlaceHolder : Interactable
 {
     public Collectibles itemType;
-    [SerializeField] Transform itemDropPosition;
+    [SerializeField] public Transform itemDropPosition;
     [SerializeField] bool hidingSpot;
     [SerializeField] bool lostAndFound;
     
@@ -144,6 +144,7 @@ public class PlaceHolder : Interactable
      public void RemoveItem(){
         canBePick = false;
         storeItem = null;
+        
         StartCoroutine(bufferGrab());
     }
 

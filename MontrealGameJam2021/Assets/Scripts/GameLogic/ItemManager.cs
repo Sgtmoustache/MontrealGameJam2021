@@ -49,9 +49,10 @@ public class ItemManager : MonoBehaviourPun
         ItemsPrefabs = ItemsPrefabs.OrderBy((item) => Random.Range(0, ItemsPrefabs.Count)).ToList();
     }
 
-    public void RefreshItems()
+    public void RefreshItems(bool clearPlaceHolders)
     {
-        photonView.RPC("ClearPlaceHolders", RpcTarget.All);
+        if(clearPlaceHolders)
+            photonView.RPC("ClearPlaceHolders", RpcTarget.All);
         
         Randomize();
         
@@ -74,13 +75,16 @@ public class ItemManager : MonoBehaviourPun
             else
             {
                 selectedPlaceholder = OutsidePlaceHolders.FirstOrDefault(b => b.itemType == item.GetComponent<ItemInfo>().Collectibles);
-                if(selectedPlaceholder == null)
-                    Debug.LogWarning($"!!!NO PLACE TO PLACE OBJECT {item.name}!!!");
-                
                 Debug.LogWarning($"({outsideCount}/{ItemsPrefabs.Count}) Spawning {item.name} at {selectedPlaceholder.transform.parent.name + "/" + selectedPlaceholder.name}");
             }
+
+            if (selectedPlaceholder == null)
+            {
+                throw new MissingComponentException($"NO PLACE TO PLACE OBJECT {item.name}");
+            }
             
-            GameObject spawnedItem = PhotonNetwork.Instantiate("Prefabs/Item/" + item.name,  Vector3.zero, Quaternion.identity);
+            GameObject spawnedItem = PhotonNetwork.Instantiate("Prefabs/Item/" + item.name,  selectedPlaceholder.itemDropPosition.position, selectedPlaceholder.itemDropPosition.rotation);
+            spawnedItem.name = spawnedItem.name + "[" + GameManager._Instance.CurrentRound + "]";
             selectedPlaceholder.BroadcastName(spawnedItem.name);
             SpawnedItems.Add(spawnedItem);
                 
@@ -92,8 +96,11 @@ public class ItemManager : MonoBehaviourPun
     [PunRPC]
     private void ClearPlaceHolders()
     {
+        PlayerSpawner.LocalPlayer.GetComponent<Inventory>().ClearItem();
         OutsidePlaceHolders.ForEach(b => b.RemoveItem());
         LostAndFoundPlaceHolders.ForEach(b => b.RemoveItem());
+        HiddenSpotPlaceHolders.ForEach(b => b.RemoveItem());
+        
         SpawnedItems.ForEach(Destroy);
     }
 }

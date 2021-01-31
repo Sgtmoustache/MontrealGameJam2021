@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviourPun
     public static GameManager _Instance;
     private static int TeacherScore = 0;
     private static int StudentScore = 0;
-    private int CurrentRound = 0;
+    public int CurrentRound = 0;
     [HideInInspector] public int NumberOfStudentDetention = 0;
     [HideInInspector] public int NumberOfFalseAccusation = 0;
     
@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviourPun
 
     private IEnumerator StartRound(int duration)
     {
-        ItemManager.RefreshItems();
+        ItemManager.RefreshItems(CurrentRound != 0);
         photonView.RPC("RespawnPlayer", RpcTarget.All, Vector3.zero);
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
