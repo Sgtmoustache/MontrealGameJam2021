@@ -12,8 +12,7 @@ public class PlayerSpawner : MonoBehaviourPun
     [HideInInspector] public CinemachineVirtualCamera camera;
     
     [SerializeField] private List<Transform> botsSpawns = new List<Transform>();
-    [SerializeField] private List<Transform> studentsSpawns = new List<Transform>();
-    [SerializeField] private List<Transform> teacherSpawns = new List<Transform>();
+    [SerializeField] private List<Transform> playerSpawns = new List<Transform>();
 
     public static GameObject LocalPlayer;
 
@@ -24,30 +23,18 @@ public class PlayerSpawner : MonoBehaviourPun
 
         if(PhotonNetwork.IsMasterClient)
             photonView.RPC("SpawnPlayers", RpcTarget.Others);
-
-        string role;
-        Vector3 position;
-        Quaternion rotation;
         
+        int randomValue = Random.Range(0, playerSpawns.Count-1);
+
+        string role = "Student";
+
         if (GameManager.TeacherViewID == PhotonNetwork.LocalPlayer.ActorNumber)
-        {
-            int randomValue = Random.Range(0, teacherSpawns.Count-1);
             role = "Teacher";
-            position = teacherSpawns[randomValue].position;
-            rotation = teacherSpawns[randomValue].rotation;
-        }
-        else
-        {
-            int randomValue = Random.Range(0, studentsSpawns.Count-1);
-            role = "Student";
-            position = studentsSpawns[randomValue].position;
-            rotation = studentsSpawns[randomValue].rotation;
-        }
         
         if (PhotonNetwork.IsConnected)
-            LocalPlayer = PhotonNetwork.Instantiate($"Prefabs/{role}", position, rotation);
+            LocalPlayer = PhotonNetwork.Instantiate($"Prefabs/{role}", playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
         else
-            LocalPlayer = (GameObject) Instantiate(Resources.Load($"Prefabs/{role}"), position, rotation);
+            LocalPlayer = (GameObject) Instantiate(Resources.Load($"Prefabs/{role}"), playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
         
         
         LocalPlayer.GetComponent<PlayerMovement>().Camera = GameManager.CameraPosition;
@@ -66,10 +53,10 @@ public class PlayerSpawner : MonoBehaviourPun
         if (forceLocation == Vector3.zero)
         {
             Debug.LogWarning("Respawning player");
-            int randomValue = Random.Range(0, studentsSpawns.Count-1);
+            int randomValue = Random.Range(0, playerSpawns.Count-1);
         
-            LocalPlayer.transform.position = studentsSpawns[randomValue].position;
-            LocalPlayer.transform.rotation = studentsSpawns[randomValue].rotation;
+            LocalPlayer.transform.position = playerSpawns[randomValue].position;
+            LocalPlayer.transform.rotation = playerSpawns[randomValue].rotation;
         }
         else
         {
