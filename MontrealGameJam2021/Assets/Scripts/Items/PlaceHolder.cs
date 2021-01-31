@@ -107,17 +107,20 @@ public class PlaceHolder : Interactable
             Description.SetText("Search");
         else if(inventory.HasItem() && isPlayer && hidingSpot)
                 Description.SetText("Hide");
-        else if(inventory.HasItem() && !hidingSpot)
+        else if(inventory.HasItem() && !hidingSpot){
+            if(lostAndFound)
                 Description.SetText("Place");
+            else if(itemType == inventory.GetTypeOfItem())
+                Description.SetText("");
+        }
+                
         
     }
 
     private void OnTriggerExit(Collider player)
     {
         Inventory inventory = player.GetComponent<Inventory>();
-        if (!inventory) return;
-        if (player.gameObject.GetComponent<PlayerInfo>().PlayerType != "Student") return;
-        
+        if (!inventory) return;    
         TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
         Description.SetText("");
     }

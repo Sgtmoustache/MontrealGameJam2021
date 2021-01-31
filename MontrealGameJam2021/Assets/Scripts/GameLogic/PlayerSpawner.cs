@@ -26,10 +26,15 @@ public class PlayerSpawner : MonoBehaviourPun
         
         int randomValue = Random.Range(0, playerSpawns.Count-1);
 
+        string role = "Student";
+
+        if (GameManager.TeacherViewID == PhotonNetwork.LocalPlayer.ActorNumber)
+            role = "Teacher";
+        
         if (PhotonNetwork.IsConnected)
-            LocalPlayer = PhotonNetwork.Instantiate("Prefabs/Teacher", playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
+            LocalPlayer = PhotonNetwork.Instantiate($"Prefabs/{role}", playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
         else
-            LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/Teacher"), playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
+            LocalPlayer = (GameObject) Instantiate(Resources.Load($"Prefabs/{role}"), playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
         
         
         LocalPlayer.GetComponent<PlayerMovement>().Camera = GameManager.CameraPosition;
