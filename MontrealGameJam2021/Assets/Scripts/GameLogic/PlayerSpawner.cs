@@ -17,6 +17,9 @@ public class PlayerSpawner : MonoBehaviourPun
 
     public static GameObject LocalPlayer;
 
+    private bool IsTeacher => GameManager.TeacherViewID == PhotonNetwork.LocalPlayer.ActorNumber;
+
+    
     [PunRPC]
     public void SpawnPlayers()
     {
@@ -29,7 +32,7 @@ public class PlayerSpawner : MonoBehaviourPun
         Vector3 position;
         Quaternion rotation;
         
-        if (GameManager.TeacherViewID == PhotonNetwork.LocalPlayer.ActorNumber)
+        if (IsTeacher)
         {
             int randomValue = Random.Range(0, teacherSpawns.Count-1);
             role = "Teacher";
@@ -66,10 +69,21 @@ public class PlayerSpawner : MonoBehaviourPun
         if (forceLocation == Vector3.zero)
         {
             Debug.LogWarning("Respawning player");
-            int randomValue = Random.Range(0, studentsSpawns.Count-1);
-        
-            LocalPlayer.transform.position = studentsSpawns[randomValue].position;
-            LocalPlayer.transform.rotation = studentsSpawns[randomValue].rotation;
+
+            if (IsTeacher)
+            {
+                int randomValue = Random.Range(0, teacherSpawns.Count-1);
+
+                LocalPlayer.transform.position = teacherSpawns[randomValue].position;
+                LocalPlayer.transform.rotation = teacherSpawns[randomValue].rotation;
+            }
+            else
+            {
+                int randomValue = Random.Range(0, studentsSpawns.Count-1);
+
+                LocalPlayer.transform.position = studentsSpawns[randomValue].position;
+                LocalPlayer.transform.rotation = studentsSpawns[randomValue].rotation;    
+            }
         }
         else
         {
