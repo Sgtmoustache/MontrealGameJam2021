@@ -29,7 +29,7 @@ public class PlayerSpawner : MonoBehaviourPun
         Debug.LogWarning("Spawning player");
 
         if(PhotonNetwork.IsMasterClient)
-            photonView.RPC("SpawnPlayers", RpcTarget.Others);
+            photonView.RPC("SpawnPlayers", RpcTarget.Others, image);
 
         string role;
         Vector3 position;
