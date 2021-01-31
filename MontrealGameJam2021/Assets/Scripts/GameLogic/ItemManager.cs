@@ -82,15 +82,11 @@ public class ItemManager : MonoBehaviourPun
             {
                 throw new MissingComponentException($"NO PLACE TO PLACE OBJECT {item.name}");
             }
-            
-            photonView.RPC(
-                "CreateAndRenamme", 
-                RpcTarget.Others, "Prefabs/Item/" + item.name, "[" + GameManager._Instance.CurrentRound + "]",
-                selectedPlaceholder.itemDropPosition.position, 
-                selectedPlaceholder.itemDropPosition.rotation);
+
+            //string tag = "[" + GameManager._Instance.CurrentRound + "]";
             
             GameObject spawnedItem = PhotonNetwork.Instantiate("Prefabs/Item/" + item.name,  selectedPlaceholder.itemDropPosition.position, selectedPlaceholder.itemDropPosition.rotation);
-            spawnedItem.name = spawnedItem.name + name;
+            //spawnedItem.name = spawnedItem.name + tag;
             selectedPlaceholder.BroadcastName(spawnedItem.name);
             SpawnedItems.Add(spawnedItem);
                 
@@ -100,25 +96,19 @@ public class ItemManager : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void CreateAndRenamme(string prefabpath, string name, Vector3 position, Quaternion rotation)
-    {
-        GameObject spawnedItem = PhotonNetwork.Instantiate(prefabpath,  position, rotation);
-        spawnedItem.name = spawnedItem.name + name;
-    }
-
-    [PunRPC]
     private void ClearPlaceHolders()
     {
-        Debug.LogError("*****Clearing objects!");
+        Debug.LogWarning("*****Clearing objects!");
         
         PlayerSpawner.LocalPlayer.GetComponent<Inventory>().ClearItem();
         OutsidePlaceHolders.ForEach(b => b.RemoveItem());
         LostAndFoundPlaceHolders.ForEach(b => b.RemoveItem());
         HiddenSpotPlaceHolders.ForEach(b => b.RemoveItem());
         
-        SpawnedItems.ForEach(Destroy);
+        if(PhotonNetwork.IsMasterClient)
+            SpawnedItems.ForEach(PhotonNetwork.Destroy);
         
-        Debug.LogError("*****End clear objects!");
+        Debug.LogWarning("*****End clear objects!");
 
     }
 }
