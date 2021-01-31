@@ -545,7 +545,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Programming : Vincent Dufour\n                          Charles-Antoine
     Bellerive\n\t                \nLevel designer : Marc-Antoine Dumouchel\n\t              
-    Jean-Simon Roy\n\n            Artist : Francis Cadorette"
+    Jean-Simon Roy\n\n            Artist : Francis Cadorette\n\t               Rebecca
+    Demers"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bc4ff95e57e3f744aa2e4bab1f0108b, type: 2}
   m_sharedMaterial: {fileID: -3771965808273321446, guid: 0bc4ff95e57e3f744aa2e4bab1f0108b, type: 2}
