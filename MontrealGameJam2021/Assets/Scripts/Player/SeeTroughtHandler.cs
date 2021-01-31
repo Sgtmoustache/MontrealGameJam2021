@@ -11,9 +11,6 @@ public class SeeTroughtHandler : MonoBehaviour
     
     public void Update()
     {
-        if (!Camera)
-            return;
-        
         RaycastHit hit;
 
         Vector3 origin = transform.position + new Vector3(0, originHeight, 0);
