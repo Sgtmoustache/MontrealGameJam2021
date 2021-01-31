@@ -32,7 +32,7 @@ public class Dropping : MonoBehaviour
             }
             if(this.gameObject.GetComponent<PlayerInfo>()?.PlayerType == "Student"){
                 Vector3 targetPosition = new Vector3(10f, -1f , -26f);
-                targetPosition.y = transform.position.y;
+                targetPosition.y = arrow.transform.position.y;
                 arrow.gameObject.SetActive(true);
                 arrow.LookAt(targetPosition);
             }
