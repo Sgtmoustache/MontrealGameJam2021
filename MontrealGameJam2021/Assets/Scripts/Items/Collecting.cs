@@ -57,7 +57,7 @@ public class Collecting : Interactable {
         if (!inventory || Locked) return;
 
         TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
-        Description.SetText("Place");
+        Description.SetText("Take");
     }
 
     private void OnTriggerExit(Collider player)

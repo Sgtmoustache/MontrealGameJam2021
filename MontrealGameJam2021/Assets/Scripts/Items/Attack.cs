@@ -23,13 +23,17 @@ public class Attack : MonoBehaviour
     public IEnumerator MovingPlayer(int timer){
         PlayerMovement movement = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>();
         Inventory inventory = this.gameObject.GetComponent<Inventory>();
-        GameObject obj = inventory.GetItemGameObject();
-        inventory.ClearItem();
-        Vector3 vec = this.gameObject.transform.localPosition;
-        Collecting collect = obj.GetComponent<Collecting>();
-        collect.beInteractable();
-        obj.transform.SetParent(null);
-        obj.transform.localPosition = new Vector3(vec.x, (vec.y + 3.5f), vec.z);
+        var current = GameManager._Instance.CurrentRound;
+        if(inventory){
+            GameObject obj = inventory.GetItemGameObject();
+            inventory.ClearItem();
+            Vector3 vec = this.gameObject.transform.localPosition;
+            Collecting collect = obj.GetComponent<Collecting>();
+            collect.beInteractable();
+            obj.transform.SetParent(null);
+            obj.transform.localPosition = new Vector3(vec.x, (vec.y + 3.5f), vec.z);
+        }
+        
 
         movement.setMovement(false);
         FadeManager._Instance.FadeOut();
@@ -39,13 +43,15 @@ public class Attack : MonoBehaviour
         movement.setMovement(true);
 
         yield return new WaitForSeconds(timer);
-
-        movement.setMovement(false);
-        FadeManager._Instance.FadeOut();
-        yield return new WaitForSeconds(2);
-        FadeManager._Instance.FadeIn();
-        PlayerSpawner.LocalPlayer.transform.position = detentionSpawnExit.position;
-        movement.setMovement(true);
+        if(GameManager._Instance.CurrentRound != current)
+        {
+            movement.setMovement(false);
+            FadeManager._Instance.FadeOut();
+            yield return new WaitForSeconds(2);
+            FadeManager._Instance.FadeIn();
+            PlayerSpawner.LocalPlayer.transform.position = detentionSpawnExit.position;
+            movement.setMovement(true);
+        }
     }
 
     // Update is called once per frame

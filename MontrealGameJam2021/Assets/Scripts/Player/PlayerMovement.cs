@@ -134,13 +134,17 @@ public class PlayerMovement : MonoBehaviourPun
         if(player.GetComponent<PlayerInfo>().isLocal)
         {
             Inventory inventory = this.gameObject.GetComponent<Inventory>();
-            GameObject obj = inventory.GetItemGameObject();
-            inventory.ClearItem();
-            Vector3 vec = this.gameObject.transform.localPosition;
-            Collecting collect = obj.GetComponent<Collecting>();
-            collect.beInteractable();
-            obj.transform.SetParent(null);
-            obj.transform.localPosition = new Vector3(vec.x, (vec.y + 2.5f), vec.z);
+            var current = GameManager._Instance.CurrentRound;
+            if(inventory)
+            {
+                GameObject obj = inventory.GetItemGameObject();
+                inventory.ClearItem();
+                Vector3 vec = this.gameObject.transform.localPosition;
+                Collecting collect = obj.GetComponent<Collecting>();
+                collect.beInteractable();
+                obj.transform.SetParent(null);
+                obj.transform.localPosition = new Vector3(vec.x, (vec.y + 2.5f), vec.z);
+            }
 
 
             movement.setMovement(false);
@@ -152,12 +156,16 @@ public class PlayerMovement : MonoBehaviourPun
 
             yield return new WaitForSeconds(timer);
 
-            movement.setMovement(false);
-            FadeManager._Instance.FadeOut();
-            yield return new WaitForSeconds(2);
-            FadeManager._Instance.FadeIn();
-            player.transform.position = detentionSpawnExit;
-            movement.setMovement(true);
+            yield return new WaitForSeconds(timer);
+            if(GameManager._Instance.CurrentRound != current)
+            {
+                movement.setMovement(false);
+                FadeManager._Instance.FadeOut();
+                yield return new WaitForSeconds(2);
+                FadeManager._Instance.FadeIn();
+                player.transform.position = detentionSpawnExit;
+                movement.setMovement(true);
+            }
         }
     }
 
