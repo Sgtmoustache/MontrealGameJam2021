@@ -85,16 +85,14 @@ public class PlayerMovement : MonoBehaviourPun
             if (direction.magnitude >= 0.1f)
             {
                 float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.eulerAngles.y;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity,
-                    TurnSmoothTime);
-
-
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, TurnSmoothTime);
+                bool isPlayer = this.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student";
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
 
                 Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 _controller.Move(
-                    moveDirection.normalized * (Input.GetKey(KeyCode.LeftShift) ? RunningSpeed : WalkingSpeed) *
+                    moveDirection.normalized * (Input.GetKey(KeyCode.LeftShift) ? (isPlayer? (this.gameObject.GetComponent<Inventory>().HasItem()? WalkingSpeed: RunningSpeed) : RunningSpeed) : WalkingSpeed) *
                     Time.deltaTime + new Vector3(0, GravityForce, 0));
                 if(Input.GetKey(KeyCode.LeftShift))  
                     _anim.SetInteger("Movement", 2);
