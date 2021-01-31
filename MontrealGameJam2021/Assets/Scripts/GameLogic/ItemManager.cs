@@ -14,6 +14,7 @@ public class ItemManager : MonoBehaviourPun
     private List<GameObject> Items;
 
     private List<GameObject> SpawnedItems = new List<GameObject>();
+    private List<GameObject> Arrows = new List<GameObject>();
     
     public void Start()
     {
@@ -92,6 +93,24 @@ public class ItemManager : MonoBehaviourPun
                 
             lostAndFoundCount++;
             itemSpawnedCount++;
+        }
+        
+        photonView.RPC("SpawnArrows", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void SpawnArrows()
+    {
+        foreach (var arrow in Arrows)
+        {
+            Destroy(arrow);
+        }
+        
+        foreach (var item in SpawnedItems)
+        {
+             GameObject obj = (GameObject) Instantiate(Resources.Load($"Prefabs/ObjectArrow"), Vector3.zero, Quaternion.identity);
+             obj.GetComponent<ArrowVisibility>().targetToFollow = item;
+             Arrows.Add(obj);
         }
     }
 
