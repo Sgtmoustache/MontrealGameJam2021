@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviourPun
     private CharacterController _controller;
     private float _turnSmoothVelocity;
     private float timer = 0.0f;
+    private bool CanMove = true;
 
     void Start()
     {
@@ -71,7 +72,7 @@ public class PlayerMovement : MonoBehaviourPun
         }
 
 
-        if (CanMove)
+        if (CanMove && CanMove)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
