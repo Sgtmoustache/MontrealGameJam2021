@@ -22,9 +22,9 @@ public class PlayerSpawner : MonoBehaviourPun
         int randomValue = Random.Range(0, playerSpawns.Count-1);
 
         if (PhotonNetwork.IsConnected)
-            LocalPlayer = PhotonNetwork.Instantiate("Prefabs/PlayerWithLight", playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
+            LocalPlayer = PhotonNetwork.Instantiate("Prefabs/Student", playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
         else
-            LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"), playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
+            LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/Student"), playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
 
         Debug.LogWarning("Spawning player!");
         
@@ -65,7 +65,7 @@ public class PlayerSpawner : MonoBehaviourPun
             {
                 int randomIndex = Random.Range(0, botsSpawns.Count);
 
-                bots.Add(PhotonNetwork.Instantiate("Prefabs/BotWithVisibility",  botsSpawns[randomIndex].position, botsSpawns[randomIndex].rotation));
+                bots.Add(PhotonNetwork.Instantiate("Prefabs/StudentBot",  botsSpawns[randomIndex].position, botsSpawns[randomIndex].rotation));
             }
         }
         else if (!PhotonNetwork.IsConnected)
@@ -74,7 +74,7 @@ public class PlayerSpawner : MonoBehaviourPun
             {
                 int randomIndex = Random.Range(0, botsSpawns.Count);
 
-                bots.Add((GameObject) Instantiate(Resources.Load("Prefabs/BotWithVisibility"), botsSpawns[randomIndex].position, botsSpawns[randomIndex].rotation));
+                bots.Add((GameObject) Instantiate(Resources.Load("Prefabs/StudentBot"), botsSpawns[randomIndex].position, botsSpawns[randomIndex].rotation));
             }
         }
 

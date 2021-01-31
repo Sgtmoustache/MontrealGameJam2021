@@ -1211,6 +1211,7 @@ MonoBehaviour:
   RunningSpeed: 6
   TurnSmoothTime: 0.1
   GravityForce: -0.4
+  CanMove: 0
 --- !u!114 &381943548686347340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1267,8 +1268,17 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 1
-    Name: isRunning
+    SynchronizeType: 0
+    Name: isGrabbing
+  - Type: 4
+    SynchronizeType: 0
+    Name: isDropping
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsAttacking
+  - Type: 3
+    SynchronizeType: 0
+    Name: Movement
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
