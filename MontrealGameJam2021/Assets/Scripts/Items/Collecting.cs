@@ -56,7 +56,7 @@ public class Collecting : Interactable {
     private void OnTriggerEnter(Collider player)
     {
         Inventory inventory = player.GetComponent<Inventory>();
-        if (!inventory) return;
+        if (!inventory || Locked) return;
 
         TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
         Description.SetText("Place");
@@ -65,7 +65,7 @@ public class Collecting : Interactable {
     private void OnTriggerExit(Collider player)
     {
         Inventory inventory = player.GetComponent<Inventory>();
-        if (!inventory) return;    
+        if (!inventory || Locked) return;    
         TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
         Description.SetText("");
     }
