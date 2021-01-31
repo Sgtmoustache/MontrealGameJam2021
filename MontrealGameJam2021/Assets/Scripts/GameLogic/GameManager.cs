@@ -1,20 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(ItemManager))]
 [RequireComponent(typeof(PlayerSpawner))]
 public class GameManager : MonoBehaviourPun
 {
+    public static GameManager _Instance;
+    
     public static int TeacherScore = 0;
     public static int StudentScore = 0;
     private int CurrentRound = 0;
     
     public static bool PlayersCanMove = false;
+    public static bool PlayersSpawned = false;
+    public static Transform CameraPosition = null;
     
+    [SerializeField] private bool SkipIntro = false;
+    [SerializeField] private Transform CameraTransform;
+    [SerializeField] private CinemachineVirtualCamera Camera;
     [SerializeField] private int startBufferDuration;
     [SerializeField] private int[] roundDuration;
     [SerializeField] private int scoreBoardDuration;
@@ -30,7 +36,7 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] private TextMeshProUGUI studentScoreLabel;
 
     private PlayerSpawner _playerSpawner;
-    private ItemManager _itemManager;
+    public ItemManager ItemManager;
 
     [SerializeField] private Transform endZonePosition;
 
@@ -39,8 +45,12 @@ public class GameManager : MonoBehaviourPun
     private PlayerMovement PlayerMovement;
     void Start()
     {
+        _Instance = this;
+        
         _playerSpawner = GetComponent<PlayerSpawner>();
-        _itemManager = GetComponent<ItemManager>();
+        _playerSpawner.camera = Camera;
+        ItemManager = GetComponent<ItemManager>();
+        CameraPosition = CameraTransform.transform;
         
         if(PhotonNetwork.IsMasterClient)
             StartCoroutine(StartGame());
@@ -107,22 +117,36 @@ public class GameManager : MonoBehaviourPun
         Debug.LogWarning($"Setting {winnerLabel.name} value to {value}");
         winnerLabel.text = value;
     }
+    
+    [PunRPC]
+    private void ActivateSeeTroughtHandlers(bool value)
+    {
+        Debug.LogWarning("Activating seethroughthandlers");
+        PlayersSpawned = value;
+    }
 
     private IEnumerator StartGame()
     {
         Debug.LogWarning("Starting game");
         Debug.LogWarning($"Waiting start buffer for {startBufferDuration} seconds");
         yield return new WaitForSeconds(startBufferDuration);
-        //Start intro animation
-        photonView.RPC("PlayIntroAnimation", RpcTarget.All);
-        yield return new WaitForSeconds(5);
-        
-        yield return FadeManager._Instance.FadeOutRoutine();
+
+        if (!SkipIntro)
+        {    
+            yield return FadeManager._Instance.FadeInRoutine();
+            //Start intro animation
+            photonView.RPC("PlayIntroAnimation", RpcTarget.All);
+            yield return new WaitForSeconds(5);
+            yield return FadeManager._Instance.FadeOutRoutine();
+        }
+
         yield return new WaitForSeconds(bufferBetweenRounds);
         
         _playerSpawner.SpawnPlayers();
         _playerSpawner.SpawnBots();
         
+        photonView.RPC("ActivateSeeTroughtHandlers", RpcTarget.All, true);
+
         for (CurrentRound = 0; CurrentRound < roundDuration.Length; CurrentRound++)
         {
             //Start Round
@@ -146,7 +170,7 @@ public class GameManager : MonoBehaviourPun
 
     private IEnumerator StartRound(int duration)
     {
-        _itemManager.RefreshItems();
+        ItemManager.RefreshItems();
         photonView.RPC("RespawnPlayer", RpcTarget.All, Vector3.zero);
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);

@@ -5,35 +5,13 @@ using UnityEngine;
 
 public class SeeTroughtHandler : MonoBehaviour
 {
-    private Transform Camera;
+    private Transform Camera => GameManager.CameraPosition;
     [SerializeField] private GameObject Bubble;
     [SerializeField] private float originHeight = 0.4f;
-
-    private bool _isInitialized = false;
-    public void Start()
-    {
-        if(PlayerSpawner.LocalPlayer == null)
-            StartCoroutine(Initializer());
-        else
-        {
-            Camera = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>().Camera;
-            _isInitialized = true;
-        }
-    }
-
-    IEnumerator Initializer()
-    {
-        yield return new WaitForSeconds(2);
-        if (PlayerSpawner.LocalPlayer == null && (!transform.root.gameObject.CompareTag("Player") || !transform.root.gameObject.CompareTag("Item")))
-            Destroy(gameObject);
-
-        Camera = PlayerSpawner.LocalPlayer.GetComponent<PlayerMovement>().Camera;
-        _isInitialized = true;
-    }
-
+    
     public void Update()
     {
-        if (!_isInitialized)
+        if (!Camera)
             return;
         
         RaycastHit hit;

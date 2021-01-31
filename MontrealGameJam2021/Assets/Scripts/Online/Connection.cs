@@ -16,7 +16,7 @@ namespace Menus
         private bool isConnecting = false;
 
         private const string GameVersion = "0.1";
-        private const int MaxPlayersPerRoom = 2;
+        private const int MaxPlayersPerRoom = 1;
 
         private void Awake()
         {
@@ -24,6 +24,11 @@ namespace Menus
                 PhotonNetwork.LeaveRoom();
             
             PhotonNetwork.AutomaticallySyncScene = true;
+        }
+
+        private void Start()
+        {
+            FadeManager._Instance.FadeIn();
         }
 
         public void FindOpponent()

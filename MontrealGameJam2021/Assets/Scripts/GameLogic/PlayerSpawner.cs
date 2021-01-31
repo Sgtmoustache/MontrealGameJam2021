@@ -7,10 +7,9 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviourPun
 {
-    [SerializeField] private Transform MainCamera;
     [SerializeField] private Bounds MapBounds;
     [SerializeField] private int numberOfBots = 50;
-    [SerializeField] private CinemachineVirtualCamera camera;
+    [HideInInspector] public CinemachineVirtualCamera camera;
     
     [SerializeField] private List<Transform> botsSpawns = new List<Transform>();
     [SerializeField] private List<Transform> playerSpawns = new List<Transform>();
@@ -32,7 +31,8 @@ public class PlayerSpawner : MonoBehaviourPun
         else
             LocalPlayer = (GameObject) Instantiate(Resources.Load("Prefabs/PlayerWithLight"), playerSpawns[randomValue].position, playerSpawns[randomValue].rotation);
         
-        LocalPlayer.GetComponent<PlayerMovement>().Camera = MainCamera;
+        
+        LocalPlayer.GetComponent<PlayerMovement>().Camera = GameManager.CameraPosition;
         LocalPlayer.gameObject.layer = 6;
         LocalPlayer.GetComponentInChildren<Light>().enabled = true;
         LocalPlayer.GetComponent<VisibilityHandler>().enabled = false;

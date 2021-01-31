@@ -15,8 +15,6 @@ public class FadeManager : MonoBehaviourPun
     {
         _Instance = this;
         _animations = GetComponent<Animation>();
-        
-        FadeIn();
     }
 
     [PunRPC]

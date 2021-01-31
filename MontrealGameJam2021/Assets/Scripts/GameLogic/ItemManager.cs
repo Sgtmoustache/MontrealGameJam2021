@@ -7,8 +7,8 @@ using UnityEngine;
 public class ItemManager : MonoBehaviourPun
 { 
     private List<GameObject> ItemsPrefabs = new List<GameObject>();
-    [SerializeField] private List<PlaceHolder> OutsidePlaceHolders;
-    [SerializeField] private List<PlaceHolder> LostAndFoundPlaceHolders;
+    [SerializeField] public List<PlaceHolder> OutsidePlaceHolders;
+    [SerializeField] public List<PlaceHolder> LostAndFoundPlaceHolders;
     private List<GameObject> Items;
 
     private List<GameObject> SpawnedItems = new List<GameObject>();

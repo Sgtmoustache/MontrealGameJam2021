@@ -1339,6 +1339,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: pupitreTess (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904681543680768390, guid: ef25806221bf8184abae3157d8eff866, type: 3}
+      propertyPath: viewIdField
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6344604752230166259, guid: ef25806221bf8184abae3157d8eff866, type: 3}
+      propertyPath: viewIdField
+      value: 23
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef25806221bf8184abae3157d8eff866, type: 3}
 --- !u!4 &490598904 stripped
@@ -1632,6 +1640,18 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: Camera
+      value: 
+      objectReference: {fileID: 251319580}
+    - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: SkipIntro
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
+      propertyPath: CameraTransform
+      value: 
+      objectReference: {fileID: 1425452494}
+    - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: roundDuration.Array.data[0]
       value: 999
       objectReference: {fileID: 0}
@@ -1902,6 +1922,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: pupitreTess (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3904681543680768390, guid: ef25806221bf8184abae3157d8eff866, type: 3}
+      propertyPath: viewIdField
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6344604752230166259, guid: ef25806221bf8184abae3157d8eff866, type: 3}
+      propertyPath: viewIdField
+      value: 21
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef25806221bf8184abae3157d8eff866, type: 3}
 --- !u!4 &929863477 stripped
@@ -1990,6 +2018,14 @@ PrefabInstance:
     - target: {fileID: 672874439630171979, guid: ef25806221bf8184abae3157d8eff866, type: 3}
       propertyPath: m_Name
       value: pupitreTess (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904681543680768390, guid: ef25806221bf8184abae3157d8eff866, type: 3}
+      propertyPath: viewIdField
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6344604752230166259, guid: ef25806221bf8184abae3157d8eff866, type: 3}
+      propertyPath: viewIdField
+      value: 19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef25806221bf8184abae3157d8eff866, type: 3}
@@ -3239,6 +3275,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: pupitreTess
       objectReference: {fileID: 0}
+    - target: {fileID: 3904681543680768390, guid: ef25806221bf8184abae3157d8eff866, type: 3}
+      propertyPath: viewIdField
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6344604752230166259, guid: ef25806221bf8184abae3157d8eff866, type: 3}
+      propertyPath: viewIdField
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef25806221bf8184abae3157d8eff866, type: 3}
 --- !u!4 &1580093540 stripped
@@ -3681,9 +3725,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5269360837927975600, guid: 91296f9fc0f90e544b61ed403362f7e6, type: 3}
+      propertyPath: viewIdField
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368349347985467660, guid: 91296f9fc0f90e544b61ed403362f7e6, type: 3}
+      propertyPath: viewIdField
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5450507355476060659, guid: 91296f9fc0f90e544b61ed403362f7e6, type: 3}
       propertyPath: m_Name
       value: kioste
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726045437152662025, guid: 91296f9fc0f90e544b61ed403362f7e6, type: 3}
+      propertyPath: viewIdField
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543720055905463140, guid: 91296f9fc0f90e544b61ed403362f7e6, type: 3}
+      propertyPath: viewIdField
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593156653487749365, guid: 91296f9fc0f90e544b61ed403362f7e6, type: 3}
+      propertyPath: viewIdField
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91296f9fc0f90e544b61ed403362f7e6, type: 3}

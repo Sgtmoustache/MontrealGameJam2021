@@ -113,12 +113,11 @@ public class PlaceHolder : Interactable
     private void OnTriggerExit(Collider player)
     {
         Inventory inventory = player.GetComponent<Inventory>();
-        if(player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student"){
-            if(inventory){
-                TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
-                Description.SetText("");
-            }
-        }
+        if (!inventory) return;
+        if (player.gameObject.GetComponent<PlayerInfo>().PlayerType != "Student") return;
+        
+        TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
+        Description.SetText("");
     }
     public override void beInteractable(){
         canBePlace = true;
