@@ -270,7 +270,7 @@ public class GameManager : MonoBehaviourPun
         yield return new WaitForSeconds(bufferBetweenRounds);
         photonView.RPC("SetViewIDTeacher", RpcTarget.All, Random.Range(1, PhotonNetwork.CountOfPlayers));
         
-        _playerSpawner.SpawnPlayers(rawImage);
+        _playerSpawner.SpawnPlayers();
         _playerSpawner.SpawnBots();
         
         photonView.RPC("ActivateSeeTroughtHandlers", RpcTarget.All, true);
