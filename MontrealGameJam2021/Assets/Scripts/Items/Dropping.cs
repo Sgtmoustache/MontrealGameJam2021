@@ -12,6 +12,12 @@ public class Dropping : MonoBehaviour
 
     private bool triggerExit = false;
 
+    Transform arrow;
+
+    private void start(){
+        arrow = this.gameObject.transform.Find("ArrowDirection");
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -28,7 +34,21 @@ public class Dropping : MonoBehaviour
                 if(this.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student")
                     GameManager.TeacherScore += 20 ; 
             }
+            if(this.gameObject.GetComponent<PlayerInfo>()?.PlayerType == "Student"){
+                Vector3 targetPosition = new Vector3(-19f, 0f , 0f);
+                targetPosition.y = transform.position.y;
+                arrow.gameObject.SetActive(true);
+                arrow.LookAt(targetPosition);
+            }
+            else{
+                Vector3 targetPosition = new Vector3(-19f, 0f , 0f);
+                targetPosition.y = transform.position.y;
+                arrow.gameObject.SetActive(true);
+                arrow.LookAt(targetPosition);
+            }
         }
+        else
+            arrow.gameObject.SetActive(false);
 
         if (Input.GetKeyDown(KeyCode.T)){
             Debug.Log(GameManager.StudentScore);
