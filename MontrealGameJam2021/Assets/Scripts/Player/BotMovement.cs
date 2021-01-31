@@ -44,7 +44,10 @@ namespace Assets.Scripts.Player
                     Random.Range(_bounds.min.x, _bounds.max.x),
                     Random.Range(_bounds.min.y, _bounds.max.y),
                     Random.Range(_bounds.min.z, _bounds.max.z)
-                ));
+                ) + transform.position);
+                
+                Debug.Log($"Bot walking to : {_agent.destination.ToString()}");
+
                 
                 //Allows to see target position
                 if(_debugtarget != null)
@@ -55,9 +58,9 @@ namespace Assets.Scripts.Player
             }
             
             if(_agent.velocity.magnitude >= 1)
-            _animator.SetInteger("Movement", 1);
+                _animator.SetInteger("Movement", 1);
             else
-             _animator.SetInteger("Movement", 0);
+                _animator.SetInteger("Movement", 0);
         }
     }
 }
