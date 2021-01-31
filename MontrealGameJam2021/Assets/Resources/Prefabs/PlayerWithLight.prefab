@@ -1324,6 +1324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Display: {fileID: 3843366381288458206}
   PlayerType: Student
+  isLocal: 0
 --- !u!1 &3311834799941785929
 GameObject:
   m_ObjectHideFlags: 0
