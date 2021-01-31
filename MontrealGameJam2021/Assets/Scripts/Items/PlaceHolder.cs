@@ -86,6 +86,8 @@ public class PlaceHolder : Interactable
     private void OnTriggerEnter(Collider player)
     {
         Inventory inventory = player.GetComponent<Inventory>();
+        if (!inventory) return;
+        
         TextMeshProUGUI Description = player.gameObject.GetComponent<PlayerInfo>().Display;
         bool isPlayer = (player.gameObject.GetComponent<PlayerInfo>().PlayerType == "Student");
         if(storeItem && !inventory.HasItem() && !hidingSpot) 
