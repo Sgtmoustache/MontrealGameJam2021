@@ -96,11 +96,16 @@ public class ItemManager : MonoBehaviourPun
     [PunRPC]
     private void ClearPlaceHolders()
     {
+        Debug.LogError("*****Clearing objects!");
+        
         PlayerSpawner.LocalPlayer.GetComponent<Inventory>().ClearItem();
         OutsidePlaceHolders.ForEach(b => b.RemoveItem());
         LostAndFoundPlaceHolders.ForEach(b => b.RemoveItem());
         HiddenSpotPlaceHolders.ForEach(b => b.RemoveItem());
         
         SpawnedItems.ForEach(Destroy);
+        
+        Debug.LogError("*****End clear objects!");
+
     }
 }
