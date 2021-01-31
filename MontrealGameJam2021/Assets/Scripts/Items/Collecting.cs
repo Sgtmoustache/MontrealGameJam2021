@@ -7,12 +7,10 @@ using Photon.Pun;
 
 public class Collecting : Interactable {
 
-    private bool canBePick = true;
-
     public override void Interact(GameObject player)
     {
         Inventory inventory = player.GetComponent<Inventory>();
-        if (inventory  && canBePick)
+        if (inventory  && !Locked)
         {
             if (!(inventory.HasItem()))
             {
@@ -39,14 +37,12 @@ public class Collecting : Interactable {
     public override void beInteractable(){
         photonView.RPC("SetLock", RpcTarget.All, false);
         photonView.RPC("SetRigibodyConstraint", RpcTarget.All, RigidbodyConstraints.None);
-        canBePick = true;
     }
 
     public void Disable() {
-        photonView.RPC("SetLock", RpcTarget.All, false);
+        photonView.RPC("SetLock", RpcTarget.All, true);
         photonView.RPC("SetRigibodyConstraint", RpcTarget.All, RigidbodyConstraints.None);
-        canBePick = false;
     }
 
-    public void Enable() => canBePick = true;
+    public void Enable() => photonView.RPC("SetLock", RpcTarget.All, false);
 }
