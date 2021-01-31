@@ -8,8 +8,8 @@ public class Attack : MonoBehaviour
 {
     public bool canUsePower = true;
 
-    [SerializeField] Transform detentionSpawn;
-    [SerializeField] Transform detentionSpawnExit;
+    [SerializeField] public Transform detentionSpawn;
+    [SerializeField] public Transform detentionSpawnExit;
 
     public IEnumerator bufferAttack(){
         canUsePower = false;

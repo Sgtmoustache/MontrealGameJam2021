@@ -14,6 +14,8 @@ public class PlayerSpawner : MonoBehaviourPun
     [SerializeField] private List<Transform> botsSpawns = new List<Transform>();
     [SerializeField] private List<Transform> studentsSpawns = new List<Transform>();
     [SerializeField] private List<Transform> teacherSpawns = new List<Transform>();
+    [SerializeField] private Transform detentionEnter = new RectTransform();
+    [SerializeField] private Transform detentionExit = new RectTransform();
 
     public static GameObject LocalPlayer;
 
@@ -61,6 +63,12 @@ public class PlayerSpawner : MonoBehaviourPun
         LocalPlayer.gameObject.tag = "Player";
         
         camera.Follow = LocalPlayer.transform;
+
+        if (IsTeacher)
+        {
+            LocalPlayer.GetComponent<Attack>().detentionSpawn = detentionEnter;
+            LocalPlayer.GetComponent<Attack>().detentionSpawnExit = detentionExit;
+        }
     }
 
     [PunRPC]
