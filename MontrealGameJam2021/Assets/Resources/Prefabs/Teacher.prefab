@@ -1000,7 +1000,7 @@ Transform:
   m_GameObject: {fileID: 3109055371581371508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.42, y: 0.42, z: 0.42}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 2638848273652833054}
   - {fileID: 7279912128240594835}
@@ -1045,13 +1045,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 6
+  m_Radius: 1.18
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.03, y: 2.97, z: 0}
 --- !u!114 &-1879377082184250912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,8 +1067,8 @@ MonoBehaviour:
   Camera: {fileID: 0}
   detentionSpawn: {fileID: 0}
   detentionSpawnExit: {fileID: 0}
-  WalkingSpeed: 3.5
-  RunningSpeed: 6.5
+  WalkingSpeed: 4.5
+  RunningSpeed: 7.5
   TurnSmoothTime: 0.1
   GravityForce: -0.4
 --- !u!114 &-5421020296327468180
@@ -1138,6 +1138,15 @@ MonoBehaviour:
   - Type: 3
     SynchronizeType: 0
     Name: Movement
+  - Type: 1
+    SynchronizeType: 0
+    Name: GrabbingTIme
+  - Type: 1
+    SynchronizeType: 0
+    Name: DroppingTime
+  - Type: 1
+    SynchronizeType: 0
+    Name: AttackingTime
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -1165,8 +1174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3038b859d742e4a80ff3793e2abb80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrow: {fileID: 0}
-  FloatingText: {fileID: 0}
+  arrow: {fileID: 1373671950495544606}
+  FloatingText: {fileID: 3391606583914722750}
 --- !u!114 &-5698296371070644330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1892,7 +1901,7 @@ Light:
     m_Strength: 1
     m_Bias: 0
     m_NormalBias: 0.11
-    m_NearPlane: 1.36
+    m_NearPlane: 2.09
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -2135,6 +2144,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloatingText
       objectReference: {fileID: 0}
+    - target: {fileID: 187504616253111434, guid: 151e688e77b031a459b4202e3a31e0e2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 187504616253111437, guid: 151e688e77b031a459b4202e3a31e0e2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2224,6 +2237,11 @@ PrefabInstance:
 --- !u!224 &3391606583914722749 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 187504616253111437, guid: 151e688e77b031a459b4202e3a31e0e2, type: 3}
+  m_PrefabInstance: {fileID: 3281802805448263984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &3391606583914722750 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 187504616253111438, guid: 151e688e77b031a459b4202e3a31e0e2, type: 3}
   m_PrefabInstance: {fileID: 3281802805448263984}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &3391606583939457778 stripped

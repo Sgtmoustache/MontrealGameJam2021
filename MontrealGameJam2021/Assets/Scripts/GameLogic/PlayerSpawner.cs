@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Player;
 using Cinemachine;
 using Photon.Pun;
@@ -19,6 +20,7 @@ public class PlayerSpawner : MonoBehaviourPun
     [PunRPC]
     public void SpawnPlayers()
     {
+        botsSpawns.FirstOrDefault() 
         Debug.LogWarning("Spawning player");
 
         if(PhotonNetwork.IsMasterClient)
