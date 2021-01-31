@@ -66,8 +66,10 @@ public class PlayerSpawner : MonoBehaviourPun
 
         if (IsTeacher)
         {
+            Debug.LogError("DETENTION START");
             LocalPlayer.GetComponent<Attack>().detentionSpawn = detentionEnter;
             LocalPlayer.GetComponent<Attack>().detentionSpawnExit = detentionExit;
+            Debug.LogError("DETENTION STOP");
         }
     }
 
