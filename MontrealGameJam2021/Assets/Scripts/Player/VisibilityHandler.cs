@@ -14,7 +14,8 @@ public class VisibilityHandler : MonoBehaviour
     
     private List<Renderer> GFX = new List<Renderer>();
 
-    private bool collidingWithPlayer = false;
+    [SerializeField] private LayerMask IgnoreAllExcept;
+    
      void Start()
     {
         GFX = GetComponentsInChildren<Renderer>().Where(b => !b.gameObject.CompareTag("VisibilityIndependant")).ToList();
@@ -30,44 +31,18 @@ public class VisibilityHandler : MonoBehaviour
         Vector3 origin = transform.position + new Vector3(0, RayHeight, 0);
         Vector3 direction = _player.transform.position - transform.position + new Vector3(0, RayHeight, 0);
 
-        int layerMask = 1 << 9;
-        layerMask = ~layerMask;
-        
-        // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(origin, direction, out hit, Range, layerMask))
+        if (Physics.Raycast(origin, direction, out hit, Range, ~IgnoreAllExcept))
         {
             if (hit.transform.root.CompareTag("Player"))
             {
-                Debug.DrawRay(origin, direction, Color.red);
+                Debug.DrawRay(origin, direction, Color.green);
                 GFX.ForEach(b => b.enabled = true);
             }
             else
             {
-                Debug.DrawRay(origin, direction, Color.yellow);
+                Debug.DrawRay(origin, direction, Color.red);
                 GFX.ForEach(b => b.enabled = false);
             }
-        }
-        else if (!collidingWithPlayer)
-        {
-            Debug.DrawRay(origin, direction, Color.green);
-            GFX.ForEach(b => b.enabled = false);
-        }
-        else
-        {
-            GFX.ForEach(b => b.enabled = true);
-        }
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if(other.transform.CompareTag("Player"))
-        {
-            GFX.ForEach(b => b.enabled = true);
-            collidingWithPlayer = true;
-        }
-        else
-        {
-            collidingWithPlayer = false;
         }
     }
 }
