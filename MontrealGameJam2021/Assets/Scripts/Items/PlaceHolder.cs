@@ -12,8 +12,8 @@ public class PlaceHolder : Interactable
 {
     public Collectibles itemType;
     [SerializeField] public Transform itemDropPosition;
-    [SerializeField] bool hidingSpot;
-    [SerializeField] bool lostAndFound;
+    [SerializeField] public bool hidingSpot;
+    [SerializeField] public bool lostAndFound;
     
 
     public bool canBePlace = true;   
@@ -142,6 +142,8 @@ public class PlaceHolder : Interactable
         storeItem.transform.SetParent(this.gameObject.transform);
         storeItem.transform.position = itemDropPosition.position;
         storeItem.transform.rotation = itemDropPosition.rotation;
+        storeItem.GetComponent<ItemInfo>().currentPlaceHolder = this;
+        
         Collecting collect = storeItem.GetComponent<Collecting>();
         collect.Disable();
         StartCoroutine(bufferPlace());
@@ -150,6 +152,7 @@ public class PlaceHolder : Interactable
     [PunRPC]
      public void RemoveItem(){
         canBePick = false;
+        storeItem.GetComponent<ItemInfo>().currentPlaceHolder = null;
         storeItem = null;
         
         StartCoroutine(bufferGrab());

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class PlayerSpawner : MonoBehaviourPun
 {
+    public static PlayerSpawner Instance;
+    
     [SerializeField] private Bounds MapBounds;
     [SerializeField] private int numberOfBots = 50;
     [HideInInspector] public CinemachineVirtualCamera camera;
@@ -20,8 +22,12 @@ public class PlayerSpawner : MonoBehaviourPun
 
     public static GameObject LocalPlayer;
 
-    private bool IsTeacher => GameManager.TeacherViewID == PhotonNetwork.LocalPlayer.ActorNumber;
+    public bool IsTeacher => GameManager.TeacherViewID == PhotonNetwork.LocalPlayer.ActorNumber;
 
+    public void Awake()
+    {
+        Instance = this;
+    }
     
     [PunRPC]
     public void SpawnPlayers()

@@ -501,6 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collectibles: 11
+  currentPlaceHolder: {fileID: 0}
 --- !u!114 &-4390791783483242550
 MonoBehaviour:
   m_ObjectHideFlags: 0

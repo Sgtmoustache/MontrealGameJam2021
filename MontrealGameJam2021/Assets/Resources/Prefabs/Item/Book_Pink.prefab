@@ -733,6 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collectibles: 2
+  currentPlaceHolder: {fileID: 0}
 --- !u!1 &3392427564979035276
 GameObject:
   m_ObjectHideFlags: 0

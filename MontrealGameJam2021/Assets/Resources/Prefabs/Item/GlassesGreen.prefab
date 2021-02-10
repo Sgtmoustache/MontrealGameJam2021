@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collectibles: 7
+  currentPlaceHolder: {fileID: 0}
 --- !u!114 &8458670782903692682
 MonoBehaviour:
   m_ObjectHideFlags: 0

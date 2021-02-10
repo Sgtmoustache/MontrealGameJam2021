@@ -112,6 +112,32 @@ public class ItemManager : MonoBehaviourPun
              obj.GetComponent<ArrowVisibility>().targetToFollow = item;
              Arrows.Add(obj);
         }
+        
+        foreach (var item in LostAndFoundPlaceHolders)
+        {
+            GameObject obj = (GameObject) Instantiate(Resources.Load($"Prefabs/ObjectArrow"), Vector3.zero, Quaternion.identity);
+            var arrowVisibility = obj.GetComponent<ArrowVisibility>();
+            arrowVisibility.targetToFollow = item.gameObject;
+            arrowVisibility.isTeacherTarget = false;
+            Arrows.Add(obj);
+        }
+        
+        foreach (var item in OutsidePlaceHolders)
+        {
+            GameObject obj = (GameObject) Instantiate(Resources.Load($"Prefabs/ObjectArrow"), Vector3.zero, Quaternion.identity);
+            var arrowVisibility = obj.GetComponent<ArrowVisibility>();
+            arrowVisibility.targetToFollow = item.gameObject;
+            arrowVisibility.isTeacherTarget = true;
+            Arrows.Add(obj);
+        }
+        
+        foreach (var item in HiddenSpotPlaceHolders)
+        {
+            GameObject obj = (GameObject) Instantiate(Resources.Load($"Prefabs/ObjectArrow"), Vector3.zero, Quaternion.identity);
+            var arrowVisibility = obj.GetComponent<ArrowVisibility>();
+            arrowVisibility.targetToFollow = item.gameObject;
+            Arrows.Add(obj);
+        }
     }
 
     [PunRPC]

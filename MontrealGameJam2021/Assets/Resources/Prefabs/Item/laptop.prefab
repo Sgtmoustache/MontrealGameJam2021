@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collectibles: 3
+  currentPlaceHolder: {fileID: 0}
 --- !u!65 &6555871897910522671
 BoxCollider:
   m_ObjectHideFlags: 0

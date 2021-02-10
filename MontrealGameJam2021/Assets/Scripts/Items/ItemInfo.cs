@@ -21,4 +21,6 @@ public enum Collectibles
 public class ItemInfo : MonoBehaviour
 {
     public Collectibles Collectibles = Collectibles.None;
+
+    public PlaceHolder currentPlaceHolder;
 }
