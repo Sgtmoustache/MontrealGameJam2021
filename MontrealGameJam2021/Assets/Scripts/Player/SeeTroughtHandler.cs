@@ -7,7 +7,7 @@ public class SeeTroughtHandler : MonoBehaviour
 {
     private Transform Camera => GameManager.CameraPosition;
     [SerializeField] private GameObject Bubble;
-    [SerializeField] private float originHeight = 0.4f;
+    [SerializeField] private float originHeight = 0;
     
     public void Start()
     {

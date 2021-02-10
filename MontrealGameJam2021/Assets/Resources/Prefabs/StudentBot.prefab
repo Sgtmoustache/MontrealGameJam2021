@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IgnoreAllExcept:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!195 &1853273676360902882
 NavMeshAgent:
   m_ObjectHideFlags: 0

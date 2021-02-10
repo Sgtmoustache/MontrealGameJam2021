@@ -70,10 +70,11 @@ public class ItemManager : MonoBehaviourPun
         yield return new WaitForSeconds(1);
 
         if (PhotonNetwork.IsMasterClient)
+        {
             SpawnedItems.ForEach(PhotonNetwork.Destroy);
-
+        }
+        
         Debug.Log("*****End clear objects!");
-
     }
 
     public IEnumerator SpawnItems()

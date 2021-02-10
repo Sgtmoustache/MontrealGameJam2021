@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bubble: {fileID: 7467155914817414454}
-  originHeight: 0.4
+  originHeight: 0
 --- !u!1 &7467155914817414454
 GameObject:
   m_ObjectHideFlags: 0
