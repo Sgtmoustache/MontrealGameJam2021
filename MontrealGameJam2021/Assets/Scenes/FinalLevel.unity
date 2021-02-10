@@ -44782,15 +44782,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: roundDuration.Array.data[0]
-      value: 120
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: roundDuration.Array.data[1]
-      value: 120
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6714186348224660479, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: roundDuration.Array.data[2]
-      value: 120
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6714186349098006627, guid: aeedae556f8bd7a4f9ee6d0a0c0d2e23, type: 3}
       propertyPath: m_LocalPosition.x

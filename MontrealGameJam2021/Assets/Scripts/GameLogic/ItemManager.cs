@@ -55,6 +55,51 @@ public class ItemManager : MonoBehaviourPun
         if(clearPlaceHolders)
             photonView.RPC("ClearPlaceHoldersFunction", RpcTarget.All);
         
+        StartCoroutine(SpawnItems());
+    }
+
+    [PunRPC]
+    private void SpawnArrows()
+    {
+        foreach (var arrow in Arrows)
+        {
+            Destroy(arrow);
+        }
+        
+        foreach (var item in SpawnedItems)
+        {
+             GameObject obj = (GameObject) Instantiate(Resources.Load($"Prefabs/ObjectArrow"), Vector3.zero, Quaternion.identity);
+             obj.GetComponent<ArrowVisibility>().targetToFollow = item;
+             Arrows.Add(obj);
+        }
+    }
+
+    [PunRPC]
+    public void ClearPlaceHoldersFunction(){
+        StartCoroutine(ClearPlaceHolders());
+    }
+    public IEnumerator ClearPlaceHolders()
+    {
+        Debug.Log("*****Clearing objects!");
+        
+        PlayerSpawner.LocalPlayer.GetComponent<Inventory>().ClearItem();
+        OutsidePlaceHolders.ForEach(b => b.RemoveItem());
+        LostAndFoundPlaceHolders.ForEach(b => b.RemoveItem());
+        HiddenSpotPlaceHolders.ForEach(b => b.RemoveItem());
+
+        yield return new WaitForSeconds(1);
+        
+        if(PhotonNetwork.IsMasterClient)
+            SpawnedItems.ForEach(PhotonNetwork.Destroy);
+        
+        Debug.Log("*****End clear objects!");
+
+    }
+
+    public IEnumerator SpawnItems()
+    {
+        yield return new WaitForSeconds(2);
+
         Randomize();
         
         int itemSpawnedCount = 0;
