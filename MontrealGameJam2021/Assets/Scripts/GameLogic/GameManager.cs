@@ -301,6 +301,7 @@ public class GameManager : MonoBehaviourPun
     private IEnumerator StartRound(int duration)
     {
         ItemManager.RefreshItems(CurrentRound != 0);
+        yield return new WaitForSeconds(1);
         photonView.RPC("RespawnPlayer", RpcTarget.All, Vector3.zero);
         photonView.RPC("SetGameUILablelVisibility", RpcTarget.All, true);
         photonView.RPC("SetPlayerCanMove", RpcTarget.All, true);
