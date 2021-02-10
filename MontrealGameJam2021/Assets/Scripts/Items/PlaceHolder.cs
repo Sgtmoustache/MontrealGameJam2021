@@ -106,7 +106,7 @@ public class PlaceHolder : Interactable
             if(lostAndFound)
                 Description.SetText("Place");
             else if(itemType == inventory.GetTypeOfItem())
-                Description.SetText("");
+                Description.SetText("Place");
         }
                 
         
